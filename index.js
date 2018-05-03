@@ -18,7 +18,7 @@ let options =
     },
     module:
     {
-        loaders:
+        rules:
         [
             {
                 test: /\.js$/,
@@ -73,11 +73,11 @@ let options =
     ],
     resolveLoader:
     {
-        modules: [path.join(process.env.NODEJS, 'node_modules'),process.env.NODE_PATH,path.resolve('./node_modules')],
+        modules: [process.env.NODE_PATH, path.resolve('./node_modules')],
     },
     resolve:
     {
-        modules: [path.join(process.env.NODEJS, 'node_modules'),process.env.NODE_PATH,path.resolve('./node_modules')],
+        modules: [process.env.NODE_PATH, path.resolve('./node_modules')],
     }
 }
 if (process.env.NODE_ENV == 'production')
