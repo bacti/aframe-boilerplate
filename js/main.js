@@ -3,7 +3,7 @@ import 'aframe'
 import { Entity, Scene } from 'aframe-react'
 import React from 'react'
 import ReactDOM from 'react-dom'
-import React3 from 'react-three-renderer'
+import Simple from './Simple3'
 
 class App extends React.Component
 {
@@ -35,5 +35,5 @@ class App extends React.Component
 window.onload = function()
 {
     $('<div></div>').attr('id', 'sceneContainer').css({ width: '100%', height: '100%' }).appendTo(document.body)
-    ReactDOM.render(<App/>, document.getElementById('sceneContainer'))
+    ReactDOM.render(<Simple/>, document.getElementById('sceneContainer'))
 }
