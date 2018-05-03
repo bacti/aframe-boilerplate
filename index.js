@@ -21,7 +21,7 @@ let options =
         rules:
         [
             {
-                test: /\.js$/,
+                test: /\.(js|jsx)(\?\S*)?$/,
                 loader: 'babel-loader',
                 exclude: /node_modules/,
                 query:
@@ -34,10 +34,10 @@ let options =
                 test: /\.js$/,
                 exclude: /node_modules/,
                 use: [{ loader: 'ifdef-loader', 
-                    options:
-                    {
-                        DEBUG: process.env.ADS_TYPE == 'DEBUG',
-                    }
+                options:
+                {
+                    DEBUG: process.env.ADS_TYPE == 'DEBUG',
+                }
                 }]
             },
             {
