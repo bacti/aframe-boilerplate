@@ -21,6 +21,7 @@ class App extends React.Component
                 <Entity primitive='a-cylinder' position='1 0.75 -3' radius='0.5' height='1.5' color='#FFC65D' />
                 <Entity primitive='a-plane' position='0 0 -4' rotation='-90 0 0' width='4' height='4' color='#7BC8A4' />
                 <Entity primitive='a-sky' color='#ECECEC' />
+                <Simple> </Simple>
 
                 <Entity primitive='a-camera'>
                     <Entity primitive='a-cursor'
@@ -35,5 +36,5 @@ class App extends React.Component
 window.onload = function()
 {
     $('<div></div>').attr('id', 'sceneContainer').css({ width: '100%', height: '100%' }).appendTo(document.body)
-    ReactDOM.render(<Simple/>, document.getElementById('sceneContainer'))
+    ReactDOM.render(<App/>, document.getElementById('sceneContainer'))
 }

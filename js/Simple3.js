@@ -1,5 +1,6 @@
 import React from 'react'
-import React3 from 'react-three-renderer'
+import React3 from '../libs/react-three-renderer'
+
 export default class Simple extends React.Component
 {
     constructor(props, context)
