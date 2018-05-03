@@ -3,6 +3,7 @@ import 'aframe'
 import { Entity, Scene } from 'aframe-react'
 import React from 'react'
 import ReactDOM from 'react-dom'
+import React3 from 'react-three-renderer'
 
 class App extends React.Component
 {
