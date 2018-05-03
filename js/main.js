@@ -34,6 +34,6 @@ class App extends React.Component
 
 window.onload = function()
 {
-    $('<div></div>').attr('id', 'root').appendTo(document.body)
-    ReactDOM.render(<App/>, document.getElementById('root'))
+    $('<div></div>').attr('id', 'sceneContainer').css({ width: '100%', height: '100%' }).appendTo(document.body)
+    ReactDOM.render(<App/>, document.getElementById('sceneContainer'))
 }
