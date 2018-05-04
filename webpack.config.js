@@ -82,12 +82,6 @@ let options =
 }
 if (process.env.NODE_ENV == 'production')
 {
-    options.module.loaders.push(
-    {
-        test: /\.js$/,
-        exclude: /node_modules/,
-        use: [{ loader: "constant-loader" }]
-    })
     options.plugins.push(new UglifyJSPlugin())
 }
 module.exports = options
