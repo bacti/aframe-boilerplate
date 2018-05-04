@@ -4,3 +4,6 @@
 [submodule "libs/aframe-react"]
 	path = libs/aframe-react
 	url = https://github.com/bacti/aframe-react.git
+[submodule "libs/aframe"]
+	path = libs/aframe
+	url = https://github.com/bacti/aframe.git
