@@ -1,3 +1,6 @@
 [submodule "libs/react-three-renderer"]
 	path = libs/react-three-renderer
 	url = https://github.com/bacti/react-three-renderer.git
+[submodule "libs/aframe-react"]
+	path = libs/aframe-react
+	url = https://github.com/bacti/aframe-react.git
