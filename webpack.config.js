@@ -73,11 +73,11 @@ let options =
     ],
     resolveLoader:
     {
-        modules: [process.env.NODE_PATH, path.resolve('./node_modules')],
+        modules: [path.resolve('./node_modules'), process.env.NODE_PATH],
     },
     resolve:
     {
-        modules: [process.env.NODE_PATH, path.resolve('./node_modules')],
+        modules: [path.resolve('./node_modules'), process.env.NODE_PATH],
     }
 }
 if (process.env.NODE_ENV == 'production')
