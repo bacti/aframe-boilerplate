@@ -1,6 +1,6 @@
 require('./zepto')
 import 'aframe'
-import { Entity, Scene } from 'aframe-react'
+import { Entity, Scene } from '../libs/aframe-react/src'
 import React from 'react'
 import ReactDOM from 'react-dom'
 import Simple from './Simple3'
