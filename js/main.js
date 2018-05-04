@@ -15,26 +15,33 @@ class App extends React.Component
     render()
     {
         return (
-            <Scene>
-                <Entity primitive='a-box' position='-1 0.5 -3' rotation='0 45 0' color='#4CC3D9' />
-                <Entity primitive='a-sphere' position='0 1.25 -5' radius='1.25' color='#EF2D5E' />
-                <Entity primitive='a-cylinder' position='1 0.75 -3' radius='0.5' height='1.5' color='#FFC65D' />
-                <Entity primitive='a-plane' position='0 0 -4' rotation='-90 0 0' width='4' height='4' color='#7BC8A4' />
-                <Entity primitive='a-sky' color='#ECECEC' />
-                <Simple> </Simple>
+            // <Scene>
+            //     <Entity primitive='a-box' position='-1 0.5 -3' rotation='0 45 0' color='#4CC3D9' />
+            //     <Entity primitive='a-sphere' position='0 1.25 -5' radius='1.25' color='#EF2D5E' />
+            //     <Entity primitive='a-cylinder' position='1 0.75 -3' radius='0.5' height='1.5' color='#FFC65D' />
+            //     <Entity primitive='a-plane' position='0 0 -4' rotation='-90 0 0' width='4' height='4' color='#7BC8A4' />
+            //     <Entity primitive='a-sky' color='#ECECEC' />
 
-                <Entity primitive='a-camera'>
-                    <Entity primitive='a-cursor'
-                        animation__click={{property: 'scale', startEvents: 'click', from: '0.1 0.1 0.1', to: '1 1 1', dur: 150}}
-                    />
-                </Entity>
-            </Scene>
+            //     <Entity primitive='a-camera'>
+            //         <Entity primitive='a-cursor'
+            //             animation__click={{property: 'scale', startEvents: 'click', from: '0.1 0.1 0.1', to: '1 1 1', dur: 150}}
+            //         />
+            //     </Entity>
+            // </Scene>
+            <div>
+                <Simple canvas={document.getElementById('mainCanvas')} />
+            </div>
         )
     }
 }
 
 window.onload = function()
 {
+    $('<canvas></canvas>')
+    .attr({ id: 'mainCanvas', width: window.innerWidth, height: window.innerHeight })
+    .css({ width: '100%', height: '100%' })
+    .appendTo(document.body)
     $('<div></div>').attr('id', 'sceneContainer').css({ width: '100%', height: '100%' }).appendTo(document.body)
-    ReactDOM.render(<App/>, document.getElementById('sceneContainer'))
+
+    ReactDOM.render(<App />, document.getElementById('sceneContainer'))
 }

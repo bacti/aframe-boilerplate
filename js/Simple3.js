@@ -6,7 +6,7 @@ export default class Simple extends React.Component
     constructor(props, context)
     {
         super(props, context);
-  
+
         // construct the position vector here, because if we use 'new' within render,
         // React will think that things have changed when they have not.
         this.cameraPosition = new THREE.Vector3(0, 0, 5);
@@ -39,6 +39,7 @@ export default class Simple extends React.Component
   
         return (
             <React3
+                canvas={this.props.canvas}
                 mainCamera="camera" // this points to the perspectiveCamera which has the name set to "camera" below
                 width={width}
                 height={height}
