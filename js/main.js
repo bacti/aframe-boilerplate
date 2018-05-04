@@ -3,7 +3,7 @@ import '../libs/aframe/src'
 import { Entity, Scene } from 'aframe-react'
 import React from 'react'
 import ReactDOM from 'react-dom'
-import Simple from './Simple3'
+// import Simple from './Simple3'
 
 class App extends React.Component
 {
