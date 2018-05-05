@@ -36,7 +36,6 @@ export default class RollerCoaster extends React.Component
   
         return (
             <React3
-                canvas={this.props.canvas}
                 mainCamera='perspective'
                 width={width}
                 height={height}

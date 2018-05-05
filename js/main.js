@@ -14,7 +14,7 @@ class App extends React.Component
 
     render()
     {
-        return <RollerCoaster canvas={document.getElementById('mainCanvas')} />
+        return <RollerCoaster />
         // return (
         //     <Scene>
         //         <Entity primitive='a-box' position='-1 0.5 -3' rotation='0 45 0' color='#4CC3D9' />
@@ -37,10 +37,5 @@ class App extends React.Component
 window.onload = function()
 {
     $('<div></div>').attr('id', 'sceneContainer').css({ width: '100%', height: '100%' }).appendTo(document.body)
-    $('<canvas></canvas>')
-    .attr({ id: 'mainCanvas', width: window.innerWidth, height: window.innerHeight })
-    .css({ width: '100%', height: '100%' })
-    .appendTo(document.body)
-
     ReactDOM.render(<App />, document.getElementById('sceneContainer'))
 }
