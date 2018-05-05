@@ -14,39 +14,29 @@ export default class RollerCoaster extends React.Component
             cubeRotation: new THREE.Euler(),
         }
 
-        var curve = ( function () {
-
-            var vector = new THREE.Vector3();
-            var vector2 = new THREE.Vector3();
-        
+        this.curve = (function()
+        {
+            let vector = new THREE.Vector3()
+            let vector2 = new THREE.Vector3()
             return {
-        
-                getPointAt: function ( t ) {
-        
-                    t = t * PI2;
-        
-                    var x = Math.sin( t * 3 ) * Math.cos( t * 4 ) * 50;
-                    var y = Math.sin( t * 10 ) * 2 + Math.cos( t * 17 ) * 2 + 5;
-                    var z = Math.sin( t ) * Math.sin( t * 4 ) * 50;
-        
-                    return vector.set( x, y, z ).multiplyScalar( 2 );
-        
+                getPointAt: function (t)
+                {
+                    t = t * PI2
+                    var x = Math.sin(t * 3) * Math.cos(t * 4) * 50
+                    var y = Math.sin(t * 10) * 2 + Math.cos(t * 17) * 2 + 5
+                    var z = Math.sin(t) * Math.sin(t * 4) * 50
+                    return vector.set(x, y, z).multiplyScalar(2)
                 },
-        
-                getTangentAt: function ( t ) {
-        
-                    var delta = 0.0001;
-                    var t1 = Math.max( 0, t - delta );
-                    var t2 = Math.min( 1, t + delta );
-        
-                    return vector2.copy( this.getPointAt ( t2 ) )
-                        .sub( this.getPointAt( t1 ) ).normalize();
-        
+                getTangentAt: function (t)
+                {
+                    var delta = 0.0001
+                    var t1 = Math.max(0, t - delta)
+                    var t2 = Math.min(1, t + delta)
+                    return vector2.copy(this.getPointAt(t2))
+                            .sub(this.getPointAt(t1)).normalize()
                 }
-        
-            };
-        
-        } )();
+            }
+        })()
 
         this.OnAnimate = _ =>
         {
