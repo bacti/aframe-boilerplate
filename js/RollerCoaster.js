@@ -35,7 +35,7 @@ export default class RollerCoaster extends React.Component
                 >
                     <scene>
                         <perspectiveCamera name='perspective'
-                            fov={75} aspect={width / height} near={0.1} far={1000}
+                            fov={75} aspect={width/height} near={0.1} far={1000}
                             position={this.cameraPosition}
                         />
                         <mesh rotation={this.state.cubeRotation}>
