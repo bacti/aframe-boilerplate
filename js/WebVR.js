@@ -4,7 +4,16 @@ export default class WebVR extends React.Component
 {
     constructor(props)
     {
-        super(props)
+		super(props)
+		
+		if (navigator.getVRDisplays)
+		{
+			navigator.getVRDisplays().then(displays =>
+			{
+			  	this.vrDisplay = displays.length && displays[0];
+			  	this.polyfilledVRDisplay = vrDisplay.displayName === POLYFILL_VRDISPLAY_ID;
+			})
+		}
 	}
 
 	createButton ( renderer )
