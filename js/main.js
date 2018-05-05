@@ -3,7 +3,7 @@ require('./zepto')
 // import { Entity, Scene } from 'aframe-react'
 import React from 'react'
 import ReactDOM from 'react-dom'
-import Simple from './Simple3'
+import RollerCoaster from './RollerCoaster'
 
 class App extends React.Component
 {
@@ -14,7 +14,7 @@ class App extends React.Component
 
     render()
     {
-        return <Simple canvas={document.getElementById('mainCanvas')} />
+        return <RollerCoaster canvas={document.getElementById('mainCanvas')} />
         // return (
         //     <Scene>
         //         <Entity primitive='a-box' position='-1 0.5 -3' rotation='0 45 0' color='#4CC3D9' />
