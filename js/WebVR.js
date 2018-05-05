@@ -20,11 +20,15 @@ export default class WebVR extends React.Component
 			navigator.getVRDisplays().then(displays =>
 			{
 			  	let vrDisplay = displays.length && displays[0]
-				let polyfilledVRDisplay = this.vrDisplay.displayName === 'Cardboard VRDisplay'
-				let vrManager = renderer.vr
-				vrManager.setDevice(vrDisplay)
-				vrManager.enabled = true
-				vrDisplay.requestPresent([{ source: this.canvas }])
+				let polyfilledVRDisplay = vrDisplay.displayName === 'Cardboard VRDisplay'
+
+				if (!vrDisplay)
+				{
+					let vrManager = renderer.vr
+					vrManager.setDevice(vrDisplay)
+					vrManager.enabled = true
+					vrDisplay.requestPresent([{ source: this.canvas }])
+				}
 			})
 		}
 	}
