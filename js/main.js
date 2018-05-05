@@ -41,5 +41,6 @@ window.onload = function()
     .css({ width: '100%', height: '100%' })
     .appendTo(document.body)
 
-    ReactDOM.render(<App />, document.getElementById('sceneContainer'))
+    // ReactDOM.render(<App />, document.getElementById('sceneContainer'))
+    require('./webvr_rollercoaster.js')
 }
