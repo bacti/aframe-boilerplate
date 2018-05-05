@@ -16,6 +16,11 @@ export default class WebVR extends React.Component
 		}
 	}
 
+	render()
+    {
+		return null
+	}
+
 	createButton ( renderer )
 	{
 

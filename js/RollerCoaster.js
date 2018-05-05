@@ -1,5 +1,6 @@
 import React from 'react'
 import React3 from '../libs/react-three-renderer/src'
+import WebVR from './WebVR'
 
 export default class RollerCoaster extends React.Component
 {
@@ -27,20 +28,23 @@ export default class RollerCoaster extends React.Component
         let width = window.innerWidth
         let height = window.innerHeight
         return (
-            <React3 mainCamera='perspective' width={width} height={height}
-                onAnimate={this.OnAnimate}
-            >
-                <scene>
-                    <perspectiveCamera name='perspective'
-                        fov={75} aspect={width / height} near={0.1} far={1000}
-                        position={this.cameraPosition}
-                    />
-                    <mesh rotation={this.state.cubeRotation}>
-                        <boxGeometry width={1} height={1} depth={1} />
-                        <meshBasicMaterial color={0x00ff00} />
-                    </mesh>
-                </scene>
-            </React3>
+            <div>
+                <WebVR />
+                <React3 mainCamera='perspective' width={width} height={height}
+                    onAnimate={this.OnAnimate}
+                >
+                    <scene>
+                        <perspectiveCamera name='perspective'
+                            fov={75} aspect={width / height} near={0.1} far={1000}
+                            position={this.cameraPosition}
+                        />
+                        <mesh rotation={this.state.cubeRotation}>
+                            <boxGeometry width={1} height={1} depth={1} />
+                            <meshBasicMaterial color={0x00ff00} />
+                        </mesh>
+                    </scene>
+                </React3>
+            </div>
         )
     }
 }
