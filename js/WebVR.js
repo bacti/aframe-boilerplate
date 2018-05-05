@@ -28,6 +28,13 @@ export default class WebVR extends React.Component
 					vrManager.setDevice(vrDisplay)
 					vrManager.enabled = true
 					vrDisplay.requestPresent([{ source: this.props.canvas }])
+
+					let canvas = this.props.canvas
+					let requestFullscreen = canvas.requestFullscreen
+						|| canvas.webkitRequestFullscreen
+						|| canvas.mozRequestFullScreen  // The capitalized `S` is not a typo.
+						|| canvas.msRequestFullscreen
+					requestFullscreen.apply(canvas)
 				}
 			})
 		}
