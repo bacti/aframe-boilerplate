@@ -29,8 +29,9 @@ export default class RollerCoaster extends React.Component
         let height = window.innerHeight
         return (
             <div>
-                <WebVR />
+                <WebVR canvas={this.props.canvas} />
                 <React3 mainCamera='perspective' width={width} height={height}
+                    canvas={this.props.canvas}
                     onAnimate={this.OnAnimate}
                 >
                     <scene>
