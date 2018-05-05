@@ -1,10 +1,7 @@
 import React from 'react'
-
-// Check before the polyfill runs.
-window.hasNativeWebVRImplementation = !!window.navigator.getVRDisplays || !!window.navigator.getVRDevices
-
-// WebVR polyfill
 import WebVRPolyfill from 'webvr-polyfill'
+
+window.hasNativeWebVRImplementation = !!window.navigator.getVRDisplays || !!window.navigator.getVRDevices
 window.webvrpolyfill = new WebVRPolyfill(
 {
   	BUFFER_SCALE: 1,
