@@ -1,251 +1,215 @@
-<!DOCTYPE html>
-<html lang="en">
-	<head>
-		<title>three.js webvr - roller coaster</title>
-		<meta charset="utf-8">
-		<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
-		<!-- Origin Trial Token, feature = WebVR (For Chrome M62+), origin = https://threejs.org, expires = 2018-05-12 -->
-		<meta http-equiv="origin-trial" data-feature="WebVR (For Chrome M62+)" data-expires="2018-05-12" content="AkM+gi6Fb7IUBwFLs18hn/x6dusbsVRYG9KBTWUUjvmT0m0wGkxRPy63Aj/i+Ti4d6qMEMnRcsR7MVV5Wuvp/AIAAABQeyJvcmlnaW4iOiJodHRwczovL3RocmVlanMub3JnOjQ0MyIsImZlYXR1cmUiOiJXZWJWUjEuMU02MiIsImV4cGlyeSI6MTUyNjExODIwMH0=">
-		<style>
-			body {
-				margin: 0px;
-				color: #fff;
-				font-family: Monospace;
-				background-color: #444;
-				overflow: hidden;
-			}
-			a {
-				color: #00f;
-			}
-		</style>
-	</head>
-	<body>
+var renderer = new THREE.WebGLRenderer( { antialias: true } );
+renderer.setPixelRatio( window.devicePixelRatio );
+renderer.setSize( window.innerWidth, window.innerHeight );
+renderer.vr.enabled = true;
+renderer.vr.userHeight = 0; // TOFIX
+document.body.appendChild( renderer.domElement );
 
-		<script src="../build/three.js"></script>
+document.body.appendChild( WEBVR.createButton( renderer ) );
 
-		<script src="js/RollerCoaster.js"></script>
+//
 
-		<script src="js/vr/WebVR.js"></script>
+var scene = new THREE.Scene();
+scene.background = new THREE.Color( 0xf0f0ff );
 
-		<script>
+var light = new THREE.HemisphereLight( 0xfff0f0, 0x606066 );
+light.position.set( 1, 1, 1 );
+scene.add( light );
 
-			var renderer = new THREE.WebGLRenderer( { antialias: true } );
-			renderer.setPixelRatio( window.devicePixelRatio );
-			renderer.setSize( window.innerWidth, window.innerHeight );
-			renderer.vr.enabled = true;
-			renderer.vr.userHeight = 0; // TOFIX
-			document.body.appendChild( renderer.domElement );
+var train = new THREE.Object3D();
+scene.add( train );
 
-			document.body.appendChild( WEBVR.createButton( renderer ) );
+var camera = new THREE.PerspectiveCamera( 40, window.innerWidth / window.innerHeight, 0.1, 500 );
+train.add( camera );
 
-			//
+// environment
 
-			var scene = new THREE.Scene();
-			scene.background = new THREE.Color( 0xf0f0ff );
+var geometry = new THREE.PlaneBufferGeometry( 500, 500, 15, 15 );
+geometry.rotateX( - Math.PI / 2 );
 
-			var light = new THREE.HemisphereLight( 0xfff0f0, 0x606066 );
-			light.position.set( 1, 1, 1 );
-			scene.add( light );
+var positions = geometry.attributes.position.array;
+var vertex = new THREE.Vector3();
 
-			var train = new THREE.Object3D();
-			scene.add( train );
+for ( var i = 0; i < positions.length; i += 3 ) {
 
-			var camera = new THREE.PerspectiveCamera( 40, window.innerWidth / window.innerHeight, 0.1, 500 );
-			train.add( camera );
+	vertex.fromArray( positions, i );
 
-			// environment
+	vertex.x += Math.random() * 10 - 5;
+	vertex.z += Math.random() * 10 - 5;
 
-			var geometry = new THREE.PlaneBufferGeometry( 500, 500, 15, 15 );
-			geometry.rotateX( - Math.PI / 2 );
+	var distance = ( vertex.distanceTo( scene.position ) / 5 ) - 25;
+	vertex.y = Math.random() * Math.max( 0, distance );
 
-			var positions = geometry.attributes.position.array;
-			var vertex = new THREE.Vector3();
+	vertex.toArray( positions, i );
 
-			for ( var i = 0; i < positions.length; i += 3 ) {
+}
 
-				vertex.fromArray( positions, i );
+geometry.computeVertexNormals();
 
-				vertex.x += Math.random() * 10 - 5;
-				vertex.z += Math.random() * 10 - 5;
+var material = new THREE.MeshLambertMaterial( {
+	color: 0x407000
+} );
 
-				var distance = ( vertex.distanceTo( scene.position ) / 5 ) - 25;
-				vertex.y = Math.random() * Math.max( 0, distance );
+var mesh = new THREE.Mesh( geometry, material );
+scene.add( mesh );
 
-				vertex.toArray( positions, i );
+var geometry = new TreesGeometry( mesh );
+var material = new THREE.MeshBasicMaterial( {
+	side: THREE.DoubleSide, vertexColors: THREE.VertexColors
+} );
+var mesh = new THREE.Mesh( geometry, material );
+scene.add( mesh );
 
-			}
+var geometry = new SkyGeometry();
+var material = new THREE.MeshBasicMaterial( { color: 0xffffff } );
+var mesh = new THREE.Mesh( geometry, material );
+scene.add( mesh );
 
-			geometry.computeVertexNormals();
+//
 
-			var material = new THREE.MeshLambertMaterial( {
-				color: 0x407000
-			} );
+var PI2 = Math.PI * 2;
 
-			var mesh = new THREE.Mesh( geometry, material );
-			scene.add( mesh );
+var curve = ( function () {
 
-			var geometry = new TreesGeometry( mesh );
-			var material = new THREE.MeshBasicMaterial( {
-				side: THREE.DoubleSide, vertexColors: THREE.VertexColors
-			} );
-			var mesh = new THREE.Mesh( geometry, material );
-			scene.add( mesh );
+	var vector = new THREE.Vector3();
+	var vector2 = new THREE.Vector3();
 
-			var geometry = new SkyGeometry();
-			var material = new THREE.MeshBasicMaterial( { color: 0xffffff } );
-			var mesh = new THREE.Mesh( geometry, material );
-			scene.add( mesh );
+	return {
 
-			//
+		getPointAt: function ( t ) {
 
-			var PI2 = Math.PI * 2;
+			t = t * PI2;
 
-			var curve = ( function () {
+			var x = Math.sin( t * 3 ) * Math.cos( t * 4 ) * 50;
+			var y = Math.sin( t * 10 ) * 2 + Math.cos( t * 17 ) * 2 + 5;
+			var z = Math.sin( t ) * Math.sin( t * 4 ) * 50;
 
-				var vector = new THREE.Vector3();
-				var vector2 = new THREE.Vector3();
+			return vector.set( x, y, z ).multiplyScalar( 2 );
 
-				return {
+		},
 
-					getPointAt: function ( t ) {
+		getTangentAt: function ( t ) {
 
-						t = t * PI2;
+			var delta = 0.0001;
+			var t1 = Math.max( 0, t - delta );
+			var t2 = Math.min( 1, t + delta );
 
-						var x = Math.sin( t * 3 ) * Math.cos( t * 4 ) * 50;
-						var y = Math.sin( t * 10 ) * 2 + Math.cos( t * 17 ) * 2 + 5;
-						var z = Math.sin( t ) * Math.sin( t * 4 ) * 50;
+			return vector2.copy( this.getPointAt ( t2 ) )
+				.sub( this.getPointAt( t1 ) ).normalize();
 
-						return vector.set( x, y, z ).multiplyScalar( 2 );
+		}
 
-					},
+	};
 
-					getTangentAt: function ( t ) {
+} )();
 
-						var delta = 0.0001;
-						var t1 = Math.max( 0, t - delta );
-						var t2 = Math.min( 1, t + delta );
+var geometry = new RollerCoasterGeometry( curve, 1500 );
+var material = new THREE.MeshPhongMaterial( {
+	vertexColors: THREE.VertexColors
+} );
+var mesh = new THREE.Mesh( geometry, material );
+scene.add( mesh );
 
-						return vector2.copy( this.getPointAt ( t2 ) )
-							.sub( this.getPointAt( t1 ) ).normalize();
+var geometry = new RollerCoasterLiftersGeometry( curve, 100 );
+var material = new THREE.MeshPhongMaterial();
+var mesh = new THREE.Mesh( geometry, material );
+mesh.position.y = 0.1;
+scene.add( mesh );
 
-					}
+var geometry = new RollerCoasterShadowGeometry( curve, 500 );
+var material = new THREE.MeshBasicMaterial( {
+	color: 0x305000, depthWrite: false, transparent: true
+} );
+var mesh = new THREE.Mesh( geometry, material );
+mesh.position.y = 0.1;
+scene.add( mesh );
 
-				};
+var funfairs = [];
 
-			} )();
+//
 
-			var geometry = new RollerCoasterGeometry( curve, 1500 );
-			var material = new THREE.MeshPhongMaterial( {
-				vertexColors: THREE.VertexColors
-			} );
-			var mesh = new THREE.Mesh( geometry, material );
-			scene.add( mesh );
+var geometry = new THREE.CylinderBufferGeometry( 10, 10, 5, 15 );
+var material = new THREE.MeshLambertMaterial( {
+	color: 0xff8080,
+	//flatShading: true // Lambert does not support flat shading
+} );
+var mesh = new THREE.Mesh( geometry, material );
+mesh.position.set( - 80, 10, - 70 );
+mesh.rotation.x = Math.PI / 2;
+scene.add( mesh );
 
-			var geometry = new RollerCoasterLiftersGeometry( curve, 100 );
-			var material = new THREE.MeshPhongMaterial();
-			var mesh = new THREE.Mesh( geometry, material );
-			mesh.position.y = 0.1;
-			scene.add( mesh );
+funfairs.push( mesh );
 
-			var geometry = new RollerCoasterShadowGeometry( curve, 500 );
-			var material = new THREE.MeshBasicMaterial( {
-				color: 0x305000, depthWrite: false, transparent: true
-			} );
-			var mesh = new THREE.Mesh( geometry, material );
-			mesh.position.y = 0.1;
-			scene.add( mesh );
+var geometry = new THREE.CylinderBufferGeometry( 5, 6, 4, 10 );
+var material = new THREE.MeshLambertMaterial( {
+	color: 0x8080ff,
+	//flatShading: true // Lambert does not support flat shading
+} );
+var mesh = new THREE.Mesh( geometry, material );
+mesh.position.set( 50, 2, 30 );
+scene.add( mesh );
 
-			var funfairs = [];
+funfairs.push( mesh );
 
-			//
+//
 
-			var geometry = new THREE.CylinderBufferGeometry( 10, 10, 5, 15 );
-			var material = new THREE.MeshLambertMaterial( {
-				color: 0xff8080,
-				//flatShading: true // Lambert does not support flat shading
-			} );
-			var mesh = new THREE.Mesh( geometry, material );
-			mesh.position.set( - 80, 10, - 70 );
-			mesh.rotation.x = Math.PI / 2;
-			scene.add( mesh );
+window.addEventListener( 'resize', onWindowResize, false );
 
-			funfairs.push( mesh );
+function onWindowResize() {
 
-			var geometry = new THREE.CylinderBufferGeometry( 5, 6, 4, 10 );
-			var material = new THREE.MeshLambertMaterial( {
-				color: 0x8080ff,
-				//flatShading: true // Lambert does not support flat shading
-			} );
-			var mesh = new THREE.Mesh( geometry, material );
-			mesh.position.set( 50, 2, 30 );
-			scene.add( mesh );
+	camera.aspect = window.innerWidth / window.innerHeight;
+	camera.updateProjectionMatrix();
 
-			funfairs.push( mesh );
+	renderer.setSize( window.innerWidth, window.innerHeight );
 
-			//
+}
 
-			window.addEventListener( 'resize', onWindowResize, false );
+//
 
-			function onWindowResize() {
+var position = new THREE.Vector3();
+var tangent = new THREE.Vector3();
 
-				camera.aspect = window.innerWidth / window.innerHeight;
-				camera.updateProjectionMatrix();
+var lookAt = new THREE.Vector3();
 
-				renderer.setSize( window.innerWidth, window.innerHeight );
+var velocity = 0;
+var progress = 0;
 
-			}
+var prevTime = performance.now();
 
-			//
+function render() {
 
-			var position = new THREE.Vector3();
-			var tangent = new THREE.Vector3();
+	var time = performance.now();
+	var delta = time - prevTime;
 
-			var lookAt = new THREE.Vector3();
+	for ( var i = 0; i < funfairs.length; i ++ ) {
 
-			var velocity = 0;
-			var progress = 0;
+		funfairs[ i ].rotation.y = time * 0.0004;
 
-			var prevTime = performance.now();
+	}
 
-			function render() {
+	//
 
-				var time = performance.now();
-				var delta = time - prevTime;
+	progress += velocity;
+	progress = progress % 1;
 
-				for ( var i = 0; i < funfairs.length; i ++ ) {
+	position.copy( curve.getPointAt( progress ) );
+	position.y += 0.3;
 
-					funfairs[ i ].rotation.y = time * 0.0004;
+	train.position.copy( position );
 
-				}
+	tangent.copy( curve.getTangentAt( progress ) );
 
-				//
+	velocity -= tangent.y * 0.0000001 * delta;
+	velocity = Math.max( 0.00004, Math.min( 0.0002, velocity ) );
 
-				progress += velocity;
-				progress = progress % 1;
+	train.lookAt( lookAt.copy( position ).sub( tangent ) );
 
-				position.copy( curve.getPointAt( progress ) );
-				position.y += 0.3;
+	//
 
-				train.position.copy( position );
+	renderer.render( scene, camera );
 
-				tangent.copy( curve.getTangentAt( progress ) );
+	prevTime = time;
 
-				velocity -= tangent.y * 0.0000001 * delta;
-				velocity = Math.max( 0.00004, Math.min( 0.0002, velocity ) );
+}
 
-				train.lookAt( lookAt.copy( position ).sub( tangent ) );
-
-				//
-
-				renderer.render( scene, camera );
-
-				prevTime = time;
-
-			}
-
-			renderer.animate( render );
-
-		</script>
-
-	</body>
-</html>
+renderer.animate( render );
