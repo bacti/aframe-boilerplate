@@ -39,6 +39,7 @@ export default class RollerCoaster extends React.Component
                             fov={75} aspect={width/height} near={0.1} far={1000}
                             position={this.cameraPosition}
                         />
+                        <hemisphereLight skyColor={0xfff0f0} groundColor={0x606066} position={new THREE.Vector3(1, 1, 1)} />
                         <mesh rotation={this.state.cubeRotation}>
                             <boxGeometry width={1} height={1} depth={1} />
                             <meshBasicMaterial color={0x00ff00} />
