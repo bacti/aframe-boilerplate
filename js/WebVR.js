@@ -1,13 +1,14 @@
-/**
- * @author mrdoob / http://mrdoob.com
- * @author Mugen87 / https://github.com/Mugen87
- *
- * Based on @tojiro's vr-samples-utils.js
- */
+import React from 'react'
 
-class WebVR
+export default class WebVR extends React.Component
 {
-	createButton: function ( renderer ) {
+    constructor(props)
+    {
+        super(props)
+	}
+
+	createButton ( renderer )
+	{
 
 		function showEnterVR( display ) {
 
