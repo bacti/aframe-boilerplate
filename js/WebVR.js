@@ -1,5 +1,17 @@
 import React from 'react'
 
+// Check before the polyfill runs.
+window.hasNativeWebVRImplementation = !!window.navigator.getVRDisplays || !!window.navigator.getVRDevices
+
+// WebVR polyfill
+import WebVRPolyfill from 'webvr-polyfill'
+window.webvrpolyfill = new WebVRPolyfill(
+{
+  	BUFFER_SCALE: 1,
+  	CARDBOARD_UI_DISABLED: true,
+  	ROTATE_INSTRUCTIONS_DISABLED: true,
+})
+
 export default class WebVR extends React.Component
 {
     constructor(props)
@@ -11,7 +23,9 @@ export default class WebVR extends React.Component
 			navigator.getVRDisplays().then(displays =>
 			{
 			  	this.vrDisplay = displays.length && displays[0]
-			  	this.polyfilledVRDisplay = vrDisplay.displayName === 'Cardboard VRDisplay'
+				this.polyfilledVRDisplay = this.vrDisplay.displayName === 'Cardboard VRDisplay'
+				console.log(this.vrDisplay)  
+				console.log(this.polyfilledVRDisplay)  
 			})
 		}
 	}
