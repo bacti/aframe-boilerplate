@@ -10,8 +10,8 @@ export default class WebVR extends React.Component
 		{
 			navigator.getVRDisplays().then(displays =>
 			{
-			  	this.vrDisplay = displays.length && displays[0];
-			  	this.polyfilledVRDisplay = vrDisplay.displayName === POLYFILL_VRDISPLAY_ID;
+			  	this.vrDisplay = displays.length && displays[0]
+			  	this.polyfilledVRDisplay = vrDisplay.displayName === 'Cardboard VRDisplay'
 			})
 		}
 	}
