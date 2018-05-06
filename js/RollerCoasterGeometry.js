@@ -1,25 +1,30 @@
 import React from 'react'
 import React3 from '../libs/react-three-renderer/src' 
-import { curve } from './Curve' 
 
 export default class RollerCoasterGeometry extends React.Component
 {
     constructor(props)
     {
 		super(props)
-		console.log(curve)
+		this.Init(props.curve, props.divisions)
     }
 
     render()
     {
-		return <boxGeometry width={1} height={1} depth={1} />
+		return (
+			<bufferGeometry
+				position={new THREE.BufferAttribute( new Float32Array( this.vertices ), 3 )}
+				normal={new THREE.BufferAttribute( new Float32Array( this.normals ), 3 )}
+				color={new THREE.BufferAttribute( new Float32Array( this.colors ), 3 )} 
+			/>
+		)
 	}
 
 	Init(curve, divisions)
 	{
-		var vertices = [];
-		var normals = [];
-		var colors = [];
+		this.vertices = [];
+		this.normals = [];
+		this.colors = [];
 
 		var color1 = [ 1, 1, 1 ];
 		var color2 = [ 1, 1, 0 ];
@@ -83,9 +88,9 @@ export default class RollerCoasterGeometry extends React.Component
 				vector.applyQuaternion( quaternion );
 				vector.add( point );
 
-				vertices.push( vector.x, vector.y, vector.z );
-				normals.push( normal.x, normal.y, normal.z );
-				colors.push( color[ 0 ], color[ 1 ], color[ 2 ] );
+				this.vertices.push( vector.x, vector.y, vector.z );
+				this.normals.push( normal.x, normal.y, normal.z );
+				this.colors.push( color[ 0 ], color[ 1 ], color[ 2 ] );
 
 			}
 
@@ -97,9 +102,9 @@ export default class RollerCoasterGeometry extends React.Component
 				vector.applyQuaternion( quaternion );
 				vector.add( point );
 
-				vertices.push( vector.x, vector.y, vector.z );
-				normals.push( normal.x, normal.y, normal.z );
-				colors.push( color[ 0 ], color[ 1 ], color[ 2 ] );
+				this.vertices.push( vector.x, vector.y, vector.z );
+				this.normals.push( normal.x, normal.y, normal.z );
+				this.colors.push( color[ 0 ], color[ 1 ], color[ 2 ] );
 
 			}
 
@@ -138,13 +143,13 @@ export default class RollerCoasterGeometry extends React.Component
 				vector4.applyQuaternion( prevQuaternion );
 				vector4.add( prevPoint );
 
-				vertices.push( vector1.x, vector1.y, vector1.z );
-				vertices.push( vector2.x, vector2.y, vector2.z );
-				vertices.push( vector4.x, vector4.y, vector4.z );
+				this.vertices.push( vector1.x, vector1.y, vector1.z );
+				this.vertices.push( vector2.x, vector2.y, vector2.z );
+				this.vertices.push( vector4.x, vector4.y, vector4.z );
 
-				vertices.push( vector2.x, vector2.y, vector2.z );
-				vertices.push( vector3.x, vector3.y, vector3.z );
-				vertices.push( vector4.x, vector4.y, vector4.z );
+				this.vertices.push( vector2.x, vector2.y, vector2.z );
+				this.vertices.push( vector3.x, vector3.y, vector3.z );
+				this.vertices.push( vector4.x, vector4.y, vector4.z );
 
 				//
 
@@ -164,21 +169,21 @@ export default class RollerCoasterGeometry extends React.Component
 				normal4.applyQuaternion( prevQuaternion );
 				normal4.normalize();
 
-				normals.push( normal1.x, normal1.y, normal1.z );
-				normals.push( normal2.x, normal2.y, normal2.z );
-				normals.push( normal4.x, normal4.y, normal4.z );
+				this.normals.push( normal1.x, normal1.y, normal1.z );
+				this.normals.push( normal2.x, normal2.y, normal2.z );
+				this.normals.push( normal4.x, normal4.y, normal4.z );
 
-				normals.push( normal2.x, normal2.y, normal2.z );
-				normals.push( normal3.x, normal3.y, normal3.z );
-				normals.push( normal4.x, normal4.y, normal4.z );
+				this.normals.push( normal2.x, normal2.y, normal2.z );
+				this.normals.push( normal3.x, normal3.y, normal3.z );
+				this.normals.push( normal4.x, normal4.y, normal4.z );
 
-				colors.push( color[ 0 ], color[ 1 ], color[ 2 ] );
-				colors.push( color[ 0 ], color[ 1 ], color[ 2 ] );
-				colors.push( color[ 0 ], color[ 1 ], color[ 2 ] );
+				this.colors.push( color[ 0 ], color[ 1 ], color[ 2 ] );
+				this.colors.push( color[ 0 ], color[ 1 ], color[ 2 ] );
+				this.colors.push( color[ 0 ], color[ 1 ], color[ 2 ] );
 
-				colors.push( color[ 0 ], color[ 1 ], color[ 2 ] );
-				colors.push( color[ 0 ], color[ 1 ], color[ 2 ] );
-				colors.push( color[ 0 ], color[ 1 ], color[ 2 ] );
+				this.colors.push( color[ 0 ], color[ 1 ], color[ 2 ] );
+				this.colors.push( color[ 0 ], color[ 1 ], color[ 2 ] );
+				this.colors.push( color[ 0 ], color[ 1 ], color[ 2 ] );
 
 			}
 
@@ -214,11 +219,5 @@ export default class RollerCoasterGeometry extends React.Component
 			prevQuaternion.copy( quaternion );
 
 		}
-
-		// console.log( vertices.length );
-
-		this.addAttribute( 'position', new THREE.BufferAttribute( new Float32Array( vertices ), 3 ) );
-		this.addAttribute( 'normal', new THREE.BufferAttribute( new Float32Array( normals ), 3 ) );
-		this.addAttribute( 'color', new THREE.BufferAttribute( new Float32Array( colors ), 3 ) );
 	}
 }
