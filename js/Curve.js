@@ -1,3 +1,4 @@
+const PI2 = Math.PI * 2
 class Curve
 {
     constructor()
@@ -14,7 +15,7 @@ class Curve
         var y = Math.sin( t * 10 ) * 2 + Math.cos( t * 17 ) * 2 + 5
         var z = Math.sin( t ) * Math.sin( t * 4 ) * 50
 
-        return vector.set( x, y, z ).multiplyScalar( 2 )
+        return this.vector.set( x, y, z ).multiplyScalar( 2 )
     }
 
     getTangentAt(t)
@@ -23,7 +24,7 @@ class Curve
         var t1 = Math.max( 0, t - delta )
         var t2 = Math.min( 1, t + delta )
 
-        return vector2.copy( this.getPointAt ( t2 ) )
+        return this.vector2.copy( this.getPointAt ( t2 ) )
             .sub( this.getPointAt( t1 ) ).normalize()
     }
 }

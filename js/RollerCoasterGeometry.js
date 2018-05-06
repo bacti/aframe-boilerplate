@@ -78,8 +78,8 @@ export default class RollerCoasterGeometry extends React.Component
 		var vector = new THREE.Vector3();
 		var normal = new THREE.Vector3();
 
-		function drawShape( shape, color ) {
-
+		let drawShape = ( shape, color ) =>
+		{
 			normal.set( 0, 0, -1 ).applyQuaternion( quaternion );
 
 			for ( var j = 0; j < shape.length; j ++ ) {
@@ -107,7 +107,6 @@ export default class RollerCoasterGeometry extends React.Component
 				this.colors.push( color[ 0 ], color[ 1 ], color[ 2 ] );
 
 			}
-
 		};
 
 		var vector1 = new THREE.Vector3();
@@ -120,10 +119,10 @@ export default class RollerCoasterGeometry extends React.Component
 		var normal3 = new THREE.Vector3();
 		var normal4 = new THREE.Vector3();
 
-		function extrudeShape( shape, offset, color ) {
-
-			for ( var j = 0, jl = shape.length; j < jl; j ++ ) {
-
+		let extrudeShape = ( shape, offset, color ) =>
+		{
+			for ( var j = 0, jl = shape.length; j < jl; j ++ )
+			{
 				var point1 = shape[ j ];
 				var point2 = shape[ ( j + 1 ) % jl ];
 

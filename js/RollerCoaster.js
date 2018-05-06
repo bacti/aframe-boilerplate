@@ -4,8 +4,6 @@ import WebVR from './WebVR'
 import { curve } from './Curve'
 import RollerCoasterGeometry from './RollerCoasterGeometry'
 
-const PI2 = Math.PI * 2
-
 export default class RollerCoaster extends React.Component
 {
     constructor(props, context)
