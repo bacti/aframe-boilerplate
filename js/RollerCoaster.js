@@ -45,6 +45,37 @@ export default class RollerCoaster extends React.Component
             // {
             //     cubeRotation: new THREE.Euler(this.state.cubeRotation.x + 0.1, this.state.cubeRotation.y + 0.1, 0),
             // })
+            var time = performance.now();
+            var delta = time - prevTime;
+        
+            // for ( var i = 0; i < funfairs.length; i ++ ) {
+        
+            // 	funfairs[ i ].rotation.y = time * 0.0004;
+        
+            // }
+        
+            //
+        
+            progress += velocity;
+            progress = progress % 1;
+        
+            position.copy( curve.getPointAt( progress ) );
+            position.y += 0.3;
+        
+            train.position.copy( position );
+        
+            tangent.copy( curve.getTangentAt( progress ) );
+        
+            velocity -= tangent.y * 0.0000001 * delta;
+            velocity = Math.max( 0.00004, Math.min( 0.0002, velocity ) );
+        
+            train.lookAt( lookAt.copy( position ).sub( tangent ) );
+        
+            
+        
+            renderer.render( scene, camera );
+        
+            prevTime = time;
         }
     }
   
