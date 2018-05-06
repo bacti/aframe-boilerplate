@@ -11,9 +11,12 @@ export default class RollerCoasterShadow extends React.Component
     render()
     {
 		return (
-			<bufferGeometry
-				position={new THREE.BufferAttribute( new Float32Array( this.vertices ), 3 )}
-			/>
+            <mesh>
+                <bufferGeometry
+                    position={new THREE.BufferAttribute( new Float32Array( this.vertices ), 3 )}
+                />
+                <meshBasicMaterial color={0x305000} depthWrite={false} transparent={true} />
+            </mesh>
 		)
     }
     

@@ -4,6 +4,7 @@ import WebVR from './WebVR'
 import { curve } from './Curve'
 import RollerCoasterGeometry from './RollerCoasterGeometry'
 import RollerCoasterLiftersGeometry from './RollerCoasterLiftersGeometry'
+import RollerCoasterShadow from './RollerCoasterShadow'
 
 export default class RollerCoaster extends React.Component
 {
@@ -109,6 +110,7 @@ export default class RollerCoaster extends React.Component
                             <RollerCoasterLiftersGeometry curve={curve} divisions={100} />
                             <meshPhongMaterial />
                         </mesh>
+                        <RollerCoasterShadow curve={curve} />
                     </scene>
                 </React3>
             </div>
