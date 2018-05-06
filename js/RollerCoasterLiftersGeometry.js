@@ -1,24 +1,32 @@
 import React from 'react'
 
-export default class RollerCoasterLiftersGeometry extends React.Component
+export default class RollerCoasterLifters extends React.Component
 {
     constructor(props)
     {
 		super(props)
-		this.Init(props.curve, props.divisions)
+		this.InitGeometry(props.curve, 100)
+    }
+
+    componentDidMount()
+    {
+        this.refs.mesh.position.y = 0.1
     }
 
     render()
     {
 		return (
-			<bufferGeometry
-				position={new THREE.BufferAttribute( new Float32Array( this.vertices ), 3 )}
-				normal={new THREE.BufferAttribute( new Float32Array( this.normals ), 3 )}
-			/>
+            <mesh ref='mesh'>
+                <bufferGeometry
+                    position={new THREE.BufferAttribute( new Float32Array( this.vertices ), 3 )}
+                    normal={new THREE.BufferAttribute( new Float32Array( this.normals ), 3 )}
+                />
+                <meshPhongMaterial />
+            </mesh>
 		)
     }
     
-    Init( curve, divisions )
+    InitGeometry( curve, divisions )
     {
         this.vertices = [];
         this.normals = [];

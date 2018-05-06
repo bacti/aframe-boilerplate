@@ -3,7 +3,7 @@ import React3 from '../libs/react-three-renderer/src'
 import WebVR from './WebVR'
 import { curve } from './Curve'
 import RollerCoasterGeometry from './RollerCoasterGeometry'
-import RollerCoasterLiftersGeometry from './RollerCoasterLiftersGeometry'
+import RollerCoasterLifters from './RollerCoasterLiftersGeometry'
 import RollerCoasterShadow from './RollerCoasterShadow'
 
 export default class RollerCoaster extends React.Component
@@ -106,10 +106,7 @@ export default class RollerCoaster extends React.Component
                             <RollerCoasterGeometry curve={curve} divisions={1500} />
                             <meshPhongMaterial vertexColors={THREE.VertexColors} />
                         </mesh>
-                        <mesh>
-                            <RollerCoasterLiftersGeometry curve={curve} divisions={100} />
-                            <meshPhongMaterial />
-                        </mesh>
+                        <RollerCoasterLifters curve={curve} />
                         <RollerCoasterShadow curve={curve} />
                     </scene>
                 </React3>
