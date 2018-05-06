@@ -1,4 +1,4 @@
-export default class Curve
+class Curve
 {
     constructor()
     {
@@ -27,3 +27,4 @@ export default class Curve
             .sub( this.getPointAt( t1 ) ).normalize()
     }
 }
+export let curve = new Curve()
