@@ -1,5 +1,4 @@
 import React from 'react'
-import React3 from '../libs/react-three-renderer/src' 
 
 export default class RollerCoasterGeometry extends React.Component
 {

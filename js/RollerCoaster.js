@@ -3,6 +3,7 @@ import React3 from '../libs/react-three-renderer/src'
 import WebVR from './WebVR'
 import { curve } from './Curve'
 import RollerCoasterGeometry from './RollerCoasterGeometry'
+import RollerCoasterLiftersGeometry from './RollerCoasterLiftersGeometry'
 
 export default class RollerCoaster extends React.Component
 {
