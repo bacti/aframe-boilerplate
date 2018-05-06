@@ -59,7 +59,7 @@ export default class RollerCoaster extends React.Component
                     canvas={this.props.canvas}
                     onAnimate={this.OnAnimate}
                 >
-                    <scene>
+                    <scene background={0xf0f0ff}>
                         <perspectiveCamera name='perspective'
                             fov={75} aspect={width/height} near={0.1} far={1000}
                             position={this.cameraPosition}
