@@ -39,14 +39,21 @@ export default class RollerCoaster extends React.Component
             }
         })()
 
+        let position = new THREE.Vector3()
+        let tangent = new THREE.Vector3()
+        let lookAt = new THREE.Vector3()
+        let velocity = 0
+        let progress = 0
+        let prevTime = performance.now()
+
         this.OnAnimate = _ =>
         {
             // this.setState(
             // {
             //     cubeRotation: new THREE.Euler(this.state.cubeRotation.x + 0.1, this.state.cubeRotation.y + 0.1, 0),
             // })
-            var time = performance.now();
-            var delta = time - prevTime;
+            let time = performance.now();
+            let delta = time - prevTime;
         
             // for ( var i = 0; i < funfairs.length; i ++ ) {
         
@@ -56,26 +63,22 @@ export default class RollerCoaster extends React.Component
         
             //
         
-            progress += velocity;
-            progress = progress % 1;
+            progress += velocity
+            progress = progress % 1
         
-            position.copy( curve.getPointAt( progress ) );
-            position.y += 0.3;
+            position.copy( curve.getPointAt( progress ) )
+            position.y += 0.3
         
-            train.position.copy( position );
+            train.position.copy( position )
         
-            tangent.copy( curve.getTangentAt( progress ) );
+            tangent.copy( curve.getTangentAt( progress ) )
         
-            velocity -= tangent.y * 0.0000001 * delta;
-            velocity = Math.max( 0.00004, Math.min( 0.0002, velocity ) );
+            velocity -= tangent.y * 0.0000001 * delta
+            velocity = Math.max( 0.00004, Math.min( 0.0002, velocity ) )
         
-            train.lookAt( lookAt.copy( position ).sub( tangent ) );
+            train.lookAt( lookAt.copy( position ).sub( tangent ) )
         
-            
-        
-            renderer.render( scene, camera );
-        
-            prevTime = time;
+            prevTime = time
         }
     }
   
