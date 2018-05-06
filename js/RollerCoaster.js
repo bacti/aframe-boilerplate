@@ -105,6 +105,10 @@ export default class RollerCoaster extends React.Component
                             <RollerCoasterGeometry curve={curve} divisions={1500} />
                             <meshPhongMaterial vertexColors={THREE.VertexColors} />
                         </mesh>
+                        <mesh rotation={this.state.cubeRotation}>
+                            <RollerCoasterLiftersGeometry curve={curve} divisions={100} />
+                            <meshPhongMaterial />
+                        </mesh>
                     </scene>
                 </React3>
             </div>

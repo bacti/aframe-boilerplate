@@ -20,8 +20,8 @@ export default class RollerCoasterLiftersGeometry extends React.Component
     
     Init( curve, divisions )
     {
-        var vertices = [];
-        var normals = [];
+        this.vertices = [];
+        this.normals = [];
 
         var quaternion = new THREE.Quaternion();
 
