@@ -69,14 +69,14 @@ export default class RollerCoaster extends React.Component
             position.copy( curve.getPointAt( progress ) )
             position.y += 0.3
         
-            train.position.copy( position )
+            this.refs.train.position.copy( position )
         
             tangent.copy( curve.getTangentAt( progress ) )
         
             velocity -= tangent.y * 0.0000001 * delta
             velocity = Math.max( 0.00004, Math.min( 0.0002, velocity ) )
         
-            train.lookAt( lookAt.copy( position ).sub( tangent ) )
+            this.refs.train.lookAt( lookAt.copy( position ).sub( tangent ) )
         
             prevTime = time
         }
