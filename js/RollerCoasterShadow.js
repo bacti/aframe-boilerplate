@@ -8,10 +8,15 @@ export default class RollerCoasterShadow extends React.Component
 		this.InitGeometry(props.curve, 500)
     }
 
+    componentDidMount()
+    {
+        this.refs.mesh.position.y = 0.1
+    }
+
     render()
     {
 		return (
-            <mesh>
+            <mesh ref='mesh'>
                 <bufferGeometry
                     position={new THREE.BufferAttribute( new Float32Array( this.vertices ), 3 )}
                 />
