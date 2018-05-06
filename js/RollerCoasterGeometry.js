@@ -1,4 +1,20 @@
-function RollerCoasterGeometry( curve, divisions )
+import React from 'react'
+import React3 from '../libs/react-three-renderer/src' 
+
+export default class RollerCoasterGeometry extends React.Component
+{
+    constructor(props)
+    {
+        super(props)
+    }
+
+    render()
+    {
+		return <boxGeometry width={1} height={1} depth={1} />
+	}
+}
+
+function RollerCoasterGeometryOld( curve, divisions )
 {
 
 	THREE.BufferGeometry.call( this );

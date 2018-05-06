@@ -1,6 +1,7 @@
 import React from 'react'
 import React3 from '../libs/react-three-renderer/src' 
 import WebVR from './WebVR'
+import RollerCoasterGeometry from './RollerCoasterGeometry'
 
 const PI2 = Math.PI * 2
 
@@ -66,7 +67,8 @@ export default class RollerCoaster extends React.Component
                         />
                         <hemisphereLight skyColor={0xfff0f0} groundColor={0x606066} position={new THREE.Vector3(1, 1, 1)} />
                         <mesh rotation={this.state.cubeRotation}>
-                            <boxGeometry width={1} height={1} depth={1} />
+                            {/* <boxGeometry width={1} height={1} depth={1} /> */}
+                            <RollerCoasterGeometry />
                             <meshBasicMaterial color={0x00ff00} />
                         </mesh>
                     </scene>
