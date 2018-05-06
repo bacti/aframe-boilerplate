@@ -60,8 +60,8 @@ export default class RollerCoasterLiftersGeometry extends React.Component
         var normal3 = new THREE.Vector3();
         var normal4 = new THREE.Vector3();
 
-        function extrudeShape( shape, fromPoint, toPoint ) {
-
+        let extrudeShape = ( shape, fromPoint, toPoint ) =>
+        {
             for ( var j = 0, jl = shape.length; j < jl; j ++ ) {
 
                 var point1 = shape[ j ];
@@ -83,13 +83,13 @@ export default class RollerCoasterLiftersGeometry extends React.Component
                 vector4.applyQuaternion( quaternion );
                 vector4.add( toPoint );
 
-                vertices.push( vector1.x, vector1.y, vector1.z );
-                vertices.push( vector2.x, vector2.y, vector2.z );
-                vertices.push( vector4.x, vector4.y, vector4.z );
+                this.vertices.push( vector1.x, vector1.y, vector1.z );
+                this.vertices.push( vector2.x, vector2.y, vector2.z );
+                this.vertices.push( vector4.x, vector4.y, vector4.z );
 
-                vertices.push( vector2.x, vector2.y, vector2.z );
-                vertices.push( vector3.x, vector3.y, vector3.z );
-                vertices.push( vector4.x, vector4.y, vector4.z );
+                this.vertices.push( vector2.x, vector2.y, vector2.z );
+                this.vertices.push( vector3.x, vector3.y, vector3.z );
+                this.vertices.push( vector4.x, vector4.y, vector4.z );
 
                 //
 
@@ -109,13 +109,13 @@ export default class RollerCoasterLiftersGeometry extends React.Component
                 normal4.applyQuaternion( quaternion );
                 normal4.normalize();
 
-                normals.push( normal1.x, normal1.y, normal1.z );
-                normals.push( normal2.x, normal2.y, normal2.z );
-                normals.push( normal4.x, normal4.y, normal4.z );
+                this.normals.push( normal1.x, normal1.y, normal1.z );
+                this.normals.push( normal2.x, normal2.y, normal2.z );
+                this.normals.push( normal4.x, normal4.y, normal4.z );
 
-                normals.push( normal2.x, normal2.y, normal2.z );
-                normals.push( normal3.x, normal3.y, normal3.z );
-                normals.push( normal4.x, normal4.y, normal4.z );
+                this.normals.push( normal2.x, normal2.y, normal2.z );
+                this.normals.push( normal3.x, normal3.y, normal3.z );
+                this.normals.push( normal4.x, normal4.y, normal4.z );
 
             }
 
