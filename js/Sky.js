@@ -1,28 +1,45 @@
-function SkyGeometry() {
+import React from 'react'
 
-	THREE.BufferGeometry.call( this );
+export default class Sky extends React.Component
+{
+    constructor(props)
+    {
+		super(props)
+		this.InitGeometry()
+    }
 
-	var vertices = [];
+    render()
+    {
+		return (
+            <mesh>
+                <bufferGeometry
+                    position={new THREE.BufferAttribute( new Float32Array( this.vertices ), 3 )}
+                />
+                <meshBasicMaterial color={0xffffff} />
+            </mesh>
+		)
+    }
+    
+    InitGeometry()
+    {
+        this.vertices = [];
 
-	for ( var i = 0; i < 100; i ++ ) {
+        for ( var i = 0; i < 100; i ++ ) {
 
-		var x = Math.random() * 800 - 400;
-		var y = Math.random() * 50 + 50;
-		var z = Math.random() * 800 - 400;
+            var x = Math.random() * 800 - 400;
+            var y = Math.random() * 50 + 50;
+            var z = Math.random() * 800 - 400;
 
-		var size = Math.random() * 40 + 20;
+            var size = Math.random() * 40 + 20;
 
-		vertices.push( x - size, y, z - size );
-		vertices.push( x + size, y, z - size );
-		vertices.push( x - size, y, z + size );
+            this.vertices.push( x - size, y, z - size );
+            this.vertices.push( x + size, y, z - size );
+            this.vertices.push( x - size, y, z + size );
 
-		vertices.push( x + size, y, z - size );
-		vertices.push( x + size, y, z + size );
-		vertices.push( x - size, y, z + size );
+            this.vertices.push( x + size, y, z - size );
+            this.vertices.push( x + size, y, z + size );
+            this.vertices.push( x - size, y, z + size );
 
-	}
-
-
-	this.addAttribute( 'position', new THREE.BufferAttribute( new Float32Array( vertices ), 3 ) );
-
+        }
+    }
 };
