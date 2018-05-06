@@ -101,11 +101,11 @@ export default class RollerCoaster extends React.Component
                                 fov={40} aspect={width/height} near={0.1} far={500}
                             />
                         </object3D>
-                        <mesh rotation={this.state.cubeRotation}>
+                        <mesh>
                             <RollerCoasterGeometry curve={curve} divisions={1500} />
                             <meshPhongMaterial vertexColors={THREE.VertexColors} />
                         </mesh>
-                        <mesh rotation={this.state.cubeRotation}>
+                        <mesh>
                             <RollerCoasterLiftersGeometry curve={curve} divisions={100} />
                             <meshPhongMaterial />
                         </mesh>
