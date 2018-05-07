@@ -5,11 +5,7 @@ const UglifyJSPlugin = require('uglifyjs-webpack-plugin')
 
 let options =
 {
-    entry:
-    [
-        // 'babel-polyfill',
-        './js/main.js',
-    ],
+    entry: './js/main.js',
     output:
     {
         path: path.resolve(__dirname, 'docs'),
@@ -78,10 +74,11 @@ let options =
     resolve:
     {
         modules: [path.resolve('./node_modules'), process.env.NODE_PATH],
-    }
+    },
+    mode: 'none',
 }
-if (process.env.NODE_ENV == 'production')
-{
-    options.plugins.push(new UglifyJSPlugin())
-}
+// if (process.env.NODE_ENV == 'production')
+// {
+//     options.plugins.push(new UglifyJSPlugin())
+// }
 module.exports = options
