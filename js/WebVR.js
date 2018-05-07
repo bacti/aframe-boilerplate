@@ -4,7 +4,7 @@ window.hasNativeWebVRImplementation = !!window.navigator.getVRDisplays || !!wind
 import WebVRPolyfill from 'webvr-polyfill'
 window.webvrpolyfill = new WebVRPolyfill(
 {
-  	BUFFER_SCALE: 1,
+  	BUFFER_SCALE: 0.5,
   	CARDBOARD_UI_DISABLED: true,
   	ROTATE_INSTRUCTIONS_DISABLED: true,
 })
@@ -42,6 +42,17 @@ export default class WebVR extends React.Component
 
 	render()
     {
-		return null
+		return (
+			<div style={{
+				background: 'url(./data/vr-icon.png) 0% 0% / contain no-repeat',
+				position: 'absolute',
+				zIndex: 12,
+				width: '100px',
+				height: '100px',
+				right: 0,
+				bottom: 0,
+			}}>
+			</div>
+		)
 	}
 }
