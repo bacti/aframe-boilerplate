@@ -1,4 +1,8 @@
 import React from 'react'
+import { connect } from 'react-redux'
+import { bindActionCreators } from 'redux'
+import dispatchScene from './actions/action_dispatch_scene'
+
 import React3 from '../libs/react-three-renderer/src' 
 import WebVR from './WebVR'
 import { curve } from './Curve'
@@ -8,7 +12,7 @@ import RollerCoasterGeometry from './RollerCoasterGeometry'
 import RollerCoasterLifters from './RollerCoasterLifters'
 import RollerCoasterShadow from './RollerCoasterShadow'
 
-export default class RollerCoaster extends React.Component
+class RollerCoaster extends React.Component
 {
     constructor(props, context)
     {
@@ -56,7 +60,12 @@ export default class RollerCoaster extends React.Component
             prevTime = time
         }
     }
-  
+
+    componentDidMount()
+    {
+        console.log('bacti', this.refs.scene)
+    }
+
     render()
     {
         let width = window.innerWidth
@@ -68,7 +77,7 @@ export default class RollerCoaster extends React.Component
                     canvas={this.props.canvas}
                     onAnimate={this.OnAnimate}
                 >
-                    <scene background={0xf0f0ff}>
+                    <scene background={0xf0f0ff} ref='scene'>
                         <hemisphereLight skyColor={0xfff0f0} groundColor={0x606066} position={new THREE.Vector3(1, 1, 1)} />
                         <object3D ref="train">
                             <perspectiveCamera name='perspective'
@@ -89,3 +98,16 @@ export default class RollerCoaster extends React.Component
         )
     }
 }
+
+function mapStateToProps(state)
+{
+    console.log('cookie')
+    return {}
+}
+
+function mapDispatchToProps(dispatch)
+{
+    return bindActionCreators({dispatchScene: dispatchScene}, dispatch)
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(RollerCoaster)
