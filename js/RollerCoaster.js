@@ -85,7 +85,7 @@ class RollerCoaster extends React.Component
                             />
                         </object3D>
                         <Landscape store={this.props.store} />
-                        <Trees />
+                        <Trees store={this.props.store} />
                         <Sky />
                         <mesh>
                             <RollerCoasterGeometry curve={curve} divisions={1500} />

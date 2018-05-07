@@ -1,12 +1,16 @@
 import React from 'react'
-
-export default class Trees extends React.Component
+import { connect } from 'react-redux'
+class Trees extends React.Component
 {
     constructor(props)
     {
 		super(props)
-		this.InitGeometry()
-    }
+	}
+	
+	componentWillReceiveProps(props)
+	{
+		this.InitGeometry(props.landscape)
+	}
 
     render()
     {
@@ -16,7 +20,7 @@ export default class Trees extends React.Component
                     position={new THREE.BufferAttribute( new Float32Array( this.vertices ), 3 )}
                     color={new THREE.BufferAttribute( new Float32Array( this.colors ), 3 )}
                 />
-                <meshBasicMaterial color={0xffffff} />
+                <meshBasicMaterial side={THREE.DoubleSide} vertexColors={THREE.VertexColors} />
             </mesh>
 		)
 	}
@@ -65,3 +69,13 @@ export default class Trees extends React.Component
 		}
 	}
 }
+
+
+let mapStateToProps = state =>
+{
+    return {
+        landscape: state.landscape
+    }
+}
+
+export default connect(mapStateToProps)(Trees)
