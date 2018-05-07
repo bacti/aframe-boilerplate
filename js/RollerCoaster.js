@@ -6,6 +6,7 @@ import React3 from '../libs/react-three-renderer/src'
 import WebVR from './WebVR'
 import { curve } from './Curve'
 import Landscape from './Landscape'
+import Trees from './Trees'
 import Sky from './Sky'
 import RollerCoasterGeometry from './RollerCoasterGeometry'
 import RollerCoasterLifters from './RollerCoasterLifters'
@@ -84,6 +85,7 @@ class RollerCoaster extends React.Component
                             />
                         </object3D>
                         <Landscape store={this.props.store} />
+                        <Trees />
                         <Sky />
                         <mesh>
                             <RollerCoasterGeometry curve={curve} divisions={1500} />
