@@ -8,10 +8,8 @@ class Landscape extends React.Component
 		super(props)
     }
 
-    componentDidMount()
+    componentWillReceiveProps(props)
     {
-        return
-
         let geometry = this.refs.geometry
         geometry.rotateX(-Math.PI / 2)
         
@@ -24,7 +22,7 @@ class Landscape extends React.Component
             vertex.x += Math.random() * 10 - 5
             vertex.z += Math.random() * 10 - 5
         
-            let distance = (vertex.distanceTo(scene.position) / 5) - 25
+            let distance = (vertex.distanceTo(props.mainScene.position) / 5) - 25
             vertex.y = Math.random() * Math.max(0, distance)
             vertex.toArray(positions, i)
         }
@@ -32,14 +30,8 @@ class Landscape extends React.Component
         geometry.computeVertexNormals()
     }
 
-    componentWillReceiveProps(newProps)
-    {
-        console.log(newProps)
-    }
-
     render()
     {
-        console.log(this.props.mainScene)
 		return (
             <mesh>
                 <planeBufferGeometry ref='geometry' width={500} height={500} widthSegments={15} heightSegments={15} />

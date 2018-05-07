@@ -101,7 +101,6 @@ class RollerCoaster extends React.Component
 
 function mapStateToProps(state)
 {
-    console.log('cookie', state)
     return {}
 }
 
