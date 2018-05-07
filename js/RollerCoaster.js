@@ -1,4 +1,8 @@
 import React from 'react'
+import { Provider } from 'react-redux'
+import { createStore, applyMiddleware } from 'redux'
+
+import reducers from './reducers'
 import React3 from '../libs/react-three-renderer/src' 
 import WebVR from './WebVR'
 import { curve } from './Curve'
@@ -62,30 +66,32 @@ export default class RollerCoaster extends React.Component
         let width = window.innerWidth
         let height = window.innerHeight
         return (
-            <div>
-                <WebVR canvas={this.props.canvas} />
-                <React3 mainCamera='perspective' width={width} height={height}
-                    canvas={this.props.canvas}
-                    onAnimate={this.OnAnimate}
-                >
-                    <scene background={0xf0f0ff}>
-                        <hemisphereLight skyColor={0xfff0f0} groundColor={0x606066} position={new THREE.Vector3(1, 1, 1)} />
-                        <object3D ref="train">
-                            <perspectiveCamera name='perspective'
-                                fov={40} aspect={width/height} near={0.1} far={500}
-                            />
-                        </object3D>
-                        <Landscape />
-                        <Sky />
-                        <mesh>
-                            <RollerCoasterGeometry curve={curve} divisions={1500} />
-                            <meshPhongMaterial vertexColors={THREE.VertexColors} />
-                        </mesh>
-                        <RollerCoasterLifters curve={curve} />
-                        <RollerCoasterShadow curve={curve} />
-                    </scene>
-                </React3>
-            </div>
+            <Provider store={applyMiddleware()(createStore)(reducers)}>
+                <div>
+                    <WebVR canvas={this.props.canvas} />
+                    <React3 mainCamera='perspective' width={width} height={height}
+                        canvas={this.props.canvas}
+                        onAnimate={this.OnAnimate}
+                    >
+                        <scene background={0xf0f0ff}>
+                            <hemisphereLight skyColor={0xfff0f0} groundColor={0x606066} position={new THREE.Vector3(1, 1, 1)} />
+                            <object3D ref="train">
+                                <perspectiveCamera name='perspective'
+                                    fov={40} aspect={width/height} near={0.1} far={500}
+                                />
+                            </object3D>
+                            {/* <Landscape /> */}
+                            <Sky />
+                            <mesh>
+                                <RollerCoasterGeometry curve={curve} divisions={1500} />
+                                <meshPhongMaterial vertexColors={THREE.VertexColors} />
+                            </mesh>
+                            <RollerCoasterLifters curve={curve} />
+                            <RollerCoasterShadow curve={curve} />
+                        </scene>
+                    </React3>
+                </div>
+            </Provider>
         )
     }
 }
