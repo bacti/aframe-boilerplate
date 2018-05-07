@@ -21,16 +21,22 @@ export default class WebVR extends React.Component
 			{
 			  	this.vrDisplay = displays.length && displays[0]
 				this.polyfilledVRDisplay = this.vrDisplay.displayName === 'Cardboard VRDisplay'
+				renderer.vr.setDevice(this.vrDisplay)
 			})
 		}
 
-		this.EnterVR = _ =>
+		this.ToggleVR = _ =>
 		{
-			if (this.vrDisplay)
+			if (!this.vrDisplay)
+				return
+			if (renderer.vr.enabled)
 			{
-				let vrManager = renderer.vr
-				vrManager.setDevice(this.vrDisplay)
-				vrManager.enabled = true
+				renderer.vr.enabled = false
+				this.vrDisplay.exitPresent()
+			}
+			else
+			{
+				renderer.vr.enabled = true
 				this.vrDisplay.requestPresent([{ source: this.props.canvas }])
 			}
 		}
@@ -39,7 +45,7 @@ export default class WebVR extends React.Component
 	render()
     {
 		return (
-			<div onClick={this.EnterVR}
+			<div onClick={this.ToggleVR}
 				style={{
 					background: `url(${require('../data/vr-icon.png')}) 0% 0% / contain no-repeat`,
 					position: 'absolute',
