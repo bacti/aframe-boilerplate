@@ -1,7 +1,6 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
-import mainScene from './actions/action_dispatch_scene'
 
 import React3 from '../libs/react-three-renderer/src' 
 import WebVR from './WebVR'
@@ -99,14 +98,23 @@ class RollerCoaster extends React.Component
     }
 }
 
-function mapStateToProps(state)
+let mapStateToProps = state =>
 {
     return {}
 }
 
-function mapDispatchToProps(dispatch)
+let mapDispatchToProps = dispatch =>
 {
-    return bindActionCreators({mainScene: mainScene}, dispatch)
+    return bindActionCreators(
+    {
+        mainScene: scene =>
+        {
+            return {
+                type: 'MAIN_SCENE',
+                payload: scene,
+            }
+        },
+    }, dispatch)
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(RollerCoaster)

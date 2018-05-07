@@ -41,7 +41,7 @@ class Landscape extends React.Component
     }
 }
 
-function mapStateToProps(state)
+let mapStateToProps = state =>
 {
     return {
         mainScene: state.mainScene
