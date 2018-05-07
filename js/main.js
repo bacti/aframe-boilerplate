@@ -31,5 +31,4 @@ window.onload = function()
     $('<canvas></canvas>').attr({ id: 'mainCanvas' }).appendTo(document.body)
 
     ReactDOM.render(<App />, document.getElementById('sceneContainer'))
-    // require('./webvr_rollercoaster.js')
 }

@@ -27,20 +27,8 @@ class RollerCoaster extends React.Component
 
         this.OnAnimate = _ =>
         {
-            // this.setState(
-            // {
-            //     cubeRotation: new THREE.Euler(this.state.cubeRotation.x + 0.1, this.state.cubeRotation.y + 0.1, 0),
-            // })
             let time = performance.now();
             let delta = time - prevTime;
-        
-            // for ( var i = 0; i < funfairs.length; i ++ ) {
-        
-            // 	funfairs[ i ].rotation.y = time * 0.0004;
-        
-            // }
-        
-            //
         
             progress += velocity
             progress = progress % 1
