@@ -42,4 +42,4 @@ export default class Sky extends React.Component
 
         }
     }
-};
+}
