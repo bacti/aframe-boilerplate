@@ -2,6 +2,7 @@ import React from 'react'
 import React3 from '../libs/react-three-renderer/src' 
 import WebVR from './WebVR'
 import { curve } from './Curve'
+import Landscape from './Landscape'
 import Sky from './Sky'
 import RollerCoasterGeometry from './RollerCoasterGeometry'
 import RollerCoasterLifters from './RollerCoasterLifters'
@@ -74,6 +75,7 @@ export default class RollerCoaster extends React.Component
                                 fov={40} aspect={width/height} near={0.1} far={500}
                             />
                         </object3D>
+                        <Landscape />
                         <Sky />
                         <mesh>
                             <RollerCoasterGeometry curve={curve} divisions={1500} />
