@@ -16,9 +16,10 @@ class App extends React.Component
 
     render()
     {
+        let store = applyMiddleware()(createStore)(reducers)
         return (
-            <Provider store={applyMiddleware()(createStore)(reducers)}>
-                <RollerCoaster canvas={document.getElementById('mainCanvas')} />
+            <Provider store={store}>
+                <RollerCoaster store={store} canvas={document.getElementById('mainCanvas')} />
             </Provider>
         )
     }

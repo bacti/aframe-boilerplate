@@ -2,7 +2,7 @@ import { combineReducers } from 'redux'
 
 const rootReducer = combineReducers(
 {
-	dispatchScene: (state = null, action) =>
+	mainScene: (state = null, action) =>
 	{
 		switch (action.type)
 		{

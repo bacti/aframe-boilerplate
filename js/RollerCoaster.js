@@ -1,7 +1,7 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
-import dispatchScene from './actions/action_dispatch_scene'
+import mainScene from './actions/action_dispatch_scene'
 
 import React3 from '../libs/react-three-renderer/src' 
 import WebVR from './WebVR'
@@ -17,8 +17,6 @@ class RollerCoaster extends React.Component
     constructor(props, context)
     {
         super(props, context)
-
-        console.log(props)
 
         let position = new THREE.Vector3()
         let tangent = new THREE.Vector3()
@@ -65,7 +63,7 @@ class RollerCoaster extends React.Component
 
     componentDidMount()
     {
-        this.props.dispatchScene(this.refs.scene)
+        this.props.mainScene(this.refs.scene)
     }
 
     render()
@@ -86,7 +84,7 @@ class RollerCoaster extends React.Component
                                 fov={40} aspect={width/height} near={0.1} far={500}
                             />
                         </object3D>
-                        <Landscape />
+                        <Landscape store={this.props.store} />
                         <Sky />
                         <mesh>
                             <RollerCoasterGeometry curve={curve} divisions={1500} />
@@ -109,7 +107,7 @@ function mapStateToProps(state)
 
 function mapDispatchToProps(dispatch)
 {
-    return bindActionCreators({dispatchScene: dispatchScene}, dispatch)
+    return bindActionCreators({mainScene: mainScene}, dispatch)
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(RollerCoaster)

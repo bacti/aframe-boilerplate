@@ -32,8 +32,14 @@ class Landscape extends React.Component
         geometry.computeVertexNormals()
     }
 
+    componentWillReceiveProps(newProps)
+    {
+        console.log(newProps)
+    }
+
     render()
     {
+        console.log(this.props.mainScene)
 		return (
             <mesh>
                 <planeBufferGeometry ref='geometry' width={500} height={500} widthSegments={15} heightSegments={15} />
@@ -45,8 +51,9 @@ class Landscape extends React.Component
 
 function mapStateToProps(state)
 {
-    console.log('cookie 2 ', state)
-    return {}
+    return {
+        mainScene: state.mainScene
+    }
 }
 
 export default connect(mapStateToProps)(Landscape)
