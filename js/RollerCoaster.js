@@ -18,6 +18,8 @@ class RollerCoaster extends React.Component
     {
         super(props, context)
 
+        console.log(props)
+
         let position = new THREE.Vector3()
         let tangent = new THREE.Vector3()
         let lookAt = new THREE.Vector3()
@@ -63,7 +65,7 @@ class RollerCoaster extends React.Component
 
     componentDidMount()
     {
-        console.log('bacti', this.refs.scene)
+        this.props.dispatchScene(this.refs.scene)
     }
 
     render()
@@ -84,7 +86,7 @@ class RollerCoaster extends React.Component
                                 fov={40} aspect={width/height} near={0.1} far={500}
                             />
                         </object3D>
-                        {/* <Landscape /> */}
+                        <Landscape />
                         <Sky />
                         <mesh>
                             <RollerCoasterGeometry curve={curve} divisions={1500} />
@@ -101,7 +103,7 @@ class RollerCoaster extends React.Component
 
 function mapStateToProps(state)
 {
-    console.log('cookie')
+    console.log('cookie', state)
     return {}
 }
 

@@ -1,6 +1,7 @@
 import React from 'react'
+import { connect } from 'react-redux'
 
-export default class Landscape extends React.Component
+class Landscape extends React.Component
 {
     constructor(props)
     {
@@ -9,6 +10,8 @@ export default class Landscape extends React.Component
 
     componentDidMount()
     {
+        return
+
         let geometry = this.refs.geometry
         geometry.rotateX(-Math.PI / 2)
         
@@ -39,3 +42,11 @@ export default class Landscape extends React.Component
 		)
     }
 }
+
+function mapStateToProps(state)
+{
+    console.log('cookie 2 ', state)
+    return {}
+}
+
+export default connect(mapStateToProps)(Landscape)
