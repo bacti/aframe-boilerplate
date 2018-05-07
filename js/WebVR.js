@@ -19,39 +19,37 @@ export default class WebVR extends React.Component
 		{
 			navigator.getVRDisplays().then(displays =>
 			{
-			  	let vrDisplay = displays.length && displays[0]
-				let polyfilledVRDisplay = vrDisplay.displayName === 'Cardboard VRDisplay'
-
-				if (vrDisplay)
-				{
-					let vrManager = renderer.vr
-					vrManager.setDevice(vrDisplay)
-					vrManager.enabled = true
-					vrDisplay.requestPresent([{ source: this.props.canvas }])
-
-					let canvas = this.props.canvas
-					let requestFullscreen = canvas.requestFullscreen
-						|| canvas.webkitRequestFullscreen
-						|| canvas.mozRequestFullScreen  // The capitalized `S` is not a typo.
-						|| canvas.msRequestFullscreen
-					requestFullscreen.apply(canvas)
-				}
+			  	this.vrDisplay = displays.length && displays[0]
+				this.polyfilledVRDisplay = this.vrDisplay.displayName === 'Cardboard VRDisplay'
 			})
+		}
+
+		this.EnterVR = _ =>
+		{
+			if (this.vrDisplay)
+			{
+				let vrManager = renderer.vr
+				vrManager.setDevice(this.vrDisplay)
+				vrManager.enabled = true
+				this.vrDisplay.requestPresent([{ source: this.props.canvas }])
+			}
 		}
 	}
 
 	render()
     {
 		return (
-			<div style={{
-				background: 'url(./data/vr-icon.png) 0% 0% / contain no-repeat',
-				position: 'absolute',
-				zIndex: 12,
-				width: '100px',
-				height: '100px',
-				right: 0,
-				bottom: 0,
-			}}>
+			<div onClick={this.EnterVR}
+				style={{
+					background: `url(${require('../data/vr-icon.png')}) 0% 0% / contain no-repeat`,
+					position: 'absolute',
+					zIndex: 12,
+					width: '100px',
+					height: '100px',
+					right: 0,
+					bottom: 0,
+				}}
+			>
 			</div>
 		)
 	}
