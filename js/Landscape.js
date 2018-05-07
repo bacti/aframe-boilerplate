@@ -7,29 +7,26 @@ export default class Landscape extends React.Component
 		super(props)
     }
 
-    componentWillMount()
+    componentDidMount()
     {
         let geometry = this.refs.geometry
-        geometry.rotateX( - Math.PI / 2 );
+        geometry.rotateX(-Math.PI / 2)
         
-        let positions = geometry.attributes.position.array;
-        let vertex = new THREE.Vector3();
+        let positions = geometry.attributes.position.array
+        let vertex = new THREE.Vector3()
         
-        for ( var i = 0; i < positions.length; i += 3 ) {
+        for (let i = 0; i < positions.length; i += 3)
+        {
+            vertex.fromArray(positions, i)
+            vertex.x += Math.random() * 10 - 5
+            vertex.z += Math.random() * 10 - 5
         
-            vertex.fromArray( positions, i );
-        
-            vertex.x += Math.random() * 10 - 5;
-            vertex.z += Math.random() * 10 - 5;
-        
-            var distance = ( vertex.distanceTo( scene.position ) / 5 ) - 25;
-            vertex.y = Math.random() * Math.max( 0, distance );
-        
-            vertex.toArray( positions, i );
-        
+            let distance = (vertex.distanceTo(scene.position) / 5) - 25
+            vertex.y = Math.random() * Math.max(0, distance)
+            vertex.toArray(positions, i)
         }
         
-        geometry.computeVertexNormals();
+        geometry.computeVertexNormals()
     }
 
     render()
