@@ -1,5 +1,6 @@
 import React from 'react'
 import { connect } from 'react-redux'
+import { bindActionCreators } from 'redux'
 
 class Landscape extends React.Component
 {
@@ -30,10 +31,14 @@ class Landscape extends React.Component
         geometry.computeVertexNormals()
     }
 
+    componentDidMount()
+    {
+        this.props.landscape(this.refs.landscape)
+    }
     render()
     {
 		return (
-            <mesh>
+            <mesh ref='landscape'>
                 <planeBufferGeometry ref='geometry' width={500} height={500} widthSegments={15} heightSegments={15} />
                 <meshLambertMaterial color={0x407000} />
             </mesh>
@@ -48,4 +53,18 @@ let mapStateToProps = state =>
     }
 }
 
-export default connect(mapStateToProps)(Landscape)
+let mapDispatchToProps = dispatch =>
+{
+    return bindActionCreators(
+    {
+        landscape: landscape =>
+        {
+            return {
+                type: 'LANDSCAPE',
+                payload: landscape,
+            }
+        },
+    }, dispatch)
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Landscape)
