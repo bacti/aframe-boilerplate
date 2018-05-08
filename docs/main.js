@@ -59,7 +59,7 @@
 /******/ 	
 /******/ 	
 /******/ 	var hotApplyOnUpdate = true;
-/******/ 	var hotCurrentHash = "108ce1db9374a69433e7"; // eslint-disable-line no-unused-vars
+/******/ 	var hotCurrentHash = "9a570145efbaab9f84ea"; // eslint-disable-line no-unused-vars
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentChildModule; // eslint-disable-line no-unused-vars
 /******/ 	var hotCurrentParents = []; // eslint-disable-line no-unused-vars
@@ -82251,9 +82251,9 @@ function CardboardVRDisplay(config$$1) {
   this.viewerSelector_ = new ViewerSelector();
   this.viewerSelector_.onChange(this.onViewerChanged_.bind(this));
   this.deviceInfo_.setViewer(this.viewerSelector_.getCurrentViewer());
-  if (!this.config.ROTATE_INSTRUCTIONS_DISABLED) {
+  // if (!this.config.ROTATE_INSTRUCTIONS_DISABLED) {
     this.rotateInstructions_ = new RotateInstructions();
-  }
+  // }
   if (isIOS()) {
     window.addEventListener('resize', this.onResize_.bind(this));
   }
