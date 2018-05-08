@@ -15,6 +15,7 @@ export default class Controls extends React.Component
 
     componentDidMount()
     {
+        this.refs.sphere.scale(1, 1, 1)
         this.controls = new THREE.DeviceOrientationControls(this.refs.camera)
     }
 
@@ -31,6 +32,10 @@ export default class Controls extends React.Component
                     <perspectiveCamera name='perspective' ref='camera'
                         fov={75} aspect={width/height} near={1} far={1000}
                     />
+                    <mesh>
+                        <sphereGeometry ref='sphere' radius={500} widthSegments={60} heightSegments={40} />
+                        <meshBasicMaterial map={new THREE.TextureLoader().load('textures/2294472375_24a3b8ef46_o.jpg')} />
+                    </mesh>
                 </scene>
             </React3>
         )
