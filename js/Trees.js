@@ -5,6 +5,8 @@ class Trees extends React.Component
     constructor(props)
     {
 		super(props)
+		this.vertices = []
+		this.colors = []
 	}
 	
 	componentWillReceiveProps(props)
@@ -27,9 +29,6 @@ class Trees extends React.Component
 	
 	InitGeometry(landscape)
 	{
-		this.vertices = [];
-		this.colors = [];
-
 		var raycaster = new THREE.Raycaster();
 		raycaster.ray.direction.set( 0, -1, 0 );
 
