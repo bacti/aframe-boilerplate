@@ -58,7 +58,7 @@ class RollerCoaster extends React.Component
         let width = window.innerWidth
         let height = window.innerHeight
         return (
-            <React3 mainCamera='perspective' width={width} height={height}
+            <React3 mainCamera='perspective' width={width} height={height} antialias={true}
                 canvas={this.props.canvas}
                 onAnimate={this.OnAnimate}
             >

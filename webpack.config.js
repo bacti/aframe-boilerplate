@@ -75,7 +75,6 @@ let options =
     {
         modules: [path.resolve('./node_modules'), process.env.NODE_PATH],
     },
-    mode: 'none',
 }
 // if (process.env.NODE_ENV == 'production')
 // {
