@@ -49,11 +49,11 @@ export default class WebVR extends React.Component
 				style={{
 					background: `url(${require('../data/vr-icon.png')}) 0% 0% / contain no-repeat`,
 					position: 'absolute',
-					zIndex: 12,
-					width: '100px',
-					height: '100px',
-					right: 0,
-					bottom: 0,
+					zIndex: 1,
+					width: '7vw',
+					height: '4.2vw',
+					right: '1vw',
+					bottom: '1vw',
 				}}
 			>
 			</div>
