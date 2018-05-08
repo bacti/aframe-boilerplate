@@ -81364,6 +81364,7 @@ FusionPoseSensor.prototype.start = function () {
   if (isIOS() && isInsideCrossOriginIFrame()) {
     window.addEventListener('message', this.onMessageCallback_);
   }
+  console.log('bacti 3')
   window.addEventListener('orientationchange', this.onOrientationChangeCallback_);
   if (this.isWithoutDeviceMotion) {
     window.addEventListener('deviceorientation', this.onDeviceOrientationCallback_);
@@ -81437,7 +81438,8 @@ var PoseSensor = function () {
         this.sensor = sensor;
         this.sensor.addEventListener('reading', this._onSensorRead);
         this.sensor.start();
-      }
+	  }
+	  console.log('bacti 1')
       window.addEventListener('orientationchange', this._onOrientationChange);
     }
   }, {
@@ -82364,6 +82366,7 @@ CardboardVRDisplay.prototype.beginPresent_ = function () {
     }
   }
   this.orientationHandler = this.onOrientationChange_.bind(this);
+  console.log('bacti 2')
   window.addEventListener('orientationchange', this.orientationHandler);
   this.vrdisplaypresentchangeHandler = this.updateBounds_.bind(this);
   window.addEventListener('vrdisplaypresentchange', this.vrdisplaypresentchangeHandler);
