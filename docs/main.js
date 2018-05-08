@@ -59,7 +59,7 @@
 /******/ 	
 /******/ 	
 /******/ 	var hotApplyOnUpdate = true;
-/******/ 	var hotCurrentHash = "2fc46322e804ba37afd0"; // eslint-disable-line no-unused-vars
+/******/ 	var hotCurrentHash = "884fe57ea2017aaedc91"; // eslint-disable-line no-unused-vars
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentChildModule; // eslint-disable-line no-unused-vars
 /******/ 	var hotCurrentParents = []; // eslint-disable-line no-unused-vars
@@ -82371,7 +82371,7 @@ CardboardVRDisplay.prototype.beginPresent_ = function () {
   window.addEventListener('orientationchange', this.orientationHandler);
   this.vrdisplaypresentchangeHandler = this.updateBounds_.bind(this);
   window.addEventListener('vrdisplaypresentchange', this.vrdisplaypresentchangeHandler);
-  this.fireVRDisplayDeviceParamsChange_();
+  // this.fireVRDisplayDeviceParamsChange_();
 };
 CardboardVRDisplay.prototype.endPresent_ = function () {
   // if (this.distorter_) {
