@@ -59,7 +59,7 @@
 /******/ 	
 /******/ 	
 /******/ 	var hotApplyOnUpdate = true;
-/******/ 	var hotCurrentHash = "abb2ba2e150b1c31ea5e"; // eslint-disable-line no-unused-vars
+/******/ 	var hotCurrentHash = "c2f932194cb75a7cc9f8"; // eslint-disable-line no-unused-vars
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentChildModule; // eslint-disable-line no-unused-vars
 /******/ 	var hotCurrentParents = []; // eslint-disable-line no-unused-vars
@@ -81373,6 +81373,7 @@ FusionPoseSensor.prototype.start = function () {
   }
 };
 FusionPoseSensor.prototype.stop = function () {
+  console.log('bacti 1a')
   window.removeEventListener('devicemotion', this.onDeviceMotionCallback_);
   window.removeEventListener('deviceorientation', this.onDeviceOrientationCallback_);
   window.removeEventListener('orientationchange', this.onOrientationChangeCallback_);
@@ -82385,6 +82386,7 @@ CardboardVRDisplay.prototype.endPresent_ = function () {
     this.rotateInstructions_.hide();
   }
   this.viewerSelector_.hide();
+  console.log('bacti 3a')
   window.removeEventListener('orientationchange', this.orientationHandler);
   window.removeEventListener('vrdisplaypresentchange', this.vrdisplaypresentchangeHandler);
 };
