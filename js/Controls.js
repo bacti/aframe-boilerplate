@@ -1,5 +1,6 @@
 import React from 'react'
 import React3 from '../libs/react-three-renderer/src' 
+require('./DeviceOrientationControls')
 
 export default class Controls extends React.Component
 {
@@ -14,6 +15,7 @@ export default class Controls extends React.Component
 
     componentDidMount()
     {
+        this.controls = new THREE.DeviceOrientationControls(this.refs.camera)
     }
 
     render()
@@ -25,6 +27,11 @@ export default class Controls extends React.Component
                 canvas={this.props.canvas}
                 onAnimate={this.OnAnimate}
             >
+                <scene>
+                    <perspectiveCamera name='perspective' ref='camera'
+                        fov={75} aspect={width/height} near={1} far={1000}
+                    />
+                </scene>
             </React3>
         )
     }
