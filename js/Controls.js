@@ -37,10 +37,10 @@ export default class Controls extends React.Component
                         <sphereGeometry ref='sphere' radius={500} widthSegments={60} heightSegments={40} />
                         <meshBasicMaterial map={new THREE.TextureLoader().load(require('../data/room.jpg'))} />
                     </mesh>
-                    <mesh>
+                    {/* <mesh>
                         <boxGeometry width={100} height={100} depth={100} widthSegments={4} heightSegments={4} depthSegments={4} />
                         <meshBasicMaterial color={0xff00ff} wireframe={true} />
-                    </mesh>
+                    </mesh> */}
                 </scene>
             </React3>
         )

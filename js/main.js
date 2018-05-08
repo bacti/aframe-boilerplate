@@ -30,6 +30,7 @@ class App extends React.Component
 
         return (
             <div>
+                <WebVR canvas={canvas} />
                 <Controls canvas={canvas} />
             </div>
         )

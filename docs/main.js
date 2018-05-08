@@ -59,7 +59,7 @@
 /******/ 	
 /******/ 	
 /******/ 	var hotApplyOnUpdate = true;
-/******/ 	var hotCurrentHash = "7923766e2b1fb422bd2d"; // eslint-disable-line no-unused-vars
+/******/ 	var hotCurrentHash = "8b92443107dfa6766fd3"; // eslint-disable-line no-unused-vars
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentChildModule; // eslint-disable-line no-unused-vars
 /******/ 	var hotCurrentParents = []; // eslint-disable-line no-unused-vars
@@ -67018,12 +67018,6 @@ var Controls = function (_React$Component) {
                         null,
                         _react2.default.createElement('sphereGeometry', { ref: 'sphere', radius: 500, widthSegments: 60, heightSegments: 40 }),
                         _react2.default.createElement('meshBasicMaterial', { map: new THREE.TextureLoader().load(__webpack_require__(342)) })
-                    ),
-                    _react2.default.createElement(
-                        'mesh',
-                        null,
-                        _react2.default.createElement('boxGeometry', { width: 100, height: 100, depth: 100, widthSegments: 4, heightSegments: 4, depthSegments: 4 }),
-                        _react2.default.createElement('meshBasicMaterial', { color: 0xff00ff, wireframe: true })
                     )
                 )
             );
@@ -83952,6 +83946,7 @@ var App = function (_React$Component) {
             return _react2.default.createElement(
                 'div',
                 null,
+                _react2.default.createElement(_WebVR2.default, { canvas: canvas }),
                 _react2.default.createElement(_Controls2.default, { canvas: canvas })
             );
         }
