@@ -10,6 +10,7 @@ export default class Controls extends React.Component
 
         this.OnAnimate = _ =>
         {
+            this.controls.update()
         }
     }
 
@@ -24,7 +25,7 @@ export default class Controls extends React.Component
         let width = window.innerWidth
         let height = window.innerHeight
         return (
-            <React3 mainCamera='perspective' width={width} height={height} antialias={true}
+            <React3 mainCamera='perspective' width={width} height={height} antialias={true} pixelRatio={window.devicePixelRatio}
                 canvas={this.props.canvas}
                 onAnimate={this.OnAnimate}
             >
