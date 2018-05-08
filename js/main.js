@@ -3,10 +3,10 @@ import React from 'react'
 import ReactDOM from 'react-dom'
 import { Provider } from 'react-redux'
 import { applyMiddleware, createStore } from 'redux'
-
+import reducers from './reducers'
 import WebVR from './WebVR'
 import RollerCoaster from './RollerCoaster'
-import reducers from './reducers'
+import Controls from './Controls'
 
 class App extends React.Component
 {
@@ -18,13 +18,19 @@ class App extends React.Component
     render()
     {
         let canvas = document.getElementById('mainCanvas')
-        let store = applyMiddleware()(createStore)(reducers)
+        // let store = applyMiddleware()(createStore)(reducers)
+        // return (
+        //     <div>
+        //         <WebVR canvas={canvas} />
+        //         <Provider store={store}>
+        //             <RollerCoaster store={store} canvas={canvas} />
+        //         </Provider>
+        //     </div>
+        // )
+
         return (
             <div>
-                <WebVR canvas={canvas} />
-                <Provider store={store}>
-                    <RollerCoaster store={store} canvas={canvas} />
-                </Provider>
+                <Controls canvas={canvas} />
             </div>
         )
     }

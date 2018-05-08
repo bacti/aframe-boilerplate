@@ -1,7 +1,7 @@
 import React from 'react'
 import React3 from '../libs/react-three-renderer/src' 
 
-class RollerCoaster extends React.Component
+export default class Controls extends React.Component
 {
     constructor(props, context)
     {
