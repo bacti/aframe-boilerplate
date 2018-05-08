@@ -15,7 +15,7 @@ export default class Controls extends React.Component
 
     componentDidMount()
     {
-        this.refs.sphere.scale(1, 1, 1)
+        this.refs.sphere.scale(-1, 1, 1)
         this.controls = new THREE.DeviceOrientationControls(this.refs.camera)
     }
 
@@ -34,7 +34,11 @@ export default class Controls extends React.Component
                     />
                     <mesh>
                         <sphereGeometry ref='sphere' radius={500} widthSegments={60} heightSegments={40} />
-                        <meshBasicMaterial map={new THREE.TextureLoader().load('textures/2294472375_24a3b8ef46_o.jpg')} />
+                        <meshBasicMaterial map={new THREE.TextureLoader().load(require('../data/room.jpg'))} />
+                    </mesh>
+                    <mesh>
+                        <boxGeometry width={100} height={100} depth={100} widthSegments={4} heightSegments={4} depthSegments={4} />
+                        <meshBasicMaterial color={0xff00ff} wireframe={true} />
                     </mesh>
                 </scene>
             </React3>

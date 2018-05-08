@@ -49,7 +49,7 @@ let options =
                 loader: 'style-loader!css-loader'
             },
             {
-                test: /\.(png|gif|eot|svg|ttf|woff|woff2)(\?\S*)?$/,
+                test: /\.(jpg|png|gif|eot|svg|ttf|woff|woff2)(\?\S*)?$/,
                 loader: 'file-loader'
             }
         ]
