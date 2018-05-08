@@ -59,7 +59,7 @@
 /******/ 	
 /******/ 	
 /******/ 	var hotApplyOnUpdate = true;
-/******/ 	var hotCurrentHash = "884fe57ea2017aaedc91"; // eslint-disable-line no-unused-vars
+/******/ 	var hotCurrentHash = "108ce1db9374a69433e7"; // eslint-disable-line no-unused-vars
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentChildModule; // eslint-disable-line no-unused-vars
 /******/ 	var hotCurrentParents = []; // eslint-disable-line no-unused-vars
@@ -81373,7 +81373,6 @@ FusionPoseSensor.prototype.start = function () {
   }
 };
 FusionPoseSensor.prototype.stop = function () {
-  console.log('bacti 1a')
   window.removeEventListener('devicemotion', this.onDeviceMotionCallback_);
   window.removeEventListener('deviceorientation', this.onDeviceOrientationCallback_);
   window.removeEventListener('orientationchange', this.onOrientationChangeCallback_);
@@ -82258,6 +82257,11 @@ function CardboardVRDisplay(config$$1) {
   if (isIOS()) {
     window.addEventListener('resize', this.onResize_.bind(this));
   }
+  console.log('bacti 3')
+  this.orientationHandler = this.onOrientationChange_.bind(this);
+  window.addEventListener('orientationchange', this.orientationHandler);
+  this.vrdisplaypresentchangeHandler = this.updateBounds_.bind(this);
+  window.addEventListener('vrdisplaypresentchange', this.vrdisplaypresentchangeHandler);
 }
 CardboardVRDisplay.prototype = Object.create(VRDisplay.prototype);
 CardboardVRDisplay.prototype._getPose = function () {
@@ -82331,64 +82335,58 @@ CardboardVRDisplay.prototype.updateBounds_ = function () {
   }
 };
 CardboardVRDisplay.prototype.beginPresent_ = function () {
-  // var gl = this.layer_.source.getContext('webgl');
-  // if (!gl) gl = this.layer_.source.getContext('experimental-webgl');
-  // if (!gl) gl = this.layer_.source.getContext('webgl2');
-  // if (!gl) return;
-  // if (this.layer_.predistorted) {
-  //   if (!this.config.CARDBOARD_UI_DISABLED) {
-  //     gl.canvas.width = getScreenWidth() * this.bufferScale_;
-  //     gl.canvas.height = getScreenHeight() * this.bufferScale_;
-  //     this.cardboardUI_ = new CardboardUI(gl);
-  //   }
-  // } else {
-  //   if (!this.config.CARDBOARD_UI_DISABLED) {
-  //     this.cardboardUI_ = new CardboardUI(gl);
-  //   }
-  //   this.distorter_ = new CardboardDistorter(gl, this.cardboardUI_, this.config.BUFFER_SCALE, this.config.DIRTY_SUBMIT_FRAME_BINDINGS);
-  //   this.distorter_.updateDeviceInfo(this.deviceInfo_);
-  // }
-  // if (this.cardboardUI_) {
-  //   this.cardboardUI_.listen(function (e) {
-  //     this.viewerSelector_.show(this.layer_.source.parentElement);
-  //     e.stopPropagation();
-  //     e.preventDefault();
-  //   }.bind(this), function (e) {
-  //     this.exitPresent();
-  //     e.stopPropagation();
-  //     e.preventDefault();
-  //   }.bind(this));
-  // }
-  // if (this.rotateInstructions_) {
-  //   if (isLandscapeMode() && isMobile()) {
-  //     this.rotateInstructions_.showTemporarily(3000, this.layer_.source.parentElement);
-  //   } else {
-  //     this.rotateInstructions_.update();
-  //   }
-  // }
-  this.orientationHandler = this.onOrientationChange_.bind(this);
-  console.log('bacti 3')
-  window.addEventListener('orientationchange', this.orientationHandler);
-  this.vrdisplaypresentchangeHandler = this.updateBounds_.bind(this);
-  window.addEventListener('vrdisplaypresentchange', this.vrdisplaypresentchangeHandler);
-  // this.fireVRDisplayDeviceParamsChange_();
+  var gl = this.layer_.source.getContext('webgl');
+  if (!gl) gl = this.layer_.source.getContext('experimental-webgl');
+  if (!gl) gl = this.layer_.source.getContext('webgl2');
+  if (!gl) return;
+  if (this.layer_.predistorted) {
+    if (!this.config.CARDBOARD_UI_DISABLED) {
+      gl.canvas.width = getScreenWidth() * this.bufferScale_;
+      gl.canvas.height = getScreenHeight() * this.bufferScale_;
+      this.cardboardUI_ = new CardboardUI(gl);
+    }
+  } else {
+    if (!this.config.CARDBOARD_UI_DISABLED) {
+      this.cardboardUI_ = new CardboardUI(gl);
+    }
+    this.distorter_ = new CardboardDistorter(gl, this.cardboardUI_, this.config.BUFFER_SCALE, this.config.DIRTY_SUBMIT_FRAME_BINDINGS);
+    this.distorter_.updateDeviceInfo(this.deviceInfo_);
+  }
+  if (this.cardboardUI_) {
+    this.cardboardUI_.listen(function (e) {
+      this.viewerSelector_.show(this.layer_.source.parentElement);
+      e.stopPropagation();
+      e.preventDefault();
+    }.bind(this), function (e) {
+      this.exitPresent();
+      e.stopPropagation();
+      e.preventDefault();
+    }.bind(this));
+  }
+  if (this.rotateInstructions_) {
+    if (isLandscapeMode() && isMobile()) {
+      this.rotateInstructions_.showTemporarily(3000, this.layer_.source.parentElement);
+    } else {
+      this.rotateInstructions_.update();
+    }
+  }
+  this.fireVRDisplayDeviceParamsChange_();
 };
 CardboardVRDisplay.prototype.endPresent_ = function () {
-  // if (this.distorter_) {
-  //   this.distorter_.destroy();
-  //   this.distorter_ = null;
-  // }
-  // if (this.cardboardUI_) {
-  //   this.cardboardUI_.destroy();
-  //   this.cardboardUI_ = null;
-  // }
-  // if (this.rotateInstructions_) {
-  //   this.rotateInstructions_.hide();
-  // }
-  // this.viewerSelector_.hide();
-  console.log('bacti 3a')
-  window.removeEventListener('orientationchange', this.orientationHandler);
-  window.removeEventListener('vrdisplaypresentchange', this.vrdisplaypresentchangeHandler);
+  if (this.distorter_) {
+    this.distorter_.destroy();
+    this.distorter_ = null;
+  }
+  if (this.cardboardUI_) {
+    this.cardboardUI_.destroy();
+    this.cardboardUI_ = null;
+  }
+  if (this.rotateInstructions_) {
+    this.rotateInstructions_.hide();
+  }
+  this.viewerSelector_.hide();
+  // window.removeEventListener('orientationchange', this.orientationHandler);
+  // window.removeEventListener('vrdisplaypresentchange', this.vrdisplaypresentchangeHandler);
 };
 CardboardVRDisplay.prototype.updatePresent_ = function () {
   this.endPresent_();
