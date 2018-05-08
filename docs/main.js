@@ -59,7 +59,7 @@
 /******/ 	
 /******/ 	
 /******/ 	var hotApplyOnUpdate = true;
-/******/ 	var hotCurrentHash = "4dbf80b1a37dfc690b45"; // eslint-disable-line no-unused-vars
+/******/ 	var hotCurrentHash = "abb2ba2e150b1c31ea5e"; // eslint-disable-line no-unused-vars
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentChildModule; // eslint-disable-line no-unused-vars
 /******/ 	var hotCurrentParents = []; // eslint-disable-line no-unused-vars
@@ -81364,7 +81364,7 @@ FusionPoseSensor.prototype.start = function () {
   if (isIOS() && isInsideCrossOriginIFrame()) {
     window.addEventListener('message', this.onMessageCallback_);
   }
-  console.log('bacti 3')
+  console.log('bacti 1')
   window.addEventListener('orientationchange', this.onOrientationChangeCallback_);
   if (this.isWithoutDeviceMotion) {
     window.addEventListener('deviceorientation', this.onDeviceOrientationCallback_);
@@ -81438,8 +81438,8 @@ var PoseSensor = function () {
         this.sensor = sensor;
         this.sensor.addEventListener('reading', this._onSensorRead);
         this.sensor.start();
-	  }
-	  console.log('bacti 1')
+      }
+      console.log('bacti 2')
       window.addEventListener('orientationchange', this._onOrientationChange);
     }
   }, {
@@ -82366,7 +82366,7 @@ CardboardVRDisplay.prototype.beginPresent_ = function () {
     }
   }
   this.orientationHandler = this.onOrientationChange_.bind(this);
-  console.log('bacti 2')
+  console.log('bacti 3')
   window.addEventListener('orientationchange', this.orientationHandler);
   this.vrdisplaypresentchangeHandler = this.updateBounds_.bind(this);
   window.addEventListener('vrdisplaypresentchange', this.vrdisplaypresentchangeHandler);
@@ -83590,7 +83590,11 @@ var Trees = function (_React$Component) {
 			function Trees(props) {
 						_classCallCheck(this, Trees);
 
-						return _possibleConstructorReturn(this, (Trees.__proto__ || Object.getPrototypeOf(Trees)).call(this, props));
+						var _this = _possibleConstructorReturn(this, (Trees.__proto__ || Object.getPrototypeOf(Trees)).call(this, props));
+
+						_this.vertices = [];
+						_this.colors = [];
+						return _this;
 			}
 
 			_createClass(Trees, [{
@@ -83614,9 +83618,6 @@ var Trees = function (_React$Component) {
 			}, {
 						key: 'InitGeometry',
 						value: function InitGeometry(landscape) {
-									this.vertices = [];
-									this.colors = [];
-
 									var raycaster = new THREE.Raycaster();
 									raycaster.ray.direction.set(0, -1, 0);
 
