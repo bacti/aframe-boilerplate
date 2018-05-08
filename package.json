@@ -11,11 +11,11 @@
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "dependencies": {
+    "cardboard-vr-display": "^1.0.11",
     "present": "^1.0.0",
     "promise-polyfill": "^7.1.2",
     "raf": "^3.4.0",
     "react": "15.6.1",
-    "react-dom": "15.6.1",
-    "webvr-polyfill": "^0.10.5"
+    "react-dom": "15.6.1"
   }
 }
