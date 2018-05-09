@@ -76,8 +76,8 @@ let options =
         modules: [path.resolve('./node_modules'), process.env.NODE_PATH],
     },
 }
-// if (process.env.NODE_ENV == 'production')
-// {
-//     options.plugins.push(new UglifyJSPlugin())
-// }
+if (process.env.NODE_ENV == 'production')
+{
+    options.plugins.push(new UglifyJSPlugin())
+}
 module.exports = options

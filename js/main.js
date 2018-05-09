@@ -18,22 +18,22 @@ class App extends React.Component
     render()
     {
         let canvas = document.getElementById('mainCanvas')
-        // let store = applyMiddleware()(createStore)(reducers)
-        // return (
-        //     <div>
-        //         <WebVR canvas={canvas} />
-        //         <Provider store={store}>
-        //             <RollerCoaster store={store} canvas={canvas} />
-        //         </Provider>
-        //     </div>
-        // )
-
+        let store = applyMiddleware()(createStore)(reducers)
         return (
             <div>
                 <WebVR canvas={canvas} />
-                <Controls canvas={canvas} />
+                <Provider store={store}>
+                    <RollerCoaster store={store} canvas={canvas} />
+                </Provider>
             </div>
         )
+
+        // return (
+        //     <div>
+        //         <WebVR canvas={canvas} />
+        //         <Controls canvas={canvas} />
+        //     </div>
+        // )
     }
 }
 

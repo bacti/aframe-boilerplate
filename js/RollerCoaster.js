@@ -10,6 +10,7 @@ import Sky from './Sky'
 import RollerCoasterGeometry from './RollerCoasterGeometry'
 import RollerCoasterLifters from './RollerCoasterLifters'
 import RollerCoasterShadow from './RollerCoasterShadow'
+require('./DeviceOrientationControls')
 
 class RollerCoaster extends React.Component
 {
@@ -45,12 +46,14 @@ class RollerCoaster extends React.Component
             this.refs.train.lookAt( lookAt.copy( position ).sub( tangent ) )
         
             prevTime = time
+            this.controls.update()
         }
     }
 
     componentDidMount()
     {
         this.props.mainScene(this.refs.scene)
+        this.controls = new THREE.DeviceOrientationControls(this.refs.camera)
     }
 
     render()
@@ -65,7 +68,7 @@ class RollerCoaster extends React.Component
                 <scene background={0xf0f0ff} ref='scene'>
                     <hemisphereLight skyColor={0xfff0f0} groundColor={0x606066} position={new THREE.Vector3(1, 1, 1)} />
                     <object3D ref="train">
-                        <perspectiveCamera name='perspective'
+                        <perspectiveCamera name='perspective' ref='camera'
                             fov={40} aspect={width/height} near={0.1} far={500}
                         />
                     </object3D>
