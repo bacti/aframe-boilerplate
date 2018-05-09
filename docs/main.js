@@ -59,7 +59,7 @@
 /******/ 	
 /******/ 	
 /******/ 	var hotApplyOnUpdate = true;
-/******/ 	var hotCurrentHash = "8b92443107dfa6766fd3"; // eslint-disable-line no-unused-vars
+/******/ 	var hotCurrentHash = "29232abd7c95fb417b73"; // eslint-disable-line no-unused-vars
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentChildModule; // eslint-disable-line no-unused-vars
 /******/ 	var hotCurrentParents = []; // eslint-disable-line no-unused-vars
@@ -66987,6 +66987,12 @@ var Controls = function (_React$Component) {
         _this.OnAnimate = function (_) {
             _this.controls.update();
         };
+
+        _this.OnWindowResize = function (_) {
+            _this.refs.camera.aspect = window.innerWidth / window.innerHeight;
+            _this.refs.camera.updateProjectionMatrix();
+            renderer.setSize(window.innerWidth, window.innerHeight);
+        };
         return _this;
     }
 
@@ -66995,6 +67001,7 @@ var Controls = function (_React$Component) {
         value: function componentDidMount() {
             this.refs.sphere.scale(-1, 1, 1);
             this.controls = new THREE.DeviceOrientationControls(this.refs.camera);
+            window.addEventListener('resize', this.OnWindowResize, false);
         }
     }, {
         key: 'render',

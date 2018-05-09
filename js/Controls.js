@@ -12,12 +12,20 @@ export default class Controls extends React.Component
         {
             this.controls.update()
         }
+
+        this.OnWindowResize = _ =>
+        {
+            this.refs.camera.aspect = window.innerWidth / window.innerHeight
+            this.refs.camera.updateProjectionMatrix()
+            renderer.setSize(window.innerWidth, window.innerHeight)
+        }
     }
 
     componentDidMount()
     {
         this.refs.sphere.scale(-1, 1, 1)
         this.controls = new THREE.DeviceOrientationControls(this.refs.camera)
+        window.addEventListener('resize', this.OnWindowResize, false)
     }
 
     render()
