@@ -1,5 +1,5 @@
 var container;
-var camera, scene, raycaster, renderer;
+var camera, scene, renderer;
 
 var mouse = new THREE.Vector2(), INTERSECTED;
 var radius = 500, theta = 0;
@@ -8,8 +8,8 @@ var frustumSize = 1000;
 init();
 animate();
 
-function init() {
-
+function init()
+{
 	container = document.createElement( 'div' );
 	document.body.appendChild( container );
 
@@ -25,8 +25,8 @@ function init() {
 
 	var geometry = new THREE.BoxBufferGeometry( 20, 20, 20 );
 
-	for ( var i = 0; i < 2000; i ++ ) {
-
+	for (var i = 0; i < 2000; i ++)
+	{
 		var object = new THREE.Mesh( geometry, new THREE.MeshLambertMaterial( { color: Math.random() * 0xffffff } ) );
 
 		object.position.x = Math.random() * 800 - 400;
@@ -42,95 +42,30 @@ function init() {
 		object.scale.z = Math.random() + 0.5;
 
 		scene.add( object );
-
 	}
-
-	raycaster = new THREE.Raycaster();
 
 	renderer = new THREE.WebGLRenderer();
 	renderer.setPixelRatio( window.devicePixelRatio );
 	renderer.setSize( window.innerWidth, window.innerHeight );
 	container.appendChild(renderer.domElement);
-
-	document.addEventListener( 'mousemove', onDocumentMouseMove, false );
-
-	//
-
-	window.addEventListener( 'resize', onWindowResize, false );
-
 }
 
-function onWindowResize() {
-
-	var aspect = window.innerWidth / window.innerHeight;
-
-	camera.left   = - frustumSize * aspect / 2;
-	camera.right  =   frustumSize * aspect / 2;
-	camera.top    =   frustumSize / 2;
-	camera.bottom = - frustumSize / 2;
-
-	camera.updateProjectionMatrix();
-
-	renderer.setSize( window.innerWidth, window.innerHeight );
-
-}
-
-function onDocumentMouseMove( event ) {
-
-	event.preventDefault();
-
-	mouse.x = ( event.clientX / window.innerWidth ) * 2 - 1;
-	mouse.y = - ( event.clientY / window.innerHeight ) * 2 + 1;
-
-}
-
-//
-
-function animate() {
-
+function animate()
+{
 	requestAnimationFrame( animate );
-
 	render();
 }
 
-function render() {
-
+function render()
+{
 	theta += 0.1;
 
 	camera.position.x = radius * Math.sin( THREE.Math.degToRad( theta ) );
 	camera.position.y = radius * Math.sin( THREE.Math.degToRad( theta ) );
 	camera.position.z = radius * Math.cos( THREE.Math.degToRad( theta ) );
 	camera.lookAt( scene.position );
-
 	camera.updateMatrixWorld();
 
-	// find intersections
-
-	raycaster.setFromCamera( mouse, camera );
-
-	var intersects = raycaster.intersectObjects( scene.children );
-
-	if ( intersects.length > 0 ) {
-
-		if ( INTERSECTED != intersects[ 0 ].object ) {
-
-			if ( INTERSECTED ) INTERSECTED.material.emissive.setHex( INTERSECTED.currentHex );
-
-			INTERSECTED = intersects[ 0 ].object;
-			INTERSECTED.currentHex = INTERSECTED.material.emissive.getHex();
-			INTERSECTED.material.emissive.setHex( 0xff0000 );
-
-		}
-
-	} else {
-
-		if ( INTERSECTED ) INTERSECTED.material.emissive.setHex( INTERSECTED.currentHex );
-
-		INTERSECTED = null;
-
-	}
-
 	renderer.render( scene, camera );
-
 }
 
