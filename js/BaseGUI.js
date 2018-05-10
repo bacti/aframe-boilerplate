@@ -1,4 +1,4 @@
-var container, stats;
+var container;
 var camera, scene, raycaster, renderer;
 
 var mouse = new THREE.Vector2(), INTERSECTED;
@@ -60,9 +60,6 @@ function init() {
 	renderer.setSize( window.innerWidth, window.innerHeight );
 	container.appendChild(renderer.domElement);
 
-	stats = new Stats();
-	container.appendChild( stats.dom );
-
 	document.addEventListener( 'mousemove', onDocumentMouseMove, false );
 
 	//
@@ -102,8 +99,6 @@ function animate() {
 	requestAnimationFrame( animate );
 
 	render();
-	stats.update();
-
 }
 
 function render() {
