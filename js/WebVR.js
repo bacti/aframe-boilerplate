@@ -16,7 +16,7 @@ export default class WebVR extends React.Component
     {
 		super(props)
 		
-		if (navigator.getVRDisplays)
+		if (navigator.getVRDisplays && global.renderer)
 		{
 			navigator.getVRDisplays().then(displays =>
 			{
@@ -28,7 +28,7 @@ export default class WebVR extends React.Component
 
 		this.ToggleVR = _ =>
 		{
-			if (!this.vrDisplay)
+			if (!this.vrDisplay || !global.renderer)
 				return
 			if (renderer.vr.enabled)
 			{

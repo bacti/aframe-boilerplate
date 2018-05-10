@@ -1,7 +1,4 @@
 require('./zepto')
-/// #if DEBUG
-global.resource = require('./debug')
-/// #endif
 
 import React from 'react'
 import ReactDOM from 'react-dom'
@@ -23,7 +20,7 @@ class App extends React.Component
         return (
             <div>
                 <WebVR canvas={canvas} />
-                <RollerCoaster canvas={canvas} />
+                {/* <RollerCoaster canvas={canvas} /> */}
             </div>
         )
     }
