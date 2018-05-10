@@ -14,6 +14,8 @@ import RollerCoasterLifters from './RollerCoasterLifters'
 import RollerCoasterShadow from './RollerCoasterShadow'
 require('./DeviceOrientationControls')
 
+import BaseGUI from '../BaseGUI'
+
 class RollerCoaster extends React.Component
 {
     constructor(props, context)
