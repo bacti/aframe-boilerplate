@@ -1,7 +1,4 @@
 const JSZip = require('jszip')
-/// #if DEBUG
-global.resource = require('./debug')
-/// #endif
 
 resource.load_buffer(resource.get_embed_src('data/jasmine.zip'), response =>
 {
