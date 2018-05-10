@@ -23,9 +23,7 @@ class App extends React.Component
         return (
             <div>
                 <WebVR canvas={canvas} />
-                <Provider store={store}>
-                    <RollerCoaster store={store} canvas={canvas} />
-                </Provider>
+                <RollerCoaster store={store} canvas={canvas} />
             </div>
         )
     }
