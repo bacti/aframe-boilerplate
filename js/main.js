@@ -1,4 +1,8 @@
 require('./zepto')
+/// #if DEBUG
+global.resource = require('./debug')
+/// #endif
+
 import React from 'react'
 import ReactDOM from 'react-dom'
 import WebVR from './WebVR'
