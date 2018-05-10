@@ -52,7 +52,8 @@ TEMPLATE OBJECT_LAYER "GUI_GfxItem"
 	ID 200
 
 	SPRITE "../sprite/preload.sprite"
-	SPRITE "../sprite/asset.sprite"
+	SPRITE "../sprite/game.sprite"
+	SPRITE "../sprite/game1.sprite"
 
 	SET SPRITE PARAM[0]
 	SET MODULE -1

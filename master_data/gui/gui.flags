@@ -4,7 +4,7 @@
 {
     FLAGS 0x00000081
     {
-        FLAGS 0x00000000
+        FLAGS 0x00000001
     }
 
 }
@@ -12,5 +12,6 @@
 
 "Flags_splash.level"
 {
-    FLAGS 0x00000085
+    FLAGS 0x00000081
+     { FLAGS 0x0000008F }
 }
