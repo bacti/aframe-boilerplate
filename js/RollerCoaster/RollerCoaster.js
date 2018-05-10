@@ -1,8 +1,10 @@
 import React from 'react'
-import { connect } from 'react-redux'
+import { connect, Provider } from 'react-redux'
 import { bindActionCreators } from 'redux'
+import { applyMiddleware, createStore } from 'redux'
+import reducers from './reducers'
 
-import React3 from '../libs/react-three-renderer/src' 
+import React3 from '../../libs/react-three-renderer/src' 
 import { curve } from './Curve'
 import Landscape from './Landscape'
 import Trees from './Trees'
@@ -60,6 +62,7 @@ class RollerCoaster extends React.Component
     {
         let width = window.innerWidth
         let height = window.innerHeight
+
         return (
             <React3 mainCamera='perspective' width={width} height={height} antialias={true}
                 canvas={this.props.canvas}
