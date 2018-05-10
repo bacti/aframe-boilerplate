@@ -20,7 +20,7 @@ class App extends React.Component
         return (
             <div>
                 <WebVR canvas={canvas} />
-                {/* <RollerCoaster canvas={canvas} /> */}
+                <RollerCoaster canvas={canvas} />
             </div>
         )
     }
