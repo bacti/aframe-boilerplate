@@ -1,176 +1,149 @@
-<!DOCTYPE html>
-<html lang="en">
-	<head>
-		<title>three.js webgl - interactive cubes</title>
-		<meta charset="utf-8">
-		<meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
-		<style>
-			body {
-				font-family: Monospace;
-				background-color: #f0f0f0;
-				margin: 0px;
-				overflow: hidden;
-			}
-		</style>
-	</head>
-	<body>
+var container, stats;
+var camera, scene, raycaster, renderer;
 
-		<script src="../build/three.js"></script>
+var mouse = new THREE.Vector2(), INTERSECTED;
+var radius = 500, theta = 0;
+var frustumSize = 1000;
 
-		<script src="js/libs/stats.min.js"></script>
+init();
+animate();
 
-		<script>
+function init() {
 
-			var container, stats;
-			var camera, scene, raycaster, renderer;
+	container = document.createElement( 'div' );
+	document.body.appendChild( container );
 
-			var mouse = new THREE.Vector2(), INTERSECTED;
-			var radius = 500, theta = 0;
-			var frustumSize = 1000;
+	var info = document.createElement( 'div' );
+	info.style.position = 'absolute';
+	info.style.top = '10px';
+	info.style.width = '100%';
+	info.style.textAlign = 'center';
+	info.innerHTML = '<a href="http://threejs.org" target="_blank" rel="noopener">three.js</a> webgl - interactive cubes';
+	container.appendChild( info );
 
-			init();
-			animate();
+	var aspect = window.innerWidth / window.innerHeight;
+	camera = new THREE.OrthographicCamera( frustumSize * aspect / - 2, frustumSize * aspect / 2, frustumSize / 2, frustumSize / - 2, 1, 1000 );
 
-			function init() {
+	scene = new THREE.Scene();
+	scene.background = new THREE.Color( 0xf0f0f0 );
 
-				container = document.createElement( 'div' );
-				document.body.appendChild( container );
+	var light = new THREE.DirectionalLight( 0xffffff, 1 );
+	light.position.set( 1, 1, 1 ).normalize();
+	scene.add( light );
 
-				var info = document.createElement( 'div' );
-				info.style.position = 'absolute';
-				info.style.top = '10px';
-				info.style.width = '100%';
-				info.style.textAlign = 'center';
-				info.innerHTML = '<a href="http://threejs.org" target="_blank" rel="noopener">three.js</a> webgl - interactive cubes';
-				container.appendChild( info );
+	var geometry = new THREE.BoxBufferGeometry( 20, 20, 20 );
 
-				var aspect = window.innerWidth / window.innerHeight;
-				camera = new THREE.OrthographicCamera( frustumSize * aspect / - 2, frustumSize * aspect / 2, frustumSize / 2, frustumSize / - 2, 1, 1000 );
+	for ( var i = 0; i < 2000; i ++ ) {
 
-				scene = new THREE.Scene();
-				scene.background = new THREE.Color( 0xf0f0f0 );
+		var object = new THREE.Mesh( geometry, new THREE.MeshLambertMaterial( { color: Math.random() * 0xffffff } ) );
 
-				var light = new THREE.DirectionalLight( 0xffffff, 1 );
-				light.position.set( 1, 1, 1 ).normalize();
-				scene.add( light );
+		object.position.x = Math.random() * 800 - 400;
+		object.position.y = Math.random() * 800 - 400;
+		object.position.z = Math.random() * 800 - 400;
 
-				var geometry = new THREE.BoxBufferGeometry( 20, 20, 20 );
+		object.rotation.x = Math.random() * 2 * Math.PI;
+		object.rotation.y = Math.random() * 2 * Math.PI;
+		object.rotation.z = Math.random() * 2 * Math.PI;
 
-				for ( var i = 0; i < 2000; i ++ ) {
+		object.scale.x = Math.random() + 0.5;
+		object.scale.y = Math.random() + 0.5;
+		object.scale.z = Math.random() + 0.5;
 
-					var object = new THREE.Mesh( geometry, new THREE.MeshLambertMaterial( { color: Math.random() * 0xffffff } ) );
+		scene.add( object );
 
-					object.position.x = Math.random() * 800 - 400;
-					object.position.y = Math.random() * 800 - 400;
-					object.position.z = Math.random() * 800 - 400;
+	}
 
-					object.rotation.x = Math.random() * 2 * Math.PI;
-					object.rotation.y = Math.random() * 2 * Math.PI;
-					object.rotation.z = Math.random() * 2 * Math.PI;
+	raycaster = new THREE.Raycaster();
 
-					object.scale.x = Math.random() + 0.5;
-					object.scale.y = Math.random() + 0.5;
-					object.scale.z = Math.random() + 0.5;
+	renderer = new THREE.WebGLRenderer();
+	renderer.setPixelRatio( window.devicePixelRatio );
+	renderer.setSize( window.innerWidth, window.innerHeight );
+	container.appendChild(renderer.domElement);
 
-					scene.add( object );
+	stats = new Stats();
+	container.appendChild( stats.dom );
 
-				}
+	document.addEventListener( 'mousemove', onDocumentMouseMove, false );
 
-				raycaster = new THREE.Raycaster();
+	//
 
-				renderer = new THREE.WebGLRenderer();
-				renderer.setPixelRatio( window.devicePixelRatio );
-				renderer.setSize( window.innerWidth, window.innerHeight );
-				container.appendChild(renderer.domElement);
+	window.addEventListener( 'resize', onWindowResize, false );
 
-				stats = new Stats();
-				container.appendChild( stats.dom );
+}
 
-				document.addEventListener( 'mousemove', onDocumentMouseMove, false );
+function onWindowResize() {
 
-				//
+	var aspect = window.innerWidth / window.innerHeight;
 
-				window.addEventListener( 'resize', onWindowResize, false );
+	camera.left   = - frustumSize * aspect / 2;
+	camera.right  =   frustumSize * aspect / 2;
+	camera.top    =   frustumSize / 2;
+	camera.bottom = - frustumSize / 2;
 
-			}
+	camera.updateProjectionMatrix();
 
-			function onWindowResize() {
+	renderer.setSize( window.innerWidth, window.innerHeight );
 
-				var aspect = window.innerWidth / window.innerHeight;
+}
 
-				camera.left   = - frustumSize * aspect / 2;
-				camera.right  =   frustumSize * aspect / 2;
-				camera.top    =   frustumSize / 2;
-				camera.bottom = - frustumSize / 2;
+function onDocumentMouseMove( event ) {
 
-				camera.updateProjectionMatrix();
+	event.preventDefault();
 
-				renderer.setSize( window.innerWidth, window.innerHeight );
+	mouse.x = ( event.clientX / window.innerWidth ) * 2 - 1;
+	mouse.y = - ( event.clientY / window.innerHeight ) * 2 + 1;
 
-			}
+}
 
-			function onDocumentMouseMove( event ) {
+//
 
-				event.preventDefault();
+function animate() {
 
-				mouse.x = ( event.clientX / window.innerWidth ) * 2 - 1;
-				mouse.y = - ( event.clientY / window.innerHeight ) * 2 + 1;
+	requestAnimationFrame( animate );
 
-			}
+	render();
+	stats.update();
 
-			//
+}
 
-			function animate() {
+function render() {
 
-				requestAnimationFrame( animate );
+	theta += 0.1;
 
-				render();
-				stats.update();
+	camera.position.x = radius * Math.sin( THREE.Math.degToRad( theta ) );
+	camera.position.y = radius * Math.sin( THREE.Math.degToRad( theta ) );
+	camera.position.z = radius * Math.cos( THREE.Math.degToRad( theta ) );
+	camera.lookAt( scene.position );
 
-			}
+	camera.updateMatrixWorld();
 
-			function render() {
+	// find intersections
 
-				theta += 0.1;
+	raycaster.setFromCamera( mouse, camera );
 
-				camera.position.x = radius * Math.sin( THREE.Math.degToRad( theta ) );
-				camera.position.y = radius * Math.sin( THREE.Math.degToRad( theta ) );
-				camera.position.z = radius * Math.cos( THREE.Math.degToRad( theta ) );
-				camera.lookAt( scene.position );
+	var intersects = raycaster.intersectObjects( scene.children );
 
-				camera.updateMatrixWorld();
+	if ( intersects.length > 0 ) {
 
-				// find intersections
+		if ( INTERSECTED != intersects[ 0 ].object ) {
 
-				raycaster.setFromCamera( mouse, camera );
+			if ( INTERSECTED ) INTERSECTED.material.emissive.setHex( INTERSECTED.currentHex );
 
-				var intersects = raycaster.intersectObjects( scene.children );
+			INTERSECTED = intersects[ 0 ].object;
+			INTERSECTED.currentHex = INTERSECTED.material.emissive.getHex();
+			INTERSECTED.material.emissive.setHex( 0xff0000 );
 
-				if ( intersects.length > 0 ) {
+		}
 
-					if ( INTERSECTED != intersects[ 0 ].object ) {
+	} else {
 
-						if ( INTERSECTED ) INTERSECTED.material.emissive.setHex( INTERSECTED.currentHex );
+		if ( INTERSECTED ) INTERSECTED.material.emissive.setHex( INTERSECTED.currentHex );
 
-						INTERSECTED = intersects[ 0 ].object;
-						INTERSECTED.currentHex = INTERSECTED.material.emissive.getHex();
-						INTERSECTED.material.emissive.setHex( 0xff0000 );
+		INTERSECTED = null;
 
-					}
+	}
 
-				} else {
+	renderer.render( scene, camera );
 
-					if ( INTERSECTED ) INTERSECTED.material.emissive.setHex( INTERSECTED.currentHex );
+}
 
-					INTERSECTED = null;
-
-				}
-
-				renderer.render( scene, camera );
-
-			}
-
-		</script>
-
-	</body>
-</html>

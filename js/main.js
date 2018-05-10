@@ -6,6 +6,7 @@ import WebVR from './WebVR'
 import RollerCoaster from './RollerCoaster/'
 
 // import ZipLoader from './ZipLoader'
+import './BaseGUI'
 
 class App extends React.Component
 {
@@ -20,7 +21,7 @@ class App extends React.Component
         return (
             <div>
                 <WebVR canvas={canvas} />
-                <RollerCoaster canvas={canvas} />
+                {/* <RollerCoaster canvas={canvas} /> */}
             </div>
         )
     }
