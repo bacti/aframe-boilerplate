@@ -1,11 +1,8 @@
 require('./zepto')
 import React from 'react'
 import ReactDOM from 'react-dom'
-import { Provider } from 'react-redux'
-import { applyMiddleware, createStore } from 'redux'
-import reducers from './RollerCoaster/reducers'
 import WebVR from './WebVR'
-import RollerCoaster from './RollerCoaster/RollerCoaster'
+import RollerCoaster from './RollerCoaster/'
 
 import ZipLoader from './ZipLoader'
 
@@ -19,13 +16,10 @@ class App extends React.Component
     render()
     {
         let canvas = document.getElementById('mainCanvas')
-        let store = applyMiddleware()(createStore)(reducers)
         return (
             <div>
                 <WebVR canvas={canvas} />
-                <Provider store={store}>
-                    <RollerCoaster store={store} canvas={canvas} />
-                </Provider>
+                <RollerCoaster canvas={canvas} />
             </div>
         )
     }
