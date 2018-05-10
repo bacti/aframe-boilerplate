@@ -5,7 +5,7 @@ import ReactDOM from 'react-dom'
 import WebVR from './WebVR'
 import RollerCoaster from './RollerCoaster/'
 
-import ZipLoader from './ZipLoader'
+// import ZipLoader from './ZipLoader'
 
 class App extends React.Component
 {
