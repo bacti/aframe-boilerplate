@@ -27,13 +27,6 @@ class App extends React.Component
                 </Provider>
             </div>
         )
-
-        // return (
-        //     <div>
-        //         <WebVR canvas={canvas} />
-        //         <Controls canvas={canvas} />
-        //     </div>
-        // )
     }
 }
 
