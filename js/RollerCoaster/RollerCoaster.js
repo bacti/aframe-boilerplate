@@ -29,6 +29,8 @@ class RollerCoaster extends React.Component
         let progress = 0
         let prevTime = performance.now()
 
+        this.baseGUI = new BaseGUI()
+
         this.OnAnimate = _ =>
         {
             let time = performance.now();
@@ -50,7 +52,8 @@ class RollerCoaster extends React.Component
             this.refs.train.lookAt( lookAt.copy( position ).sub( tangent ) )
         
             prevTime = time
-            this.controls.update()
+            // this.controls.update()
+            this.baseGUI.render()
         }
     }
 

@@ -1,7 +1,3 @@
-var container;
-var camera, scene, renderer;
-
-var mouse = new THREE.Vector2(), INTERSECTED;
 var radius = 500, theta = 0;
 var frustumSize = 1000;
 
@@ -9,18 +5,15 @@ export default class BaseGUI
 {
 	constructor()
 	{
-		container = document.createElement( 'div' );
-		document.body.appendChild( container );
-
 		var aspect = window.innerWidth / window.innerHeight;
-		camera = new THREE.OrthographicCamera( frustumSize * aspect / - 2, frustumSize * aspect / 2, frustumSize / 2, frustumSize / - 2, 1, 1000 );
+		global.orthocamera = new THREE.OrthographicCamera( frustumSize * aspect / - 2, frustumSize * aspect / 2, frustumSize / 2, frustumSize / - 2, 1, 1000 );
 
-		scene = new THREE.Scene();
-		scene.background = new THREE.Color( 0xf0f0f0 );
+		global.orthoscene = new THREE.Scene();
+		// orthoscene.background = new THREE.Color( 0xf0f0f0 );
 
 		var light = new THREE.DirectionalLight( 0xffffff, 1 );
 		light.position.set( 1, 1, 1 ).normalize();
-		scene.add( light );
+		orthoscene.add( light );
 
 		var geometry = new THREE.BoxBufferGeometry( 20, 20, 20 );
 
@@ -40,31 +33,24 @@ export default class BaseGUI
 			object.scale.y = Math.random() + 0.5;
 			object.scale.z = Math.random() + 0.5;
 
-			scene.add( object );
+			orthoscene.add( object );
 		}
 
-		renderer = new THREE.WebGLRenderer();
-		renderer.setPixelRatio( window.devicePixelRatio );
-		renderer.setSize( window.innerWidth, window.innerHeight );
-		container.appendChild(renderer.domElement);
-	}
-
-	animate()
-	{
-		requestAnimationFrame( animate );
-		render();
+		// renderer = new THREE.WebGLRenderer();
+		// renderer.setPixelRatio( window.devicePixelRatio );
+		// renderer.setSize( window.innerWidth, window.innerHeight );
 	}
 
 	render()
 	{
 		theta += 0.1;
 
-		camera.position.x = radius * Math.sin( THREE.Math.degToRad( theta ) );
-		camera.position.y = radius * Math.sin( THREE.Math.degToRad( theta ) );
-		camera.position.z = radius * Math.cos( THREE.Math.degToRad( theta ) );
-		camera.lookAt( scene.position );
-		camera.updateMatrixWorld();
+		orthocamera.position.x = radius * Math.sin( THREE.Math.degToRad( theta ) );
+		orthocamera.position.y = radius * Math.sin( THREE.Math.degToRad( theta ) );
+		orthocamera.position.z = radius * Math.cos( THREE.Math.degToRad( theta ) );
+		orthocamera.lookAt( orthoscene.position );
+		orthocamera.updateMatrixWorld();
 
-		renderer.render( scene, camera );
+		// renderer.render( orthoscene, orthocamera );
 	}
 }
