@@ -105,13 +105,13 @@ class RollerCoaster extends React.Component
                     </mesh>
                     <RollerCoasterLifters curve={curve} />
                     <RollerCoasterShadow curve={curve} />
+                </scene>
+                <orthoscene>
                     <orthographicCamera name='ortho'
                         left={frustumSize * aspect / - 2} right={frustumSize * aspect / 2}
                         top={frustumSize / 2} bottom={frustumSize / - 2}
                         near={1} far={1000}
                     />
-                </scene>
-                <orthoscene>
                     <directionalLight color={0xffffff} intensity={1} ref='directionalLight' />
                     {objects}
                 </orthoscene>
