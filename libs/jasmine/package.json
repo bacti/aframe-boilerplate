@@ -1,0 +1,17 @@
+{
+  "name": "rnd",
+  "author": "",
+  "license": "ISC",
+  "version": "0.0.1",
+  "scripts": {
+    "sprite-pack": "node tools/SpritePack.js",
+    "jasmine-pack": "node tools/JasminePack.js",
+    "data-export": "node %RIM_TOOLS%/script/DataExport.js",
+    "dev": "%NODE_PATH%/.bin/cross-env NODE_ENV=development %NODE_PATH%/.bin/webpack-dev-server -d --devtool source-map --config index.js --port 8080 --host 0.0.0.0",
+    "build-release": "%NODE_PATH%/.bin/cross-env NODE_ENV=production %NODE_PATH%/.bin/webpack --config index.js --progress --profile --colors",
+    "release": "npm run build-release && node raw/jsunifier.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "dependencies": {
+  }
+}
