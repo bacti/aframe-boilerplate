@@ -48,7 +48,7 @@ export default class WebVR extends React.Component
 		return (
 			<div onClick={this.ToggleVR}
 				style={{
-					background: `url(${require('../data/vr-icon.png')}) 0% 0% / contain no-repeat`,
+					background: `url(${resource.get_embed_src('data/image/vr-icon.png')}) 0% 0% / contain no-repeat`,
 					position: 'absolute',
 					zIndex: 1,
 					width: '7vw',

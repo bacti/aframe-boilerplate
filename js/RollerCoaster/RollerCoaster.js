@@ -70,10 +70,10 @@ class RollerCoaster extends React.Component
         let frustumSize = 1000
         let aspect = width / height
 
-        let objects = [...Array(2000)].map( _ =>
+        let objects = [...Array(2000)].map((_, index) =>
         {
             return (
-                <mesh
+                <mesh key={index}
                     position={new THREE.Vector3(Math.random() * 800 - 400, Math.random() * 800 - 400, Math.random() * 800 - 400)}
                     rotation={new THREE.Euler(Math.random() * 2 * Math.PI, Math.random() * 2 * Math.PI, Math.random() * 2 * Math.PI)}
                     scale={new THREE.Vector3(Math.random() + 0.5, Math.random() + 0.5, Math.random() + 0.5)}
