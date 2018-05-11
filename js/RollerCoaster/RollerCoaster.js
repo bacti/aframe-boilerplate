@@ -60,6 +60,7 @@ class RollerCoaster extends React.Component
     {
         this.props.mainScene(this.refs.scene)
         this.controls = new THREE.DeviceOrientationControls(this.refs.camera)
+        this.refs.directionalLight.position.set(1, 1, 1).normalize()
     }
 
     render()
@@ -68,6 +69,20 @@ class RollerCoaster extends React.Component
         let height = window.innerHeight
         let frustumSize = 1000
         let aspect = width / height
+
+        let objects = [...Array(2000)].map( _ =>
+        {
+            return (
+                <mesh
+                    position={new THREE.Vector3(Math.random() * 800 - 400, Math.random() * 800 - 400, Math.random() * 800 - 400)}
+                    rotation={new THREE.Euler(Math.random() * 2 * Math.PI, Math.random() * 2 * Math.PI, Math.random() * 2 * Math.PI)}
+                    scale={new THREE.Vector3(Math.random() + 0.5, Math.random() + 0.5, Math.random() + 0.5)}
+                >
+                    <boxGeometry width={20} height={20} depth={20} />
+                    <meshLambertMaterial color={Math.random() * 0xffffff} />
+                </mesh>
+            )
+        })
 
         return (
             <React3 mainCamera='perspective' orthoCamera='ortho' width={width} height={height} antialias={true}
@@ -97,15 +112,8 @@ class RollerCoaster extends React.Component
                     />
                 </scene>
                 <orthoscene>
-                    <directionalLight color={0xffffff} intensity={1} position={new THREE.Vector3(1, 1, 1).normalize()} />
-                    <mesh
-                        position={new THREE.Vector3(Math.random() * 800 - 400, Math.random() * 800 - 400, Math.random() * 800 - 400)}
-                        rotation={new THREE.Euler(Math.random() * 2 * Math.PI, Math.random() * 2 * Math.PI, Math.random() * 2 * Math.PI)}
-                        scale={new THREE.Vector3(Math.random() + 0.5, Math.random() + 0.5, Math.random() + 0.5)}
-                    >
-                        <boxGeometry width={20} height={20} depth={20} />
-                        <meshLambertMaterial color={Math.random() * 0xffffff} />
-                    </mesh>
+                    <directionalLight color={0xffffff} intensity={1} ref='directionalLight' />
+                    {objects}
                 </orthoscene>
             </React3>
         )
