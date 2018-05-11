@@ -96,6 +96,13 @@ class RollerCoaster extends React.Component
                         near={1} far={1000}
                     />
                 </scene>
+                <orthoscene>
+                    <directionalLight color={0xffffff} intensity={1} position={new THREE.Vector3(1, 1, 1).normalize()} />
+                    <mesh>
+                        <boxGeometry width={20} height={20} depth={20} />
+                        <meshLambertMaterial color={Math.random() * 0xffffff} />
+                    </mesh>
+                </orthoscene>
             </React3>
         )
     }
