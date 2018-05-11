@@ -5,9 +5,6 @@ export default class BaseGUI
 {
 	constructor()
 	{
-		var aspect = window.innerWidth / window.innerHeight;
-		global.orthocamera = new THREE.OrthographicCamera( frustumSize * aspect / - 2, frustumSize * aspect / 2, frustumSize / 2, frustumSize / - 2, 1, 1000 );
-
 		global.orthoscene = new THREE.Scene();
 		// orthoscene.background = new THREE.Color( 0xf0f0f0 );
 
@@ -35,22 +32,5 @@ export default class BaseGUI
 
 			orthoscene.add( object );
 		}
-
-		// renderer = new THREE.WebGLRenderer();
-		// renderer.setPixelRatio( window.devicePixelRatio );
-		// renderer.setSize( window.innerWidth, window.innerHeight );
-	}
-
-	render()
-	{
-		theta += 0.1;
-
-		orthocamera.position.x = radius * Math.sin( THREE.Math.degToRad( theta ) );
-		orthocamera.position.y = radius * Math.sin( THREE.Math.degToRad( theta ) );
-		orthocamera.position.z = radius * Math.cos( THREE.Math.degToRad( theta ) );
-		orthocamera.lookAt( orthoscene.position );
-		orthocamera.updateMatrixWorld();
-
-		// renderer.render( orthoscene, orthocamera );
 	}
 }

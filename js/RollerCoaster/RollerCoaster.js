@@ -53,7 +53,6 @@ class RollerCoaster extends React.Component
         
             prevTime = time
             // this.controls.update()
-            this.baseGUI.render()
         }
     }
 
@@ -67,6 +66,8 @@ class RollerCoaster extends React.Component
     {
         let width = window.innerWidth
         let height = window.innerHeight
+        let frustumSize = 1000
+        let aspect = width / height
 
         return (
             <React3 mainCamera='perspective' orthoCamera='ortho' width={width} height={height} antialias={true}
@@ -89,6 +90,11 @@ class RollerCoaster extends React.Component
                     </mesh>
                     <RollerCoasterLifters curve={curve} />
                     <RollerCoasterShadow curve={curve} />
+                    <orthographicCamera name='ortho'
+                        left={frustumSize * aspect / - 2} right={frustumSize * aspect / 2}
+                        top={frustumSize / 2} bottom={frustumSize / - 2}
+                        near={1} far={1000}
+                    />
                 </scene>
             </React3>
         )
