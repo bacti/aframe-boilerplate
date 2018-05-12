@@ -3,6 +3,15 @@ import Jasmine from '../libs/jasmine/'
 
 export default class BaseGUI extends React.Component
 {
+    constructor(props)
+    {
+        super(props)
+        resource.load_buffer(resource.get_embed_src('data/all1.bsprite'), response =>
+        {
+            console.log(response)
+        })
+    }
+
 	render()
 	{
         let objects = [...Array(2000)].map((_, index) =>
