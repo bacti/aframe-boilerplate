@@ -70,20 +70,6 @@ class RollerCoaster extends React.Component
         let frustumSize = 1000
         let aspect = width / height
 
-        let objects = [...Array(2000)].map((_, index) =>
-        {
-            return (
-                <mesh key={index}
-                    position={new THREE.Vector3(Math.random() * 800 - 400, Math.random() * 800 - 400, Math.random() * 800 - 400)}
-                    rotation={new THREE.Euler(Math.random() * 2 * Math.PI, Math.random() * 2 * Math.PI, Math.random() * 2 * Math.PI)}
-                    scale={new THREE.Vector3(Math.random() + 0.5, Math.random() + 0.5, Math.random() + 0.5)}
-                >
-                    <boxGeometry width={20} height={20} depth={20} />
-                    <meshLambertMaterial color={Math.random() * 0xffffff} />
-                </mesh>
-            )
-        })
-
         return (
             <React3 mainCamera='perspective' orthoCamera='ortho' width={width} height={height} antialias={true}
                 canvas={this.props.canvas}
@@ -113,7 +99,7 @@ class RollerCoaster extends React.Component
                         near={1} far={1000}
                     />
                     <directionalLight color={0xffffff} intensity={1} ref='directionalLight' />
-                    {objects}
+                    <BaseGUI />
                 </orthoscene>
             </React3>
         )
