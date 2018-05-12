@@ -3,3 +3,4 @@
 /node_modules/*
 npm-debug.log
 master_data/sprite/
+js/DataHeader.js
