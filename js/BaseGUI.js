@@ -1,6 +1,5 @@
 import React from 'react'
-import Jasmine from '../libs/jasmine/' 
-import SLoader from '../libs/jasmine/src/SLoader' 
+import Jasmine from '../libs/jasmine/'
 
 export default class BaseGUI extends React.Component
 {
@@ -10,7 +9,7 @@ export default class BaseGUI extends React.Component
 
         resource.load_buffer(resource.get_embed_src('data/all1.bsprite'), response =>
         {
-            new SLoader(response, pixma =>
+            new Jasmine.Loader(response, pixma =>
             {
                 console.log(pixma)
             })
