@@ -1,7 +1,5 @@
 require('./zepto')
-/// #if DEBUG
-global.resource = require('./debug')
-/// #endif
+global.resource = global.resource || require('./debug')
 
 import React from 'react'
 import ReactDOM from 'react-dom'
