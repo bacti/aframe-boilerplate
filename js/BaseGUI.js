@@ -6,9 +6,13 @@ export default class BaseGUI extends React.Component
     constructor(props)
     {
         super(props)
+        console.log(Jasmine)
         resource.load_buffer(resource.get_embed_src('data/all1.bsprite'), response =>
         {
-            console.log(response)
+            let pixma = new Jasmine.Loader(response, evt =>
+            {
+                console.log(pixma)
+            })
         })
     }
 
