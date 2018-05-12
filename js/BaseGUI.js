@@ -1,4 +1,5 @@
 import React from 'react'
+import Jasmine from '../libs/jasmine/' 
 
 export default class BaseGUI extends React.Component
 {
