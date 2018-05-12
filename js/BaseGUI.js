@@ -2,11 +2,6 @@ import React from 'react'
 
 export default class BaseGUI extends React.Component
 {
-	constructor(props, context)
-    {
-        super(props, context)
-	}
-
 	render()
 	{
         let objects = [...Array(2000)].map((_, index) =>
