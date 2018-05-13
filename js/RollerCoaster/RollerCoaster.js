@@ -92,9 +92,10 @@ class RollerCoaster extends React.Component
                 </scene>
                 <orthoscene>
                     <orthographicCamera name='ortho'
-                        left={frustumSize * aspect / - 2} right={frustumSize * aspect / 2}
-                        top={frustumSize / 2} bottom={frustumSize / - 2}
-                        near={1} far={1000}
+                        position={new THREE.Vector3(0, 0, 1)}
+                        left={width / - 2} right={width / 2}
+                        top={height / 2} bottom={height / - 2}
+                        near={1} far={100}
                     />
                     <directionalLight color={0xffffff} intensity={1} ref='directionalLight' />
                     <BaseGUI />
