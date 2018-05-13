@@ -98,7 +98,7 @@ class RollerCoaster extends React.Component
                         near={1} far={100}
                     />
                     <directionalLight color={0xffffff} intensity={1} ref='directionalLight' />
-                    <BaseGUI />
+                    {/* <BaseGUI /> */}
                 </orthoscene>
             </React3>
         )

@@ -21,9 +21,9 @@ class App extends React.Component
         let canvas = document.getElementById('mainCanvas')
         return (
             <div>
-                {/* <WebVR canvas={canvas} /> */}
-                {/* <RollerCoaster canvas={canvas} /> */}
-                <ReactJasmine />
+                <WebVR canvas={canvas} />
+                <RollerCoaster canvas={canvas} />
+                {/* <ReactJasmine /> */}
             </div>
         )
     }
