@@ -5,6 +5,7 @@ import React from 'react'
 import ReactDOM from 'react-dom'
 import WebVR from './WebVR'
 import RollerCoaster from './RollerCoaster/'
+import ReactJasmine from './ReactJasmine'
 
 // import ZipLoader from './ZipLoader'
 
@@ -20,8 +21,9 @@ class App extends React.Component
         let canvas = document.getElementById('mainCanvas')
         return (
             <div>
-                <WebVR canvas={canvas} />
-                <RollerCoaster canvas={canvas} />
+                {/* <WebVR canvas={canvas} /> */}
+                {/* <RollerCoaster canvas={canvas} /> */}
+                <ReactJasmine />
             </div>
         )
     }
