@@ -1,7 +1,7 @@
 import React from 'react'
 import { BrowserRouter, Route } from 'react-router-dom'
 
-import PreLoad from './screens/PreLoad'
+import Preload from './screens/Preload'
 
 export default class MyAd extends React.Component
 {
@@ -15,7 +15,7 @@ export default class MyAd extends React.Component
         return (
             <BrowserRouter>
                 <div>
-                    <Route exact path='/' component={PreLoad}/>
+                    <Route exact path='/' component={Preload}/>
                 </div>
             </BrowserRouter>
         )
