@@ -4,26 +4,17 @@ global.resource = global.resource || require('./debug')
 import React from 'react'
 import ReactDOM from 'react-dom'
 import WebVR from './WebVR'
-import RollerCoaster from './RollerCoaster/'
-import ReactJasmine from './ReactJasmine/'
-
-// import ZipLoader from './ZipLoader'
+import MyAd from './MyAd'
 
 class App extends React.Component
 {
-    constructor(props)
-    {
-        super(props)
-    }
-
     render()
     {
         let canvas = document.getElementById('mainCanvas')
         return (
             <div>
                 <WebVR canvas={canvas} />
-                <RollerCoaster canvas={canvas} />
-                {/* <ReactJasmine /> */}
+                <MyAd />
             </div>
         )
     }
