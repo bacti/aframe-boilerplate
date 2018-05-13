@@ -12,7 +12,7 @@ export default class PreLoad extends React.Component
             new Jasmine.Loader(response, pixma =>
             {
                 console.log(pixma)
-                this.props.history.push('/about')
+                setTimeout( _ => this.props.history.push('/roller-coaster'), 2000)
             })
         })
     }

@@ -2,6 +2,7 @@ import React from 'react'
 import { BrowserRouter, Route } from 'react-router-dom'
 
 import Preload from './screens/Preload'
+import RollerCoaster from './RollerCoaster/'
 
 export default class MyAd extends React.Component
 {
@@ -16,6 +17,7 @@ export default class MyAd extends React.Component
             <BrowserRouter>
                 <div>
                     <Route exact path='/' component={Preload}/>
+                    <Route exact path='/roller-coaster' component={RollerCoaster}/>
                 </div>
             </BrowserRouter>
         )

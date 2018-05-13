@@ -11,7 +11,7 @@ export default class RollerCoasterWrapper extends React.Component
         let store = applyMiddleware()(createStore)(reducers)
 		return (
             <Provider store={store}>
-                <RollerCoaster store={store} canvas={this.props.canvas} />
+                <RollerCoaster store={store} canvas={document.getElementById('mainCanvas')} />
             </Provider>
         )
 	}
