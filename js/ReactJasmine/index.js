@@ -1,14 +1,10 @@
 import React from 'react'
 import { BrowserRouter, Route } from 'react-router-dom'
 
+import PreLoad from './PreLoad'
+
 class Home extends React.Component
 {
-    constructor(props)
-    {
-        super(props)
-        // console.log(this.props)
-    }
-
     componentDidMount()
     {
         console.log(this.props.history)
@@ -43,7 +39,7 @@ class BasicExample extends React.Component
         return (
             <BrowserRouter>
                 <div>
-                    <Route exact path="/" component={Home}/>
+                    <Route exact path="/" component={PreLoad}/>
                     <Route path="/about" component={About}/>
                 </div>
             </BrowserRouter>
