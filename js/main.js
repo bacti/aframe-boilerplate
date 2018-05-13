@@ -5,7 +5,7 @@ import React from 'react'
 import ReactDOM from 'react-dom'
 import WebVR from './WebVR'
 import RollerCoaster from './RollerCoaster/'
-import ReactJasmine from './ReactJasmine'
+import ReactJasmine from './ReactJasmine/'
 
 // import ZipLoader from './ZipLoader'
 
