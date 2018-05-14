@@ -3,6 +3,10 @@ global.resource = global.resource || require('./debug')
 
 import React from 'react'
 import ReactDOM from 'react-dom'
+import { Provider } from 'react-redux'
+import { applyMiddleware, createStore } from 'redux'
+import reducers from './reducers'
+
 import WebVR from './WebVR'
 import MyAd from './MyAd'
 
@@ -11,11 +15,14 @@ class App extends React.Component
     render()
     {
         let canvas = document.getElementById('mainCanvas')
+        let store = applyMiddleware()(createStore)(reducers)
         return (
-            <div>
-                <WebVR canvas={canvas} />
-                <MyAd />
-            </div>
+            <Provider store={store}>
+                <div>
+                    <WebVR canvas={canvas} />
+                    <MyAd />
+                </div>
+            </Provider>
         )
     }
 }

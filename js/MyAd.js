@@ -1,7 +1,12 @@
 import React from 'react'
 import React3 from '../libs/react-three-renderer/src' 
+import ReactSpriteModule from './ReactSpriteModule'
 
-export default class MyAd extends React.Component
+import { connect, Provider } from 'react-redux'
+import { bindActionCreators } from 'redux'
+import { applyMiddleware, createStore } from 'redux'
+
+class MyAd extends React.Component
 {
     constructor(props)
     {
@@ -32,8 +37,31 @@ export default class MyAd extends React.Component
                         top={height / 2} bottom={height / - 2}
                         near={1} far={100}
                     />
+                    <ReactSpriteModule />
                 </orthoscene>
             </React3>
         )
 	}
 }
+
+
+let mapStateToProps = state =>
+{
+    return {}
+}
+
+let mapDispatchToProps = dispatch =>
+{
+    return bindActionCreators(
+    {
+        mainScene: scene =>
+        {
+            return {
+                type: 'MAIN_SCENE',
+                payload: scene,
+            }
+        },
+    }, dispatch)
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(MyAd)
