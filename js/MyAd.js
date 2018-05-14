@@ -1,10 +1,12 @@
 import React from 'react'
 import React3 from '../libs/react-three-renderer/src' 
-import ReactSpriteModule from './ReactSpriteModule'
 
 import { connect, Provider } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import { applyMiddleware, createStore } from 'redux'
+
+import GameWorld from './GameWorld'
+import GameGUI from './GameGUI'
 
 class MyAd extends React.Component
 {
@@ -29,6 +31,7 @@ class MyAd extends React.Component
                     <perspectiveCamera name='camera' ref='camera'
                         fov={40} aspect={width/height} near={0.1} far={500}
                     />
+                    <GameWorld />
                 </scene>
                 <orthoscene ref='orthoscene'>
                     <orthographicCamera name='orthocamera' ref='orthocamera'
@@ -37,17 +40,11 @@ class MyAd extends React.Component
                         top={height / 2} bottom={height / - 2}
                         near={1} far={100}
                     />
-                    <ReactSpriteModule />
+                    <GameGUI />
                 </orthoscene>
             </React3>
         )
 	}
-}
-
-
-let mapStateToProps = state =>
-{
-    return {}
 }
 
 let mapDispatchToProps = dispatch =>
@@ -64,4 +61,4 @@ let mapDispatchToProps = dispatch =>
     }, dispatch)
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(MyAd)
+export default connect(state => ({}), mapDispatchToProps)(MyAd)
