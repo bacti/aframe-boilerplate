@@ -28,10 +28,23 @@ class Preload extends React.Component
                 })
                 textureLoader.load((loader, resources) =>
                 {
-                    // setTimeout(_ => this.props.SwitchState('SPLASH'), 2000)
+                    setTimeout(_ => this.props.SwitchState('SPLASH'), 2000)
                 })
             })
         })
+    }
+
+    componentDidMount()
+    {
+        this.wheel = setInterval( _ =>
+        {
+            this.refs.sprite.material.rotation -= 0.1
+        }, 10)
+    }
+
+    componentWillUnmount()
+    {
+        clearInterval(this.wheel)
     }
 
 	render()
