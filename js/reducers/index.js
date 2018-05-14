@@ -1,8 +1,24 @@
 import { combineReducers } from 'redux'
-import CurrentStateReducer from './CurrentStateReducer'
 
 const rootReducer = combineReducers(
 {
-	currentState: CurrentStateReducer,
+	currentState: (state = null, action) =>
+	{
+		switch (action.type)
+		{
+			case 'SWITCH_STATE': 
+				return action.payload
+		}
+		return state
+	},
+	deltaTime: (state = 0, action) =>
+	{
+		switch (action.type)
+		{
+			case 'UPDATE': 
+				return action.payload
+		}
+		return state
+	},
 })
 export default rootReducer
