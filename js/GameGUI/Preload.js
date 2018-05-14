@@ -34,20 +34,15 @@ class Preload extends React.Component
         })
     }
 
-    componentDidMount()
+    componentDidUpdate()
     {
-        this.wheel = setInterval( _ => { this.refs.sprite.material.rotation -= Math.PI / 50 }, 1)
-    }
-
-    componentWillUnmount()
-    {
-        clearInterval(this.wheel)
+        this.refs.sprite.material.rotation -= this.props.deltaTime / 80
     }
 
 	render()
 	{
 		return (
-            <sprite ref='sprite' scale={new THREE.Vector3(64, 64, 1)}>
+            <sprite ref='sprite' scale={new THREE.Vector3(32, 32, 1)}>
                 <spriteMaterial>
                     <texture url={resource.get_embed_src('data/image/loading_wheel.png')} />
                 </spriteMaterial>
@@ -58,7 +53,9 @@ class Preload extends React.Component
 
 let mapStateToProps = state =>
 {
-    return {}
+    return {
+        deltaTime: state.deltaTime
+    }
 }
 
 let mapDispatchToProps = dispatch =>
