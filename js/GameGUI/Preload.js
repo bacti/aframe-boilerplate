@@ -15,6 +15,7 @@ class Preload extends React.Component
             new Jasmine.Loader(response, pixma =>
             {
                 console.log(pixma)
+                this.props.SwitchState('SPLASH')
             })
         })
     }

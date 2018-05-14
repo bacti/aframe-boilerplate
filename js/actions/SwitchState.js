@@ -1,4 +1,7 @@
-export default function SwitchState(state)
+export default function(state)
 {
-    return state
+    return {
+        type: 'SWITCH_STATE',
+        payload: state,
+    }
 }

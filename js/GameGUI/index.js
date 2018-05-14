@@ -27,11 +27,7 @@ class GameGUI extends React.Component
                 break
             }
         }
-        return (
-            <object3D>
-                {GUI}
-            </object3D>
-        )
+        return <object3D>{GUI}</object3D>
 	}
 }
 
