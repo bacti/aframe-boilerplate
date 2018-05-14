@@ -1,4 +1,9 @@
-export default function(state = null, gamestate)
+export default function(state = null, action)
 {
-	return gamestate
+	switch (action.type)
+	{
+		case 'SWITCH_STATE': 
+			return action.state
+	}
+	return 'PRELOAD'
 }

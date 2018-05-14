@@ -13,9 +13,18 @@ class GameGUI extends React.Component
 
 	render()
 	{
+        let GUI = function()
+        {
+            console.log(this.props.gameState)
+            switch (this.props.gameState)
+            {
+                case 'PRELOAD': return <Preload />
+                case 'SPLASH': return <Splash />
+            }
+        }
         return (
             <object3D>
-                {this.props.gameState}
+                {GUI}
             </object3D>
         )
 	}
@@ -24,7 +33,7 @@ class GameGUI extends React.Component
 function mapStateToProps(state)
 {
     return {
-        gameState: <Splash />
+        gameState: state.currentState
     }
 }
 export default connect(mapStateToProps)(GameGUI)

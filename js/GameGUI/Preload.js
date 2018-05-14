@@ -1,7 +1,9 @@
 import React from 'react'
+import {connect} from 'react-redux'
 import Jasmine from '../../libs/jasmine/'
+import Actions from '../actions/'
 
-export default class Preload extends React.Component
+class Preload extends React.Component
 {
     constructor(props)
     {
@@ -30,15 +32,7 @@ let mapStateToProps = state =>
 
 let mapDispatchToProps = dispatch =>
 {
-    return bindActionCreators(
-    {
-        changeState: state =>
-        {
-            return 'MAIN_SCENE',
-                payload: scene,
-            }
-        },
-    }, dispatch)
+    return bindActionCreators(Actions, dispatch)
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(RollerCoaster)
+export default connect(mapStateToProps, mapDispatchToProps)(Preload)
