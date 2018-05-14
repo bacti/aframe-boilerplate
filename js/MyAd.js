@@ -6,7 +6,7 @@ import { bindActionCreators } from 'redux'
 import { applyMiddleware, createStore } from 'redux'
 
 import GameWorld from './GameWorld'
-import GameGUI from './GameGUI'
+import GameGUI from './GameGUI/'
 
 class MyAd extends React.Component
 {
