@@ -40,7 +40,7 @@ class MyAd extends React.Component
                         top={height / 2} bottom={height / - 2}
                         near={1} far={100}
                     />
-                    <GameGUI />
+                    <GameGUI store={this.props.store} />
                 </orthoscene>
             </React3>
         )

@@ -20,7 +20,7 @@ class App extends React.Component
             <Provider store={store}>
                 <div>
                     <WebVR canvas={canvas} />
-                    <MyAd />
+                    <MyAd store={store} />
                 </div>
             </Provider>
         )

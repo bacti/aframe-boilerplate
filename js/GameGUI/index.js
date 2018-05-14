@@ -1,7 +1,10 @@
 import React from 'react'
-import Preload from './Preload'
+import {connect} from 'react-redux'
 
-export default class GameGUI extends React.Component
+import Preload from './Preload'
+import Splash from './Splash'
+
+class GameGUI extends React.Component
 {
     constructor(props)
     {
@@ -10,6 +13,18 @@ export default class GameGUI extends React.Component
 
 	render()
 	{
-        return <object3D></object3D>
+        return (
+            <object3D>
+                <Preload />
+            </object3D>
+        )
 	}
 }
+
+function mapStateToProps(state)
+{
+    return {
+        state: state.currentState
+    }
+}
+export default connect(mapStateToProps)(GameGUI)
