@@ -8,13 +8,21 @@ import { applyMiddleware, createStore } from 'redux'
 import GameWorld from './GameWorld'
 import GameGUI from './GameGUI/'
 
-class MyAd extends React.Component
+export default class MyAd extends React.Component
 {
     constructor(props)
     {
         super(props)
+
+        let prevTime = performance.now()
         this.OnAnimate = _ =>
         {
+            let time = performance.now()
+            let delta = time - prevTime
+
+            // console.log(delta)
+
+            prevTime = time
         }
     }
 
@@ -46,19 +54,3 @@ class MyAd extends React.Component
         )
 	}
 }
-
-let mapDispatchToProps = dispatch =>
-{
-    return bindActionCreators(
-    {
-        mainScene: scene =>
-        {
-            return {
-                type: 'MAIN_SCENE',
-                payload: scene,
-            }
-        },
-    }, dispatch)
-}
-
-export default connect(state => ({}), mapDispatchToProps)(MyAd)
