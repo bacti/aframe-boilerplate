@@ -1,5 +1,5 @@
 import React from 'react'
-import PreLoad from './screen/PreLoad'
+import Preload from './Preload'
 
 export default class GameGUI extends React.Component
 {

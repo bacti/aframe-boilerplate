@@ -1,7 +1,7 @@
 import React from 'react'
 import Jasmine from '../../libs/jasmine/'
 
-export default class PreLoad extends React.Component
+export default class Preload extends React.Component
 {
     constructor(props)
     {
