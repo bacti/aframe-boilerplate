@@ -10,6 +10,13 @@ export default class Splash extends React.Component
 	render()
 	{
         console.log('Splash')
-        return null
+        // (window.URL ? URL : webkitURL).createObjectURL(resource.data)
+        return (
+            <sprite ref='sprite' scale={new THREE.Vector3(256, 256, 1)}>
+                <spriteMaterial>
+                    <texture url={(window.URL ? URL : webkitURL).createObjectURL(resource.data['image/crate.png'].data)} />
+                </spriteMaterial>
+            </sprite>
+        )
 	}
 }

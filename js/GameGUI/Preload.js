@@ -19,7 +19,6 @@ class Preload extends React.Component
                 [
                     'image/vr-icon.png',
                     'image/crate.png',
-                    'image/loading_wheel.png',
                 ])
                 
                 let textureLoader = new Loader()
@@ -28,7 +27,8 @@ class Preload extends React.Component
                 })
                 textureLoader.load((loader, resources) =>
                 {
-                    setTimeout(_ => this.props.SwitchState('SPLASH'), 20000)
+                    resource.data = textureLoader.resources
+                    setTimeout( _ => this.props.SwitchState('SPLASH'), 1000)
                 })
             })
         })
