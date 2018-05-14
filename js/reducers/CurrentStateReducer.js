@@ -5,5 +5,5 @@ export default function(state = null, action)
 		case 'SWITCH_STATE': 
 			return action.payload
 	}
-	return 'PRELOAD'
+	return state
 }

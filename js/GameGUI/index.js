@@ -16,15 +16,14 @@ class GameGUI extends React.Component
         let GUI = null
         switch (this.props.gameState)
         {
-            case 'PRELOAD':
-            {
-                GUI = <Preload store={this.props.store} />
-                break
-            }
             case 'SPLASH':
             {
                 GUI = <Splash />
                 break
+            }
+            default:
+            {
+                GUI = <Preload store={this.props.store} />
             }
         }
         return <object3D>{GUI}</object3D>
