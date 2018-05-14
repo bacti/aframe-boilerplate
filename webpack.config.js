@@ -8,7 +8,7 @@ let options =
     entry: './js/main.js',
     output:
     {
-        path: path.resolve(__dirname, '.release'),
+        path: path.resolve(__dirname, 'docs'),
         filename: 'main.js',
         publicPath: process.env.NODE_ENV == 'production' ? './' : '/',
     },
