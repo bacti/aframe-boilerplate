@@ -1,5 +1,5 @@
 import React from 'react'
-import {connect} from 'react-redux'
+import { connect } from 'react-redux'
 
 import Preload from './Preload'
 import Splash from './Splash'
@@ -13,13 +13,18 @@ class GameGUI extends React.Component
 
 	render()
 	{
-        let GUI = function()
+        let GUI = null
+        switch (this.props.gameState)
         {
-            console.log(this.props.gameState)
-            switch (this.props.gameState)
+            case 'PRELOAD':
             {
-                case 'PRELOAD': return <Preload />
-                case 'SPLASH': return <Splash />
+                GUI = <Preload store={this.props.store} />
+                break
+            }
+            case 'SPLASH':
+            {
+                GUI = <Splash />
+                break
             }
         }
         return (
