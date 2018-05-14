@@ -19,6 +19,7 @@ class Preload extends React.Component
                 [
                     'image/vr-icon.png',
                     'image/crate.png',
+                    'image/loading_wheel.png',
                 ])
                 
                 let textureLoader = new Loader()
@@ -27,7 +28,7 @@ class Preload extends React.Component
                 })
                 textureLoader.load((loader, resources) =>
                 {
-                    this.props.SwitchState('SPLASH')
+                    // setTimeout(_ => this.props.SwitchState('SPLASH'), 2000)
                 })
             })
         })
@@ -35,8 +36,13 @@ class Preload extends React.Component
 
 	render()
 	{
-        console.log('Preload')
-        return null
+		return (
+            <sprite ref='sprite' scale={new THREE.Vector3(64, 64, 1)}>
+                <spriteMaterial>
+                    <texture url={resource.get_embed_src('data/image/loading_wheel.png')} />
+                </spriteMaterial>
+            </sprite>
+        )
 	}
 }
 
