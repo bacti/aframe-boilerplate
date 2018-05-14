@@ -22,3 +22,23 @@ export default class Preload extends React.Component
         return null
 	}
 }
+
+let mapStateToProps = state =>
+{
+    return {}
+}
+
+let mapDispatchToProps = dispatch =>
+{
+    return bindActionCreators(
+    {
+        changeState: state =>
+        {
+            return 'MAIN_SCENE',
+                payload: scene,
+            }
+        },
+    }, dispatch)
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(RollerCoaster)
