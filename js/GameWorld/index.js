@@ -1,10 +1,9 @@
 import React from 'react'
 import { connect } from 'react-redux'
 
-import Preload from './Preload'
-import Splash from './Splash'
+import Background from './Background'
 
-class GameGUI extends React.Component
+class GameWorld extends React.Component
 {
     constructor(props)
     {
@@ -13,20 +12,15 @@ class GameGUI extends React.Component
 
 	render()
 	{
-        let GUI = null
+        let object = null
         switch (this.props.gameState)
         {
-            case 'SPLASH':
-            {
-                GUI = <Splash />
-                break
-            }
             default:
             {
-                GUI = <Preload store={this.props.store} />
+                object = <Background />
             }
         }
-        return <object3D>{GUI}</object3D>
+        return <object3D>{object}</object3D>
 	}
 }
 
@@ -36,4 +30,4 @@ function mapStateToProps(state)
         gameState: state.currentState
     }
 }
-export default connect(mapStateToProps)(GameGUI)
+export default connect(mapStateToProps)(GameWorld)
