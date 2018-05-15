@@ -19,15 +19,22 @@ class Preload extends React.Component
                 [
                     'image/crate.png',
                     'image/room.jpg',
+                    'image/bg-interstitial.jpg',
                 ])
                 
-                let textureLoader = new Loader()
-                images.forEach(imageUrl => {
-                    textureLoader.add(imageUrl, resource.get_embed_src(`data/${imageUrl}`), { loadType: Loader.Resource.LOAD_TYPE.XHR });
-                })
-                textureLoader.load((loader, resources) =>
+                let textureLoader = new THREE.TextureLoader()
+                let loader = images.map(imageUrl =>
                 {
-                    resource.data = textureLoader.resources
+                    return new Promise((resolve, reject) =>
+                    {
+                        textureLoader.load(resource.get_embed_src(`data/${imageUrl}`),
+                                texture => resolve({ alias: imageUrl, data: texture }), undefined, reject)
+                    })
+                })
+                Promise.all(loader).then(textures =>
+                {
+                    resource.textures = {}
+                    textures.map(texture => resource.textures[texture.alias] = texture.data)
                     this.props.SwitchState('SPLASH')
                 })
             })
