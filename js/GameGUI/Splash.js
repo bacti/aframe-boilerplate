@@ -24,7 +24,7 @@ class Splash extends React.Component
 	{
         return (
             <object3D>
-                <Jasmine.ThreeSpriteModule metadata={this.props.aurora} id={152} texture={resource.textures['all1_1.png']} />
+                <Jasmine.ThreeSpriteFrame metadata={this.props.aurora} id={DataHeader.SPRITE_ALL1_FRAME_SLINGSHOT} />
                 <sprite ref='sprite'
                     scale={new THREE.Vector3(this.interstitial.size.width, this.interstitial.size.height, 1)}
                     position={new THREE.Vector3(window.innerWidth / 2, window.innerHeight / 2, 0)}
