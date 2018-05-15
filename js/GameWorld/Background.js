@@ -1,5 +1,4 @@
 import React from 'react'
-// require('../DeviceOrientationControls')
 
 export default class Background extends React.Component
 {
@@ -12,7 +11,6 @@ export default class Background extends React.Component
     componentDidMount()
     {
         this.refs.sphere.scale(-1, 1, 1)
-        // this.controls = new THREE.DeviceOrientationControls(this.refs.camera)
     }
 
     render()

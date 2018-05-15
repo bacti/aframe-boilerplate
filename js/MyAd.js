@@ -1,6 +1,7 @@
 import React from 'react'
 import React3 from '../libs/react-three-renderer/src' 
 import { Interaction } from 'three.interaction'
+require('./DeviceOrientationControls')
 
 import { connect, Provider } from 'react-redux'
 import { bindActionCreators } from 'redux'
@@ -22,6 +23,7 @@ class MyAd extends React.Component
             let time = performance.now()
             let deltaTime = time - prevTime
             this.props.Update(deltaTime)
+            this.controls.update()
             prevTime = time
         }
 
@@ -36,6 +38,7 @@ class MyAd extends React.Component
 	componentDidMount()
 	{
         const interaction = new Interaction(renderer, this.refs.orthoscene, this.refs.orthocamera)
+        this.controls = new THREE.DeviceOrientationControls(this.refs.camera)
         window.addEventListener('resize', this.OnWindowResize, false)
     }
 
