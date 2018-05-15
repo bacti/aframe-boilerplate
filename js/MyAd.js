@@ -27,20 +27,8 @@ class MyAd extends React.Component
     {
         super(props)
 
-		if (navigator.getVRDisplays)
-		{
-			navigator.getVRDisplays().then(displays =>
-			{
-			  	this.vrDisplay = displays.length && displays[0]
-				this.polyfilledVRDisplay = this.vrDisplay.displayName === 'Cardboard VRDisplay'
-			})
-		}
-
 		this.ToggleVR = _ =>
 		{
-			if (!this.vrDisplay || !global.renderer)
-                return
-            ;!renderer.vr.getDevice() && renderer.vr.setDevice(this.vrDisplay)
 			if (renderer.vr.enabled)
 			{
 				renderer.vr.enabled = false
@@ -78,6 +66,17 @@ class MyAd extends React.Component
         const interaction = new Interaction(renderer, this.refs.orthoscene, this.refs.orthocamera)
         this.controls = new THREE.DeviceOrientationControls(this.refs.camera)
         window.addEventListener('resize', this.OnWindowResize, false)
+
+		if (navigator.getVRDisplays)
+		{
+			navigator.getVRDisplays().then(displays =>
+			{
+			  	this.vrDisplay = displays.length && displays[0]
+                this.polyfilledVRDisplay = this.vrDisplay.displayName === 'Cardboard VRDisplay'
+                renderer.vr.setDevice(this.vrDisplay)
+                document.getElementById('vr-icon').addEventListener('click', this.ToggleVR, false)
+			})
+		}
     }
 
 	render()
@@ -106,7 +105,7 @@ class MyAd extends React.Component
                         <GameGUI store={this.props.store} />
                     </orthoscene>
                 </React3>
-                <div onClick={this.ToggleVR}
+                <div id='vr-icon'
                     style={{
                         background: `url(${resource.get_embed_src('data/image/vr-icon.png')}) 0% 0% / contain no-repeat`,
                         position: 'absolute',
