@@ -12,9 +12,10 @@ class Preload extends React.Component
         super(props)
         resource.load_buffer(resource.get_embed_src('data/all1.bsprite'), response =>
         {
-            new Jasmine.Loader(response, pixma =>
+            new Jasmine.Loader(response, sprite =>
             {
-                let images = pixma.images
+                this.props.AuroraLoader(sprite)
+                let images = sprite.images
                 images.push(...
                 [
                     'image/crate.png',

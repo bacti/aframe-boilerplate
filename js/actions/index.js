@@ -5,4 +5,11 @@ export default
 {
     SwitchState: SwitchState,
     Update: Update,
+    AuroraLoader: sprite =>
+    {
+        return {
+            type: 'AURORA_LOADER',
+            payload: sprite,
+        }
+    }
 }

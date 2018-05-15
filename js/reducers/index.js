@@ -20,5 +20,14 @@ const rootReducer = combineReducers(
 		}
 		return state
 	},
+	aurora: (state = 0, action) =>
+	{
+		switch (action.type)
+		{
+			case 'AURORA_LOADER': 
+				return action.payload
+		}
+		return state
+	},
 })
 export default rootReducer
