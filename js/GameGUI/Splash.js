@@ -13,11 +13,6 @@ class Splash extends React.Component
 	componentWillMount()
 	{
         this.interstitial = resource.textures['image/bg-interstitial.jpg'].image
-        this.interstitial.size =
-        {
-            width: window.innerWidth,
-            height: this.interstitial.height * window.innerWidth / this.interstitial.width,
-        }
     }
 
 	render()
@@ -26,7 +21,7 @@ class Splash extends React.Component
             <object3D>
                 <Jasmine.ThreeSpriteFrame metadata={this.props.aurora} id={DataHeader.SPRITE_ALL1_FRAME_SLINGSHOT} />
                 <sprite ref='sprite'
-                    scale={new THREE.Vector3(this.interstitial.size.width, this.interstitial.size.height, 1)}
+                    scale={new THREE.Vector3(this.interstitial.width, this.interstitial.height, 1)}
                     position={new THREE.Vector3(window.innerWidth / 2, window.innerHeight / 2, 0)}
                 >
                     <spriteMaterial map={resource.textures['image/bg-interstitial.jpg']} />
