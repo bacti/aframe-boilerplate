@@ -18,7 +18,7 @@ class GameGUI extends React.Component
         {
             case 'SPLASH':
             {
-                GUI = <Splash />
+                GUI = <Splash store={this.props.store} />
                 break
             }
             default:
