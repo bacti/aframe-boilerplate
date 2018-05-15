@@ -1,6 +1,8 @@
 import React from 'react'
 import { connect } from 'react-redux'
 
+global.INTERSTITIAL_DEFAULT_WIDTH = 1334
+
 import Preload from './Preload'
 import Splash from './Splash'
 
