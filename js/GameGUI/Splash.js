@@ -9,17 +9,22 @@ export default class Splash extends React.Component
 
 	componentWillMount()
 	{
-        this.texCrate = resource.textures['image/crate.png']
+        this.interstitial = resource.textures['image/bg-interstitial.jpg'].image
+        this.interstitial.size =
+        {
+            width: window.innerWidth,
+            height: this.interstitial.height * window.innerWidth / this.interstitial.width,
+        }
     }
 
 	render()
 	{
         return (
             <sprite ref='sprite'
-                scale={new THREE.Vector3(this.texCrate.image.width, this.texCrate.image.height, 1)}
+                scale={new THREE.Vector3(this.interstitial.size.width, this.interstitial.size.height, 1)}
                 position={new THREE.Vector3(window.innerWidth / 2, window.innerHeight / 2, 0)}
             >
-                <spriteMaterial map={resource.textures['image/crate.png']} />
+                <spriteMaterial map={resource.textures['image/bg-interstitial.jpg']} />
             </sprite>
         )
 	}
