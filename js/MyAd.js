@@ -6,7 +6,7 @@ import { connect, Provider } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import { applyMiddleware, createStore } from 'redux'
 
-import GameWorld from './GameWorld'
+import GameWorld from './GameWorld/'
 import GameGUI from './GameGUI/'
 import Actions from './actions/'
 
@@ -24,11 +24,19 @@ class MyAd extends React.Component
             this.props.Update(deltaTime)
             prevTime = time
         }
+
+        this.OnWindowResize = _ =>
+        {
+            this.refs.camera.aspect = window.innerWidth / window.innerHeight
+            this.refs.camera.updateProjectionMatrix()
+            renderer.setSize(window.innerWidth, window.innerHeight)
+        }
     }
 
 	componentDidMount()
 	{
-        const interaction = new Interaction(renderer, this.refs.orthoscene, this.refs.orthocamera);
+        const interaction = new Interaction(renderer, this.refs.orthoscene, this.refs.orthocamera)
+        window.addEventListener('resize', this.OnWindowResize, false)
     }
 
 	render()
@@ -44,7 +52,7 @@ class MyAd extends React.Component
                     <perspectiveCamera name='camera' ref='camera'
                         fov={40} aspect={width/height} near={0.1} far={500}
                     />
-                    <GameWorld />
+                    <GameWorld store={this.props.store} />
                 </scene>
                 <orthoscene ref='orthoscene'>
                     <orthographicCamera name='orthocamera' ref='orthocamera'

@@ -15,6 +15,10 @@ class GameWorld extends React.Component
         let object = null
         switch (this.props.gameState)
         {
+            case null:
+            {
+                break
+            }
             default:
             {
                 object = <Background />

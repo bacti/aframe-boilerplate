@@ -18,6 +18,7 @@ class Preload extends React.Component
                 images.push(...
                 [
                     'image/crate.png',
+                    'image/room.jpg',
                 ])
                 
                 let textureLoader = new Loader()
