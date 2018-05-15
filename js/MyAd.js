@@ -44,11 +44,13 @@ class MyAd extends React.Component
 			if (renderer.vr.enabled)
 			{
 				renderer.vr.enabled = false
+                this.refs.orthoscene.visible = true
 				this.vrDisplay.exitPresent()
 			}
 			else
 			{
 				renderer.vr.enabled = true
+                this.refs.orthoscene.visible = false
 				this.vrDisplay.requestPresent([{ source: document.getElementById('mainCanvas') }])
 			}
 		}
@@ -76,7 +78,6 @@ class MyAd extends React.Component
         const interaction = new Interaction(renderer, this.refs.orthoscene, this.refs.orthocamera)
         this.controls = new THREE.DeviceOrientationControls(this.refs.camera)
         window.addEventListener('resize', this.OnWindowResize, false)
-        this.refs.orthoscene.visible = false
     }
 
 	render()
