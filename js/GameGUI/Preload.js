@@ -17,7 +17,6 @@ class Preload extends React.Component
                 let images = pixma.images
                 images.push(...
                 [
-                    'image/vr-icon.png',
                     'image/crate.png',
                 ])
                 

@@ -19,12 +19,31 @@ export default class WebVR extends React.Component
 
 	componentDidMount()
 	{
-        // console.log(global.renderer)
-        // const interaction = new Interaction(renderer, scene, camera);
-        this.refs.sprite.on('click', function(ev)
+		if (navigator.getVRDisplays && global.renderer)
+		{
+			navigator.getVRDisplays().then(displays =>
+			{
+			  	this.vrDisplay = displays.length && displays[0]
+				this.polyfilledVRDisplay = this.vrDisplay.displayName === 'Cardboard VRDisplay'
+				renderer.vr.setDevice(this.vrDisplay)
+			})
+		}
+
+        this.refs.sprite.on('click', evt =>
         {
-            console.log('bacti')
-        });
+			if (!this.vrDisplay || !global.renderer)
+				return
+			if (renderer.vr.enabled)
+			{
+				renderer.vr.enabled = false
+				this.vrDisplay.exitPresent()
+			}
+			else
+			{
+				renderer.vr.enabled = true
+				this.vrDisplay.requestPresent([{ source: document.getElementById('mainCanvas') }])
+			}
+        })
     }
 
 	render()

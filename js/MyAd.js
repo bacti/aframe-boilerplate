@@ -49,8 +49,8 @@ class MyAd extends React.Component
                 <orthoscene ref='orthoscene'>
                     <orthographicCamera name='orthocamera' ref='orthocamera'
                         position={new THREE.Vector3(0, 0, 1)}
-                        left={width / - 2} right={width / 2}
-                        top={height / 2} bottom={height / - 2}
+                        left={0} right={width}
+                        top={height} bottom={0}
                         near={1} far={100}
                     />
                     <GameGUI store={this.props.store} />
