@@ -1,5 +1,6 @@
 import React from 'react'
 import React3 from '../libs/react-three-renderer/src' 
+import { Interaction } from 'three.interaction'
 
 import { connect, Provider } from 'react-redux'
 import { bindActionCreators } from 'redux'
@@ -23,6 +24,11 @@ class MyAd extends React.Component
             this.props.Update(deltaTime)
             prevTime = time
         }
+    }
+
+	componentDidMount()
+	{
+        const interaction = new Interaction(renderer, this.refs.orthoscene, this.refs.orthocamera);
     }
 
 	render()

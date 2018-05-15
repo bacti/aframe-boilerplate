@@ -28,7 +28,7 @@ class Preload extends React.Component
                 textureLoader.load((loader, resources) =>
                 {
                     resource.data = textureLoader.resources
-                    setTimeout( _ => this.props.SwitchState('SPLASH'), 1000)
+                    this.props.SwitchState('SPLASH')
                 })
             })
         })
