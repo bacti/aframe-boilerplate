@@ -1,7 +1,7 @@
 import React from 'react'
 import { connect } from 'react-redux'
 
-import WebVR from './WebVR'
+// import WebVR from './WebVR'
 import Preload from './Preload'
 import Splash from './Splash'
 
@@ -30,7 +30,7 @@ class GameGUI extends React.Component
         return (
             <object3D>
                 {GUI}
-                <WebVR />
+                {/* <WebVR /> */}
             </object3D>
         )
 	}
