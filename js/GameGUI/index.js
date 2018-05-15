@@ -11,6 +11,7 @@ class GameGUI extends React.Component
     constructor(props)
     {
         super(props)
+        global.INTERSTITIAL_SCALE = window.innerWidth / INTERSTITIAL_DEFAULT_WIDTH
     }
 
 	render()
