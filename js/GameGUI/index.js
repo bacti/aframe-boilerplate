@@ -31,7 +31,7 @@ class GameGUI extends React.Component
         }
         return (
             <object3D scale={new THREE.Vector3(INTERSTITIAL_SCALE, INTERSTITIAL_SCALE, 1)}
-                position={new THREE.Vector3(window.innerWidth * (1 - INTERSTITIAL_SCALE) / 2, window.innerHeight * (1 - INTERSTITIAL_SCALE) / 2, 0)}
+                position={new THREE.Vector3(window.innerWidth / 2, window.innerHeight / 2, 0)}
             >
                 {GUI}
             </object3D>
