@@ -121,9 +121,14 @@ class MyAd extends React.Component
 	}
 }
 
+let mapStateToProps = state =>
+{
+    return {}
+}
+
 let mapDispatchToProps = dispatch =>
 {
     return bindActionCreators({ Update: Update }, dispatch)
 }
 
-export default connect(_, mapDispatchToProps)(MyAd)
+export default connect(mapStateToProps, mapDispatchToProps)(MyAd)
