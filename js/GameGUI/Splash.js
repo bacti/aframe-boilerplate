@@ -21,6 +21,7 @@ class Splash extends React.Component
 
     componentDidMount()
     {
+        this.refs.begin.object.position.y -= 300
         this.myTween.Create(this.refs.begin.object, tweenDefine.LINEAR_EASE, {scale: 1}, {scale: 0.8}, 0.2, 1.5)
 		this.myTween.Create(this.refs.begin.object, tweenDefine.ELASTIC_EASE_OUT, {scale: 0.8}, {scale: 1}, 0.5, 0)
 		this.myTween.SetLoop(this.refs.begin.object, -1)
