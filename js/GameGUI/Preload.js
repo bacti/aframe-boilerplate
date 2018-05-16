@@ -29,6 +29,7 @@ class Preload extends React.Component
                             images.push(...
                             [
                                 'image/room.jpg',
+                                'image/background.jpg',
                                 'image/bg-interstitial.jpg',
                             ])
                             

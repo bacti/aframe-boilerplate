@@ -1,16 +1,38 @@
-import * as THREE from '../three/Three'
+import React from 'react'
 
-export class SkyBox extends THREE.Mesh
+export default class SkyBox extends React.Component
 {
-    constructor (size, texture)
+    constructor(props, context)
     {
-        let geometry, material
-        texture.format = THREE.RGBFormat
-        texture.minFilter = THREE.LinearFilter
-        texture.magFilter = THREE.LinearFilter
+        super(props, context)
+        this.texture = resource.textures['image/background.jpg']
+        this.texture.format = THREE.RGBFormat
+        this.texture.minFilter = THREE.LinearFilter
+        this.texture.magFilter = THREE.LinearFilter
+        this.texture.mapping = THREE.UVMapping
+        this.InitGeometry()
+    }
+
+    componentDidMount()
+    {
+        this.refs.box.scale(-1, 1, 1)
+    }
+
+    render()
+    {
+        return (
+            <mesh>
+                <boxGeometry ref='box' width={this.props.size} height={this.props.size} depth={this.props.size} faceVertexUvs={this.faces} />
+                <meshBasicMaterial map={this.texture} depthTest={false} depthWrite={false} />
+            </mesh>
+        )
+    }
+
+    InitGeometry()
+    {
         if (true)
         {
-            let image = texture.image
+            let image = this.texture.image
             let oneThirdWidth = Math.round(image.width / 3)
             let twoThirdWidth = Math.round(image.width * 2 / 3)
             let halfHeight = Math.round(image.height / 2)
@@ -63,7 +85,7 @@ export class SkyBox extends THREE.Mesh
                 new THREE.Vector2(1, 0),
                 new THREE.Vector2(1, calcMidS),
             ]
-            let faces =
+            this.faces =
             [
                 [f1[0], f1[1], f1[3]],
                 [f1[1], f1[2], f1[3]],
@@ -78,19 +100,11 @@ export class SkyBox extends THREE.Mesh
                 [f6[0], f6[1], f6[3]],
                 [f6[1], f6[2], f6[3]],
             ]
-            geometry = new THREE.BoxGeometry(size, size, size)
-            geometry.faceVertexUvs[0] = faces            
-            texture.mapping = THREE.UVMapping
         }
-        else
-        {
-            geometry = new THREE.SphereGeometry(size, 32, 32, Math.PI * 2)
-            texture.mapping = THREE.SphericalReflectionMapping
-        }
-        geometry.scale(- 1, 1, 1)
-        material = new THREE.MeshBasicMaterial({  map: texture, depthTest: false, depthWrite: false })
-        
-        super(geometry, material)
-        this.name = 'SkyBox'
+        // else
+        // {
+        //     geometry = new THREE.SphereGeometry(size, 32, 32, Math.PI * 2)
+        //     texture.mapping = THREE.SphericalReflectionMapping
+        // }
     }
 }

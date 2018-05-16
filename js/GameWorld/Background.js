@@ -2,12 +2,6 @@ import React from 'react'
 
 export default class Background extends React.Component
 {
-    constructor(props, context)
-    {
-        super(props, context)
-
-    }
-
     componentDidMount()
     {
         this.refs.sphere.scale(-1, 1, 1)

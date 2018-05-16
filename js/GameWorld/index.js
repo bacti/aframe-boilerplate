@@ -2,6 +2,7 @@ import React from 'react'
 import { connect } from 'react-redux'
 
 import Background from './Background'
+import SkyBox from './SkyBox'
 
 class GameWorld extends React.Component
 {
