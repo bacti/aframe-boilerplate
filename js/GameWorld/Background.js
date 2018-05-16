@@ -12,7 +12,7 @@ export default class Background extends React.Component
         return (
             <mesh>
                 <sphereGeometry ref='sphere' radius={500} widthSegments={60} heightSegments={40} />
-                <meshBasicMaterial map={resource.textures['image/room.jpg']} />
+                <meshBasicMaterial map={resource.textures['room.jpg']} />
             </mesh>
         )
     }

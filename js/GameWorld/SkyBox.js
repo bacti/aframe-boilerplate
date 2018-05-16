@@ -5,7 +5,7 @@ export default class SkyBox extends React.Component
     constructor(props, context)
     {
         super(props, context)
-        this.texture = resource.textures['image/background.jpg']
+        this.texture = resource.textures['background.jpg']
         this.texture.format = THREE.RGBFormat
         this.texture.minFilter = THREE.LinearFilter
         this.texture.magFilter = THREE.LinearFilter
