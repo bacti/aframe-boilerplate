@@ -11,11 +11,13 @@ class Preload extends React.Component
     constructor(props)
     {
         super(props)
-        resource.load_buffer(resource.get_embed_src('data/all1.zip'), response =>
+        resource.load_buffer(resource.get_embed_src('data/all1.bin'), response =>
         {
             let zip = new JSZip()
             zip.loadAsync(response).then(zip =>
             {
+                let textureLoader = new THREE.TextureLoader()
+                let loader = []
                 for (let filename in zip.files)
                 {
                     if (filename.includes('.sprite'))
@@ -24,33 +26,27 @@ class Preload extends React.Component
                         {
                             let sprite = JSON.parse(data)
                             this.props.AuroraLoader(sprite)
-
-                            let images = sprite.images
-                            images.push(...
-                            [
-                                'image/room.jpg',
-                                'image/background.jpg',
-                                'image/bg-interstitial.jpg',
-                            ])
-                            
-                            let textureLoader = new THREE.TextureLoader()
-                            let loader = images.map(imageUrl =>
-                            {
-                                return new Promise((resolve, reject) =>
-                                {
-                                    textureLoader.load(resource.get_embed_src(`data/${imageUrl}`),
-                                            texture => resolve({ alias: imageUrl, data: texture }), undefined, reject)
-                                })
-                            })
-                            Promise.all(loader).then(textures =>
-                            {
-                                resource.textures = {}
-                                textures.map(texture => resource.textures[texture.alias] = texture.data)
-                                this.props.SwitchState('SPLASH')
-                            })
                         })
                     }
+                    else
+                    if (filename.slice(-4).includes('.png') || filename.slice(-4).includes('.jpg'))
+                    {
+                        loader.push(new Promise((resolve, reject) =>
+                        {
+                            zip.file(filename).async('arraybuffer').then(data =>
+                            {
+                                textureLoader.load((window.URL ? URL : webkitURL).createObjectURL(new Blob([data], {type: 'image/' + filename.slice(-3)})),
+                                    texture => resolve({ alias: filename, data: texture }), undefined, reject)
+                            })
+                        }))
+                    }
                 }
+                Promise.all(loader).then(textures =>
+                {
+                    resource.textures = {}
+                    textures.map(texture => resource.textures[texture.alias] = texture.data)
+                    this.props.SwitchState('SPLASH')
+                })
             })
         })
     }
