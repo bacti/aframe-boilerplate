@@ -5,7 +5,7 @@ import React from 'react'
 import ReactDOM from 'react-dom'
 import { Provider } from 'react-redux'
 import { applyMiddleware, createStore } from 'redux'
-import reducers from './reducers/'
+import rootReducer from './reducers/'
 
 // import WebVR from './WebVR'
 import MyAd from './MyAd'
@@ -19,7 +19,7 @@ class App extends React.Component
 
     render()
     {
-        let store = applyMiddleware()(createStore)(reducers)
+        let store = applyMiddleware()(createStore)(rootReducer)
         return (
             <Provider store={store}>
                 <MyAd store={store} />
