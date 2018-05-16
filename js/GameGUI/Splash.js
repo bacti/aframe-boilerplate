@@ -3,7 +3,7 @@ import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 import DataHeader from '../DataHeader'
 import Jasmine from '../../libs/jasmine/'
-import Actions from '../actions/'
+import { Update, SwitchState } from '../actions/'
 import { TweenMgr } from '../../libs/tween/TweenMgr'
 
 class Splash extends React.Component
@@ -67,7 +67,7 @@ let mapStateToProps = state =>
 
 let mapDispatchToProps = dispatch =>
 {
-    return bindActionCreators(Actions, dispatch)
+    return bindActionCreators({ Update: Update, SwitchState: SwitchState }, dispatch)
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(Splash)

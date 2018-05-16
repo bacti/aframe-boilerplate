@@ -19,7 +19,7 @@ import { applyMiddleware, createStore } from 'redux'
 
 import GameWorld from './GameWorld/'
 import GameGUI from './GameGUI/'
-import Actions from './actions/'
+import { Update } from './actions/'
 
 class MyAd extends React.Component
 {
@@ -123,7 +123,7 @@ class MyAd extends React.Component
 
 let mapDispatchToProps = dispatch =>
 {
-    return bindActionCreators(Actions, dispatch)
+    return bindActionCreators({ Update: Update }, dispatch)
 }
 
 export default connect(_, mapDispatchToProps)(MyAd)

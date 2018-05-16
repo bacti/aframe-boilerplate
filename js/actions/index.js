@@ -1,15 +1,3 @@
-import SwitchState from './SwitchState'
-import Update from './Update'
-
-export default
-{
-    SwitchState: SwitchState,
-    Update: Update,
-    AuroraLoader: sprite =>
-    {
-        return {
-            type: 'AURORA_LOADER',
-            payload: sprite,
-        }
-    }
-}
+export const SwitchState = state => ({ type: 'SWITCH_STATE', state })
+export const Update = deltaTime => ({ type: 'UPDATE', deltaTime })
+export const AuroraLoader = sprite => ({ type: 'AURORA_LOADER', sprite })

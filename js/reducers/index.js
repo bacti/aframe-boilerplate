@@ -4,30 +4,15 @@ const rootReducer = combineReducers(
 {
 	currentState: (state = null, action) =>
 	{
-		switch (action.type)
-		{
-			case 'SWITCH_STATE': 
-				return action.payload
-		}
-		return state
+		return action.type == 'SWITCH_STATE' ? action.state : state
 	},
 	deltaTime: (state = 0, action) =>
 	{
-		switch (action.type)
-		{
-			case 'UPDATE': 
-				return action.payload
-		}
-		return state
+		return action.type == 'UPDATE' ? action.deltaTime : state
 	},
 	aurora: (state = 0, action) =>
 	{
-		switch (action.type)
-		{
-			case 'AURORA_LOADER': 
-				return action.payload
-		}
-		return state
+		return action.type == 'AURORA_LOADER' ? action.sprite : state
 	},
 })
 export default rootReducer

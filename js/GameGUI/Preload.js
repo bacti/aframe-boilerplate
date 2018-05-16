@@ -4,7 +4,7 @@ import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 import Loader from 'resource-loader'
 import Jasmine from '../../libs/jasmine/'
-import Actions from '../actions/'
+import { AuroraLoader, SwitchState } from '../actions/'
 
 class Preload extends React.Component
 {
@@ -79,9 +79,9 @@ let mapStateToProps = state =>
     }
 }
 
-let mapDispatchToProps = dispatch =>
+const mapDispatchToProps = dispatch =>
 {
-    return bindActionCreators(Actions, dispatch)
+    return bindActionCreators({ AuroraLoader: AuroraLoader, SwitchState: SwitchState }, dispatch)
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(Preload)
