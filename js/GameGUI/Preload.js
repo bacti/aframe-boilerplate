@@ -61,7 +61,7 @@ class Preload extends React.Component
 		return (
             <sprite ref='sprite' scale={new THREE.Vector3(64, 64, 1)}>
                 <spriteMaterial>
-                    <texture url={resource.get_embed_src('data/image/loading_wheel.png')} />
+                    <texture url={resource.get_embed_src('data/loading_wheel.png')} />
                 </spriteMaterial>
             </sprite>
         )

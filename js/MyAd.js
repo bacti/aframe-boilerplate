@@ -107,7 +107,7 @@ class MyAd extends React.Component
                 </React3>
                 <div id='vr-icon'
                     style={{
-                        background: `url(${resource.get_embed_src('data/image/vr-icon.png')}) 0% 0% / contain no-repeat`,
+                        background: `url(${resource.get_embed_src('data/vr-icon.png')}) 0% 0% / contain no-repeat`,
                         position: 'absolute',
                         zIndex: 1,
                         width: '7vw',

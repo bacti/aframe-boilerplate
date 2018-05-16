@@ -16,7 +16,7 @@ class Splash extends React.Component
 
 	componentWillMount()
 	{
-        this.interstitial = resource.textures['bg-interstitial.jpg'].image
+        this.interstitial = resource.textures['bg-interstitial.jpg']
     }
 
     componentDidMount()
@@ -48,9 +48,9 @@ class Splash extends React.Component
                 <Jasmine.ThreeSpriteFrame metadata={this.props.aurora} id={DataHeader.SPRITE_ALL1_FRAME_ADS_TXT} />
                 <Jasmine.ThreeSpriteFrame metadata={this.props.aurora} id={DataHeader.SPRITE_ALL1_FRAME_SLINGSHOT} />
                 <sprite ref='bg'
-                    scale={new THREE.Vector3(this.interstitial.width, this.interstitial.height, 1)}
+                    scale={new THREE.Vector3(this.interstitial.image.width, this.interstitial.image.height, 1)}
                 >
-                    <spriteMaterial map={resource.textures['bg-interstitial.jpg']} />
+                    <spriteMaterial map={this.interstitial} />
                 </sprite>
             </object3D>
         )
