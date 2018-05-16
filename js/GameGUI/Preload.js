@@ -28,7 +28,6 @@ class Preload extends React.Component
                             let images = sprite.images
                             images.push(...
                             [
-                                'image/crate.png',
                                 'image/room.jpg',
                                 'image/bg-interstitial.jpg',
                             ])
