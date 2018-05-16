@@ -19,7 +19,7 @@ class Splash extends React.Component
 	{
         return (
             <object3D>
-                <Jasmine.ThreeSpriteFrame metadata={this.props.aurora} id={DataHeader.SPRITE_ALL1_FRAME_LOADING} />
+                <Jasmine.ThreeSpriteFrame metadata={this.props.aurora} id={DataHeader.SPRITE_ALL1_FRAME_AIM} />
                 <Jasmine.ThreeSpriteFrame metadata={this.props.aurora} id={DataHeader.SPRITE_ALL1_FRAME_SLINGSHOT} />
                 <sprite ref='sprite'
                     scale={new THREE.Vector3(this.interstitial.width, this.interstitial.height, 1)}
