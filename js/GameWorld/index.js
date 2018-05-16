@@ -18,7 +18,7 @@ class GameWorld extends React.Component
         {
             case 'INGAME':
             {
-                object = <Background />
+                object = <SkyBox size={400} />
                 break
             }
         }

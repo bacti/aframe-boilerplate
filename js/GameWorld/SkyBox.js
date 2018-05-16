@@ -22,7 +22,7 @@ export default class SkyBox extends React.Component
     {
         return (
             <mesh>
-                <boxGeometry ref='box' width={this.props.size} height={this.props.size} depth={this.props.size} faceVertexUvs={this.faces} />
+                <boxGeometry ref='box' width={this.props.size} height={this.props.size} depth={this.props.size} faceVertexUvs={[this.faces]} />
                 <meshBasicMaterial map={this.texture} depthTest={false} depthWrite={false} />
             </mesh>
         )
