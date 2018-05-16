@@ -1,13 +1,17 @@
 import React from 'react'
+import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 import DataHeader from '../DataHeader'
 import Jasmine from '../../libs/jasmine/'
+import Actions from '../actions/'
+import { TweenMgr } from '../../libs/tween/TweenMgr'
 
 class Splash extends React.Component
 {
     constructor(props)
     {
         super(props)
+        this.myTween = new TweenMgr()
     }
 
 	componentWillMount()
@@ -15,11 +19,26 @@ class Splash extends React.Component
         this.interstitial = resource.textures['image/bg-interstitial.jpg'].image
     }
 
+    componentDidMount()
+    {
+        this.myTween.Create(this.refs.begin.object, tweenDefine.LINEAR_EASE, {scale: 1}, {scale: 0.8}, 0.2, 1.5)
+		this.myTween.Create(this.refs.begin.object, tweenDefine.ELASTIC_EASE_OUT, {scale: 0.8}, {scale: 1}, 0.5, 0)
+		this.myTween.SetLoop(this.refs.begin.object, -1)
+        this.myTween.PreInit()
+        
+        this.refs.bg.on('click', evt => this.props.SwitchState('INGAME'))
+    }
+
+    componentDidUpdate()
+    {
+        this.myTween.Update(this.props.deltaTime / 1000)
+    }
+
 	render()
 	{
         return (
             <object3D>
-                <Jasmine.ThreeSpriteFrame metadata={this.props.aurora} id={DataHeader.SPRITE_ALL1_FRAME_TAP_CONTINUE} />
+                <Jasmine.ThreeSpriteFrame ref='begin' metadata={this.props.aurora} id={DataHeader.SPRITE_ALL1_FRAME_TAP_CONTINUE} />
                 <Jasmine.ThreeSpriteFrame metadata={this.props.aurora} id={DataHeader.SPRITE_ALL1_FRAME_AIM} />
                 <Jasmine.ThreeSpriteFrame metadata={this.props.aurora} id={DataHeader.SPRITE_ALL1_FRAME_GL_LOGO} />
                 <Jasmine.ThreeSpriteFrame metadata={this.props.aurora} id={DataHeader.SPRITE_ALL1_FRAME_NEW_LOGO} />
@@ -28,7 +47,7 @@ class Splash extends React.Component
                 <Jasmine.ThreeSpriteFrame metadata={this.props.aurora} id={DataHeader.SPRITE_ALL1_FRAME_TXT_3} />
                 <Jasmine.ThreeSpriteFrame metadata={this.props.aurora} id={DataHeader.SPRITE_ALL1_FRAME_ADS_TXT} />
                 <Jasmine.ThreeSpriteFrame metadata={this.props.aurora} id={DataHeader.SPRITE_ALL1_FRAME_SLINGSHOT} />
-                <sprite ref='sprite'
+                <sprite ref='bg'
                     scale={new THREE.Vector3(this.interstitial.width, this.interstitial.height, 1)}
                 >
                     <spriteMaterial map={resource.textures['image/bg-interstitial.jpg']} />
@@ -41,8 +60,14 @@ class Splash extends React.Component
 let mapStateToProps = state =>
 {
     return {
-        aurora: state.aurora
+        aurora: state.aurora,
+        deltaTime: state.deltaTime,
     }
 }
 
-export default connect(mapStateToProps)(Splash)
+let mapDispatchToProps = dispatch =>
+{
+    return bindActionCreators(Actions, dispatch)
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Splash)

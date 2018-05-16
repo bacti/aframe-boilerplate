@@ -24,6 +24,10 @@ class GameGUI extends React.Component
                 GUI = <Splash store={this.props.store} />
                 break
             }
+            case 'INGAME':
+            {
+                break
+            }
             default:
             {
                 GUI = <Preload store={this.props.store} />
