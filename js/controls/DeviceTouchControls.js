@@ -3,31 +3,28 @@ export default class DeviceTouchControls
 	constructor(camera)
 	{
         let isTouch = false
-        let isHammerPinch = false
         let [pointerDownX, pointerDownY] = [0, 0]
         let [longitudeDown, latitudeDown] = [0, 0]
-        let control = this.cameraControl = {
+		this.control =
+		{
             longitude: 0,
             latitude: 0,
             phi: 0,
             theta: 0,
         }
 
-        $(target).on(
+        $('#mainCanvas').on(
         {
             touchstart: event =>
             {
-                if (!isHammerPinch)
-                {
-                    isTouch = true
-                    let changedTouches = event.originalEvent ? event.originalEvent.changedTouches: event.changedTouches; 
-                    ;[pointerDownX, pointerDownY] = [changedTouches[0].clientX, changedTouches[0].clientY]
-                    ;[longitudeDown, latitudeDown] = [control.longitude, control.latitude]
-                }                
+				isTouch = true
+				let changedTouches = event.originalEvent ? event.originalEvent.changedTouches: event.changedTouches; 
+				;[pointerDownX, pointerDownY] = [changedTouches[0].clientX, changedTouches[0].clientY]
+				;[longitudeDown, latitudeDown] = [control.longitude, control.latitude]
             },
             touchmove: event =>
             {
-                if (isTouch === true && !isHammerPinch)
+                if (isTouch === true)
                 {
                     let changedTouches = event.originalEvent ? event.originalEvent.changedTouches: event.changedTouches; 
                     control.longitude = (changedTouches[0].clientX - pointerDownX) * 0.1 + longitudeDown
@@ -36,16 +33,13 @@ export default class DeviceTouchControls
             },
             mousedown: event =>
             {
-                if (!isHammerPinch)
-                {
-                    isTouch = true
-                    ;[pointerDownX, pointerDownY] = [event.clientX, event.clientY]
-                    ;[longitudeDown, latitudeDown] = [control.longitude, control.latitude]
-                }
+				isTouch = true
+				;[pointerDownX, pointerDownY] = [event.clientX, event.clientY]
+				;[longitudeDown, latitudeDown] = [control.longitude, control.latitude]
             },
             mousemove: event =>
             {
-                if (isTouch === true && !isHammerPinch)
+                if (isTouch === true)
                 {
                     control.longitude = (event.clientX - pointerDownX) * 0.1 + longitudeDown
                     control.latitude = (event.clientY - pointerDownY) * 0.1 + latitudeDown
