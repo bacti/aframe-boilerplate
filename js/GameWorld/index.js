@@ -2,6 +2,7 @@ import React from 'react'
 import { connect } from 'react-redux'
 
 import Background from './Background'
+import VideoBackground from './VideoBackground'
 import SkyBox from './SkyBox'
 
 class GameWorld extends React.Component
@@ -18,7 +19,8 @@ class GameWorld extends React.Component
         {
             case 'INGAME':
             {
-                object = <SkyBox size={400} />
+                // object = <SkyBox size={400} />
+                object = <VideoBackground />
                 break
             }
         }
