@@ -5,13 +5,12 @@ export default class DeviceControl
 {
     constructor(camera)
     {
-        this.control = null
+        this.control = new DeviceTouchControls(camera)
         window.addEventListener('deviceorientation', evt =>
         {
             let [alpha, beta, gamma] = [evt.alpha, evt.beta, evt.gamma]
             if (!(alpha && beta && gamma))
             {
-                this.control = new DeviceTouchControls(camera)
                 window.removeEventListener('deviceorientation', _)
             }
             else
