@@ -20,29 +20,29 @@ export default class DeviceTouchControls
 				isTouch = true
 				let changedTouches = event.originalEvent ? event.originalEvent.changedTouches: event.changedTouches; 
 				;[pointerDownX, pointerDownY] = [changedTouches[0].clientX, changedTouches[0].clientY]
-				;[longitudeDown, latitudeDown] = [control.longitude, control.latitude]
+				;[longitudeDown, latitudeDown] = [this.control.longitude, this.control.latitude]
             },
             touchmove: event =>
             {
                 if (isTouch === true)
                 {
                     let changedTouches = event.originalEvent ? event.originalEvent.changedTouches: event.changedTouches; 
-                    control.longitude = (changedTouches[0].clientX - pointerDownX) * 0.1 + longitudeDown
-                    control.latitude = (changedTouches[0].clientY - pointerDownY) * 0.1 + latitudeDown
+                    this.control.longitude = (changedTouches[0].clientX - pointerDownX) * 0.1 + longitudeDown
+                    this.control.latitude = (changedTouches[0].clientY - pointerDownY) * 0.1 + latitudeDown
                 }
             },
             mousedown: event =>
             {
 				isTouch = true
 				;[pointerDownX, pointerDownY] = [event.clientX, event.clientY]
-				;[longitudeDown, latitudeDown] = [control.longitude, control.latitude]
+				;[longitudeDown, latitudeDown] = [this.control.longitude, this.control.latitude]
             },
             mousemove: event =>
             {
                 if (isTouch === true)
                 {
-                    control.longitude = (event.clientX - pointerDownX) * 0.1 + longitudeDown
-                    control.latitude = (event.clientY - pointerDownY) * 0.1 + latitudeDown
+                    this.control.longitude = (event.clientX - pointerDownX) * 0.1 + longitudeDown
+                    this.control.latitude = (event.clientY - pointerDownY) * 0.1 + latitudeDown
                 }
             },
             'touchend mouseup': event =>
@@ -55,8 +55,7 @@ export default class DeviceTouchControls
 	Update()
 	{
 		let camera = this.camera
-		let control = this.cameraControl
-		let [latitude, longitude, phi, theta, distance] = [control.latitude, control.longitude, control.phi, control.theta, control.distance]
+		let [latitude, longitude, phi, theta, distance] = [this.control.latitude, this.control.longitude, this.control.phi, this.control.theta, this.control.distance]
 		latitude = Math.max(-85, Math.min(85, latitude))
 		phi = THREE.Math.degToRad(90 - latitude)
 		theta = THREE.Math.degToRad(longitude)

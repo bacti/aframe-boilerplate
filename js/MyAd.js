@@ -49,7 +49,7 @@ class MyAd extends React.Component
             let time = performance.now()
             let deltaTime = time - prevTime
             this.props.Update(deltaTime)
-            this.deviceControl.update()
+            this.deviceControl.Update()
             prevTime = time
         }
 
