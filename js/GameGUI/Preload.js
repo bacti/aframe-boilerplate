@@ -40,6 +40,21 @@ class Preload extends React.Component
                             })
                         }))
                     }
+                    else
+                    if (filename.slice(-4).includes('.mp4'))
+                    {
+                        zip.file(filename).async('arraybuffer').then(data =>
+                        {
+                            resource.video = document.createElement('video')
+                            $(resource.video).attr(
+                            {
+                                preload: 'auto',
+                                src: (window.URL ? URL : webkitURL).createObjectURL(new Blob([data], {type: 'video/mp4'})),
+                                'playsinline': '',
+                                'webkit-playsinline': ''
+                            })
+                        })
+                    }
                 }
                 Promise.all(loader).then(textures =>
                 {
