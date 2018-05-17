@@ -50,8 +50,8 @@ class Preload extends React.Component
                             {
                                 preload: 'auto',
                                 src: (window.URL ? URL : webkitURL).createObjectURL(new Blob([data], {type: 'video/mp4'})),
-                                'playsinline': '',
-                                'webkit-playsinline': '',
+                                'playsinline': true,
+                                'webkit-playsinline': true,
                                 'loop': true,
                             })
                         })
