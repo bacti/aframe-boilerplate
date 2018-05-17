@@ -1,6 +1,7 @@
 import React from 'react'
 import { connect } from 'react-redux'
 
+import DataHeader from '../DataHeader'
 import Jasmine from '../../libs/jasmine/'
 import Background from './Background'
 import VideoBackground from './VideoBackground'
@@ -13,13 +14,22 @@ class GameWorld extends React.Component
         super(props)
     }
 
+    componentDidMount()
+    {
+        if (this.props.gameState != 'INGAME')
+            return
+        global.aim = this.refs.aim.object
+        aim.position.x = -1 
+    }
+
 	render()
 	{
         if (this.props.gameState != 'INGAME')
-            return null
+            return <object3D />
         return (
             <object3D>
                 {/* <SkyBox size={400} /> */}
+                <Jasmine.ThreeMeshModule ref='aim' metadata={this.props.aurora} id={153} />
                 <VideoBackground video={resource.video} />
             </object3D>
         )
@@ -29,6 +39,7 @@ class GameWorld extends React.Component
 function mapStateToProps(state)
 {
     return {
+        aurora: state.aurora,
         gameState: state.currentState
     }
 }
