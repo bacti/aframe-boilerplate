@@ -28,8 +28,8 @@ class GameWorld extends React.Component
             return <object3D />
         return (
             <object3D>
-                {/* <SkyBox size={400} /> */}
                 <Jasmine.ThreeMeshModule ref='aim' metadata={this.props.aurora} id={153} />
+                {/* <SkyBox size={400} /> */}
                 <VideoBackground video={resource.video} />
             </object3D>
         )
