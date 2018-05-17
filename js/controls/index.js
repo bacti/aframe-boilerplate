@@ -25,5 +25,6 @@ export default class DeviceControl
     {
         if (!this.control)
             return
+        this.control.Update()
     }
 }
