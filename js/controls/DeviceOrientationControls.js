@@ -77,7 +77,7 @@ THREE.DeviceOrientationControls = function ( object ) {
 
 	};
 
-	this.update = function () {
+	this.Update = function () {
 
 		if ( scope.enabled === false ) return;
 
