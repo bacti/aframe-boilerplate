@@ -1,6 +1,7 @@
 import React from 'react'
 import { connect } from 'react-redux'
 
+import Jasmine from '../../libs/jasmine/'
 import Background from './Background'
 import VideoBackground from './VideoBackground'
 import SkyBox from './SkyBox'
