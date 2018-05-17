@@ -4,15 +4,15 @@ export default class VideoBackground extends React.Component
 {
     componentWillMount()
     {
-        this.texture = new THREE.VideoTexture(resource.video)
+        this.texture = new THREE.VideoTexture(this.props.video)
         this.texture.format = THREE.RGBFormat
         this.texture.minFilter = THREE.LinearFilter
         this.texture.magFilter = THREE.LinearFilter
         //this.texture.mapping = THREE.SphericalReflectionMapping
         this.texture.mapping = THREE.UVMapping
-        this.texture.image.width = resource.video.videoWidth
-        this.texture.image.height = resource.video.videoHeight
-        resource.video.play()
+        this.texture.image.width = this.props.video.videoWidth
+        this.texture.image.height = this.props.video.videoHeight
+        this.props.video.play()
     }
 
     componentDidMount()

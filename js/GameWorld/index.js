@@ -20,7 +20,7 @@ class GameWorld extends React.Component
             case 'INGAME':
             {
                 // object = <SkyBox size={400} />
-                object = <VideoBackground />
+                object = <VideoBackground video={resource.video} />
                 break
             }
         }
