@@ -19,7 +19,7 @@ export default class DeviceTouchControls
             touchstart: event =>
             {
 				isTouch = true
-				let changedTouches = event.originalEvent ? event.originalEvent.changedTouches: event.changedTouches; 
+				let changedTouches = event.originalEvent ? event.originalEvent.changedTouches : event.changedTouches
 				;[pointerDownX, pointerDownY] = [changedTouches[0].clientX, changedTouches[0].clientY]
 				;[longitudeDown, latitudeDown] = [this.cameraControl.longitude, this.cameraControl.latitude]
             },
@@ -27,7 +27,7 @@ export default class DeviceTouchControls
             {
                 if (isTouch === true)
                 {
-                    let changedTouches = event.originalEvent ? event.originalEvent.changedTouches: event.changedTouches; 
+                    let changedTouches = event.originalEvent ? event.originalEvent.changedTouches : event.changedTouches
                     this.cameraControl.longitude = (changedTouches[0].clientX - pointerDownX) * 0.1 + longitudeDown
                     this.cameraControl.latitude = (changedTouches[0].clientY - pointerDownY) * 0.1 + latitudeDown
                 }
@@ -55,7 +55,14 @@ export default class DeviceTouchControls
 
 	Update()
 	{
-		let [latitude, longitude, phi, theta, distance] = [this.cameraControl.latitude, this.cameraControl.longitude, this.cameraControl.phi, this.cameraControl.theta, this.cameraControl.distance]
+        let [latitude, longitude, phi, theta, distance] =
+        [
+            this.cameraControl.latitude,
+            this.cameraControl.longitude,
+            this.cameraControl.phi,
+            this.cameraControl.theta,
+            this.cameraControl.distance
+        ]
 		latitude = Math.max(-85, Math.min(85, latitude))
 		phi = THREE.Math.degToRad(90 - latitude)
 		theta = THREE.Math.degToRad(longitude)
