@@ -14,17 +14,14 @@ class GameWorld extends React.Component
 
 	render()
 	{
-        let object = null
-        switch (this.props.gameState)
-        {
-            case 'INGAME':
-            {
-                // object = <SkyBox size={400} />
-                object = <VideoBackground video={resource.video} />
-                break
-            }
-        }
-        return <object3D>{object}</object3D>
+        if (this.props.gameState != 'INGAME')
+            return null
+        return (
+            <object3D>
+                {/* <SkyBox size={400} /> */}
+                <VideoBackground video={resource.video} />
+            </object3D>
+        )
 	}
 }
 
