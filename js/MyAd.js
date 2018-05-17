@@ -29,6 +29,8 @@ class MyAd extends React.Component
 
 		this.ToggleVR = _ =>
 		{
+            if (!this.vrDisplay)
+                return
 			if (renderer.vr.enabled)
 			{
 				renderer.vr.enabled = false
