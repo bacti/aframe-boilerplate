@@ -14,23 +14,14 @@ class GameWorld extends React.Component
         super(props)
     }
 
-    componentDidMount()
-    {
-        if (this.props.gameState != 'INGAME')
-            return
-        global.aim = this.refs.aim.object
-        aim.position.x = -1 
-    }
-
 	render()
 	{
         if (this.props.gameState != 'INGAME')
             return <object3D />
         return (
             <object3D>
-                <Jasmine.ThreeMeshModule ref='aim' metadata={this.props.aurora} id={153} />
-                {/* <SkyBox size={400} /> */}
-                <VideoBackground video={resource.video} />
+                <SkyBox size={400} />
+                {/* <VideoBackground video={resource.video} /> */}
             </object3D>
         )
 	}

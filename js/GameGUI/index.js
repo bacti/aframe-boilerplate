@@ -5,6 +5,7 @@ global.INTERSTITIAL_DEFAULT_WIDTH = 1334
 
 import Preload from './Preload'
 import Splash from './Splash'
+import Ingame from './Ingame'
 
 class GameGUI extends React.Component
 {
@@ -19,25 +20,15 @@ class GameGUI extends React.Component
         let GUI = null
         switch (this.props.gameState)
         {
-            case 'SPLASH':
-            {
-                GUI = <Splash store={this.props.store} />
-                break
-            }
-            case 'INGAME':
-            {
-                break
-            }
-            default:
-            {
-                GUI = <Preload store={this.props.store} />
-            }
+            case 'SPLASH': GUI = Splash; break
+            case 'INGAME': GUI = Ingame; break
+            default:       GUI = Preload
         }
         return (
             <object3D scale={new THREE.Vector3(INTERSTITIAL_SCALE, INTERSTITIAL_SCALE, 1)}
                 position={new THREE.Vector3(window.innerWidth / 2, window.innerHeight / 2, 0)}
             >
-                {GUI}
+                <GUI store={this.props.store} />
             </object3D>
         )
 	}
