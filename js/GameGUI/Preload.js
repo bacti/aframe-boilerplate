@@ -46,13 +46,13 @@ class Preload extends React.Component
                         zip.file(filename).async('arraybuffer').then(data =>
                         {
                             resource.video = document.createElement('video')
+                            resource.video.loop = true
                             $(resource.video).attr(
                             {
                                 preload: 'auto',
                                 src: (window.URL ? URL : webkitURL).createObjectURL(new Blob([data], {type: 'video/mp4'})),
                                 'playsinline': '',
                                 'webkit-playsinline': '',
-                                'loop': true,
                             })
                         })
                     }
