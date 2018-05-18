@@ -29,6 +29,8 @@ class Ingame extends React.Component
         return (
             <object3D>
                 <Jasmine.ThreeSpriteFrame metadata={this.props.aurora} id={DataHeader.SPRITE_GAME_FRAME_AIM} />
+                <Jasmine.ThreeSpriteFrame metadata={this.props.aurora} id={DataHeader.SPRITE_GAME_FRAME_LOGO} />
+                <Jasmine.ThreeSpriteFrame metadata={this.props.aurora} id={DataHeader.SPRITE_PRELOAD_FRAME_TUTORIAL_1} />
             </object3D>
         )
 	}

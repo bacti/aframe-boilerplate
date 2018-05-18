@@ -93,7 +93,7 @@ class MyAd extends React.Component
                 >
                     <scene background={0xf0f0ff} ref='scene'>
                         <perspectiveCamera name='camera' ref='camera'
-                            fov={40} aspect={width/height} near={0.1} far={500}
+                            fov={50} aspect={width/height} near={1} far={500}
                         />
                         <GameWorld store={this.props.store} />
                     </scene>
