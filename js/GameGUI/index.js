@@ -22,12 +22,10 @@ class GameGUI extends React.Component
         {
             case 'SPLASH': GUI = Splash; break
             case 'INGAME': GUI = Ingame; break
-            default:       GUI = Preload
+            default: GUI = Preload
         }
         return (
-            <object3D scale={new THREE.Vector3(INTERSTITIAL_SCALE, INTERSTITIAL_SCALE, 1)}
-                position={new THREE.Vector3(window.innerWidth / 2, window.innerHeight / 2, 0)}
-            >
+            <object3D position={new THREE.Vector3(INTERSTITIAL_DEFAULT_WIDTH / 2,INTERSTITIAL_DEFAULT_HEIGHT / 2, 0)}>
                 <GUI store={this.props.store} />
             </object3D>
         )

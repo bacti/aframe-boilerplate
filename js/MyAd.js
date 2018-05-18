@@ -21,6 +21,9 @@ import GameWorld from './GameWorld/'
 import GameGUI from './GameGUI/'
 import { Update } from './actions/'
 
+global.INTERSTITIAL_DEFAULT_WIDTH = 1334
+global.INTERSTITIAL_DEFAULT_HEIGHT = INTERSTITIAL_DEFAULT_WIDTH * window.innerHeight / window.innerWidth
+
 class MyAd extends React.Component
 {
     constructor(props)
@@ -41,7 +44,7 @@ class MyAd extends React.Component
 			{
 				renderer.vr.enabled = true
                 this.refs.orthoscene.visible = false
-				this.vrDisplay.requestPresent([{ source: document.getElementById('mainCanvas') }])
+				this.vrDisplay.requestPresent([{ source: this.props.canvas }])
 			}
 		}
 
@@ -68,6 +71,8 @@ class MyAd extends React.Component
         const interaction = new Interaction(renderer, this.refs.orthoscene, this.refs.orthocamera)
         this.deviceControl = new DeviceControl(this.refs.camera)
         window.addEventListener('resize', this.OnWindowResize, false)
+        this.props.canvas.style.width = `${window.innerWidth}px`
+        this.props.canvas.style.height = `${window.innerHeight}px`
 
 		if (navigator.getVRDisplays)
 		{
@@ -83,25 +88,23 @@ class MyAd extends React.Component
 
 	render()
 	{
-        let width = window.innerWidth
-        let height = window.innerHeight
         return (
             <div>
-                <React3 mainCamera='camera' orthoCamera='orthocamera' width={width} height={height} antialias={true}
-                    canvas={document.getElementById('mainCanvas')}
+                <React3 mainCamera='camera' orthoCamera='orthocamera' width={INTERSTITIAL_DEFAULT_WIDTH} height={INTERSTITIAL_DEFAULT_HEIGHT} antialias={true}
+                    canvas={this.props.canvas}
                     onAnimate={this.OnAnimate}
                 >
                     <scene background={0xf0f0ff} ref='scene'>
                         <perspectiveCamera name='camera' ref='camera'
-                            fov={50} aspect={width/height} near={1} far={500}
+                            fov={50} aspect={INTERSTITIAL_DEFAULT_WIDTH/INTERSTITIAL_DEFAULT_HEIGHT} near={1} far={500}
                         />
                         <GameWorld store={this.props.store} />
                     </scene>
                     <orthoscene ref='orthoscene'>
                         <orthographicCamera name='orthocamera' ref='orthocamera'
                             position={new THREE.Vector3(0, 0, 1)}
-                            left={0} right={width}
-                            top={height} bottom={0}
+                            left={0} right={INTERSTITIAL_DEFAULT_WIDTH}
+                            top={INTERSTITIAL_DEFAULT_HEIGHT} bottom={0}
                             near={1} far={100}
                         />
                         <GameGUI store={this.props.store} />

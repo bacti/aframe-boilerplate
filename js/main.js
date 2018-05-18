@@ -22,7 +22,7 @@ class App extends React.Component
         let store = applyMiddleware()(createStore)(rootReducer)
         return (
             <Provider store={store}>
-                <MyAd store={store} />
+                <MyAd store={store} canvas={document.getElementById('mainCanvas')} />
             </Provider>
         )
     }
