@@ -14,13 +14,20 @@ class GameWorld extends React.Component
         super(props)
     }
 
+    componentDidUpdate()
+    {
+        if (this.props.gameState != 'INGAME')
+            return
+        this.refs.aim.object.rotation.set(this.props.camera.rotation.x, this.props.camera.rotation.y - Math.PI, -this.props.camera.rotation.z)
+    }
+
 	render()
 	{
         if (this.props.gameState != 'INGAME')
             return <object3D />
         return (
             <object3D>
-                <Jasmine.ThreeMeshModule metadata={this.props.aurora} id={20} />
+                <Jasmine.ThreeMeshModule ref='aim' metadata={this.props.aurora} id={20} />
                 <SkyBox size={400} />
                 {/* <VideoBackground video={resource.video} /> */}
             </object3D>
@@ -32,7 +39,9 @@ function mapStateToProps(state)
 {
     return {
         aurora: state.aurora,
-        gameState: state.currentState
+        camera: state.camera,
+        deltaTime: state.deltaTime,
+        gameState: state.currentState,
     }
 }
 export default connect(mapStateToProps)(GameWorld)

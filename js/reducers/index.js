@@ -14,5 +14,9 @@ const rootReducer = combineReducers(
 	{
 		return action.type == 'AURORA_LOADER' ? action.sprite : state
 	},
+	camera: (state = 0, action) =>
+	{
+		return action.type == 'CAMERA_LOADER' ? action.camera : state
+	},
 })
 export default rootReducer

@@ -19,7 +19,7 @@ import { applyMiddleware, createStore } from 'redux'
 
 import GameWorld from './GameWorld/'
 import GameGUI from './GameGUI/'
-import { Update } from './actions/'
+import { Update, CameraLoader } from './actions/'
 
 global.INTERSTITIAL_DEFAULT_WIDTH = 1334
 global.INTERSTITIAL_DEFAULT_HEIGHT = INTERSTITIAL_DEFAULT_WIDTH * window.innerHeight / window.innerWidth
@@ -68,11 +68,10 @@ class MyAd extends React.Component
 
 	componentDidMount()
 	{
-        const interaction = new Interaction(renderer, this.refs.orthoscene, this.refs.orthocamera)
+        this.props.CameraLoader(this.refs.camera)
         this.deviceControl = new DeviceControl(this.refs.camera)
+        const interaction = new Interaction(renderer, this.refs.orthoscene, this.refs.orthocamera)
         window.addEventListener('resize', this.OnWindowResize, false)
-        this.props.canvas.style.width = `${window.innerWidth}px`
-        this.props.canvas.style.height = `${window.innerHeight}px`
 
 		if (navigator.getVRDisplays)
 		{
@@ -96,7 +95,7 @@ class MyAd extends React.Component
                 >
                     <scene background={0xf0f0ff} ref='scene'>
                         <perspectiveCamera name='camera' ref='camera'
-                            fov={50} aspect={INTERSTITIAL_DEFAULT_WIDTH/INTERSTITIAL_DEFAULT_HEIGHT} near={1} far={500}
+                            fov={50} aspect={INTERSTITIAL_DEFAULT_WIDTH/INTERSTITIAL_DEFAULT_HEIGHT} near={1} far={801}
                         />
                         <GameWorld store={this.props.store} />
                     </scene>
@@ -133,7 +132,7 @@ let mapStateToProps = state =>
 
 let mapDispatchToProps = dispatch =>
 {
-    return bindActionCreators({ Update: Update }, dispatch)
+    return bindActionCreators({ Update: Update, CameraLoader: CameraLoader }, dispatch)
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(MyAd)
