@@ -18,5 +18,10 @@ const rootReducer = combineReducers(
 	{
 		return action.type == 'CAMERA_LOADER' ? action.camera : state
 	},
+	size: (state = 0, action) =>
+	{
+		return action.type == 'RESIZE' ? action.size :
+			{ INTERSTITIAL_WIDTH: 1334, INTERSTITIAL_HEIGHT: 1334 * window.innerHeight / window.innerWidth }
+	},
 })
 export default rootReducer
