@@ -1,8 +1,6 @@
 import React from 'react'
 import { connect } from 'react-redux'
 
-global.INTERSTITIAL_DEFAULT_WIDTH = 1334
-
 import Preload from './Preload'
 import Splash from './Splash'
 import Ingame from './Ingame'
@@ -12,7 +10,6 @@ class GameGUI extends React.Component
     constructor(props)
     {
         super(props)
-        global.INTERSTITIAL_SCALE = window.innerWidth / INTERSTITIAL_DEFAULT_WIDTH
     }
 
 	render()
@@ -25,7 +22,7 @@ class GameGUI extends React.Component
             default: GUI = Preload
         }
         return (
-            <object3D position={new THREE.Vector3(INTERSTITIAL_DEFAULT_WIDTH / 2,INTERSTITIAL_DEFAULT_HEIGHT / 2, 0)}>
+            <object3D position={new THREE.Vector3(this.props.size.INTERSTITIAL_WIDTH / 2, this.props.size.INTERSTITIAL_HEIGHT / 2, 0)}>
                 <GUI store={this.props.store} />
             </object3D>
         )
@@ -35,6 +32,7 @@ class GameGUI extends React.Component
 function mapStateToProps(state)
 {
     return {
+        size: state.size,
         gameState: state.currentState
     }
 }
