@@ -7,3 +7,6 @@
 [submodule "libs/cardboard-vr-display"]
 	path = libs/cardboard-vr-display
 	url = https://github.com/bacti/cardboard-vr-display.git
+[submodule "libs/webvr-polyfill"]
+	path = libs/webvr-polyfill
+	url = https://github.com/bacti/webvr-polyfill.git
