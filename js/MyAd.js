@@ -4,7 +4,7 @@ window.webvrpolyfill = new WebVRPolyfill(
 {
 	MOBILE_WAKE_LOCK: false,
   	BUFFER_SCALE: 1,
-  	CARDBOARD_UI_DISABLED: true,
+  	CARDBOARD_UI_DISABLED: false,
   	ROTATE_INSTRUCTIONS_DISABLED: true,
 })
 
