@@ -1,5 +1,5 @@
 window.hasNativeWebVRImplementation = !!window.navigator.getVRDisplays || !!window.navigator.getVRDevices
-import WebVRPolyfill from './webvr-polyfill'
+import WebVRPolyfill from '../libs/webvr-polyfill'
 window.webvrpolyfill = new WebVRPolyfill(
 {
 	MOBILE_WAKE_LOCK: false,
