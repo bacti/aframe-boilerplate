@@ -4,3 +4,6 @@
 [submodule "libs/jasmine"]
 	path = libs/jasmine
 	url = https://github.com/bacti/jasmine.git
+[submodule "libs/cardboard-vr-display"]
+	path = libs/cardboard-vr-display
+	url = https://github.com/bacti/cardboard-vr-display.git
