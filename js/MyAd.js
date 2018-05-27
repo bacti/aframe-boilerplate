@@ -33,12 +33,12 @@ class MyAd extends React.Component
                 return
 			if (renderer.vr.enabled)
 			{
-				// renderer.vr.enabled = false
+				renderer.vr.enabled = false
 				this.vrDisplay.exitPresent()
 			}
 			else
 			{
-				// renderer.vr.enabled = true
+				renderer.vr.enabled = true
 				this.vrDisplay.requestPresent([{ source: this.props.canvas }])
 			}
 		}
@@ -71,9 +71,11 @@ class MyAd extends React.Component
 		{
 			navigator.getVRDisplays().then(displays =>
 			{
-			  	this.vrDisplay = displays.length && displays[0]
+                this.vrDisplay = displays.length && displays[0]
+                this.vrDisplay.requestPresent([{ source: this.props.canvas }])
                 this.polyfilledVRDisplay = this.vrDisplay.displayName === 'Cardboard VRDisplay'
                 renderer.vr.setDevice(this.vrDisplay)
+				renderer.vr.enabled = true
                 document.getElementById('vr-icon').addEventListener('click', this.ToggleVR, false)
 			})
 		}
