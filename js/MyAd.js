@@ -19,7 +19,7 @@ import { applyMiddleware, createStore } from 'redux'
 
 import GameWorld from './GameWorld/'
 import GameGUI from './GameGUI/'
-import { Update, CameraLoader } from './actions/'
+import { Update } from './actions/'
 
 class MyAd extends React.Component
 {
@@ -33,12 +33,12 @@ class MyAd extends React.Component
                 return
 			if (renderer.vr.enabled)
 			{
-				renderer.vr.enabled = false
+				// renderer.vr.enabled = false
 				this.vrDisplay.exitPresent()
 			}
 			else
 			{
-				renderer.vr.enabled = true
+				// renderer.vr.enabled = true
 				this.vrDisplay.requestPresent([{ source: this.props.canvas }])
 			}
 		}
@@ -49,7 +49,7 @@ class MyAd extends React.Component
             let time = performance.now()
             let deltaTime = time - prevTime
             this.props.Update(deltaTime)
-            this.deviceControl.Update()
+            // this.deviceControl.Update()
             prevTime = time
         }
 
@@ -63,8 +63,7 @@ class MyAd extends React.Component
 
 	componentDidMount()
 	{
-        this.props.CameraLoader(this.refs.camera)
-        this.deviceControl = new DeviceControl(this.refs.camera)
+        // this.deviceControl = new DeviceControl(this.refs.camera)
         const interaction = new Interaction(renderer, this.refs.scene, this.refs.camera)
         window.addEventListener('resize', this.OnWindowResize, false)
 
@@ -124,7 +123,7 @@ let mapStateToProps = state =>
 
 let mapDispatchToProps = dispatch =>
 {
-    return bindActionCreators({ Update: Update, CameraLoader: CameraLoader }, dispatch)
+    return bindActionCreators({ Update: Update }, dispatch)
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(MyAd)
