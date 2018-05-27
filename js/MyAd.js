@@ -34,13 +34,11 @@ class MyAd extends React.Component
 			if (renderer.vr.enabled)
 			{
 				renderer.vr.enabled = false
-                this.refs.orthoscene.visible = true
 				this.vrDisplay.exitPresent()
 			}
 			else
 			{
 				renderer.vr.enabled = true
-                this.refs.orthoscene.visible = false
 				this.vrDisplay.requestPresent([{ source: this.props.canvas }])
 			}
 		}
@@ -67,7 +65,7 @@ class MyAd extends React.Component
 	{
         this.props.CameraLoader(this.refs.camera)
         this.deviceControl = new DeviceControl(this.refs.camera)
-        const interaction = new Interaction(renderer, this.refs.orthoscene, this.refs.orthocamera)
+        const interaction = new Interaction(renderer, this.refs.scene, this.refs.camera)
         window.addEventListener('resize', this.OnWindowResize, false)
 
 		if (navigator.getVRDisplays)
@@ -86,7 +84,7 @@ class MyAd extends React.Component
 	{
         return (
             <div>
-                <React3 mainCamera='camera' orthoCamera='orthocamera'
+                <React3 mainCamera='camera'
                     width={this.props.size.INTERSTITIAL_WIDTH} height={this.props.size.INTERSTITIAL_HEIGHT}
                     antialias={true}
                     canvas={this.props.canvas}
@@ -94,19 +92,12 @@ class MyAd extends React.Component
                 >
                     <scene background={0xf0f0ff} ref='scene'>
                         <perspectiveCamera name='camera' ref='camera'
-                            fov={50} aspect={this.props.size.INTERSTITIAL_WIDTH/this.props.size.INTERSTITIAL_HEIGHT} near={1} far={801}
-                        />
+                            fov={50} aspect={this.props.size.INTERSTITIAL_WIDTH/this.props.size.INTERSTITIAL_HEIGHT} near={100} far={1000}
+                        >
+                            <GameGUI store={this.props.store} />
+                        </perspectiveCamera>
                         <GameWorld store={this.props.store} />
                     </scene>
-                    <orthoscene ref='orthoscene'>
-                        <orthographicCamera name='orthocamera' ref='orthocamera'
-                            position={new THREE.Vector3(0, 0, 1)}
-                            left={0} right={this.props.size.INTERSTITIAL_WIDTH}
-                            top={this.props.size.INTERSTITIAL_HEIGHT} bottom={0}
-                            near={1} far={100}
-                        />
-                        <GameGUI store={this.props.store} />
-                    </orthoscene>
                 </React3>
                 <div id='vr-icon'
                     style={{

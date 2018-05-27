@@ -12,6 +12,11 @@ class GameGUI extends React.Component
         super(props)
     }
 
+    componentDidMount()
+    {
+        global.GUI = this.refs.GUI
+    }
+
 	render()
 	{
         let GUI = null
@@ -22,7 +27,7 @@ class GameGUI extends React.Component
             default: GUI = Preload
         }
         return (
-            <object3D position={new THREE.Vector3(this.props.size.INTERSTITIAL_WIDTH / 2, this.props.size.INTERSTITIAL_HEIGHT / 2, 0)}>
+            <object3D ref='GUI' position={new THREE.Vector3(0, 0, -800)}>
                 <GUI store={this.props.store} />
             </object3D>
         )
