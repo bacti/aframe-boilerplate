@@ -14,6 +14,6 @@ export default class DevicePoseSensor
     {
         let [alpha, beta, gamma, orient] = this.poseSensor.getOrientation()
         this.euler.set(beta, alpha, - gamma, 'YXZ')
-		this.camera.quaternion.setFromEuler(this.euler)
+        this.camera.quaternion.setFromEuler(this.euler)
     }
 }
