@@ -1,12 +1,11 @@
-require('./DeviceOrientationControls')
+// require('./DeviceOrientationControls')
 import DeviceTouchControls from './DeviceTouchControls'
-import DevicePoseSensor from './DevicePoseSensor'
 
 export default class DeviceControl
 {
     constructor(camera)
     {
-        this.control = new DevicePoseSensor(camera)
+        this.control = new DeviceTouchControls(camera)
         // let ScreenOrientationTest = evt =>
         // {
         //     window.removeEventListener('deviceorientation', ScreenOrientationTest, false)
@@ -21,8 +20,6 @@ export default class DeviceControl
 
     Update()
     {
-        if (!this.control)
-            return
         this.control.Update()
     }
 }

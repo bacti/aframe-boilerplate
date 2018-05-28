@@ -49,7 +49,7 @@ class MyAd extends React.Component
             let time = performance.now()
             let deltaTime = time - prevTime
             this.props.Update(deltaTime)
-            // this.deviceControl.Update()
+            this.deviceControl && this.deviceControl.Update()
             prevTime = time
         }
 
@@ -63,7 +63,6 @@ class MyAd extends React.Component
 
 	componentDidMount()
 	{
-        // this.deviceControl = new DeviceControl(this.refs.camera)
         const interaction = new Interaction(renderer, this.refs.scene, this.refs.camera)
         window.addEventListener('resize', this.OnWindowResize, false)
 
@@ -71,12 +70,20 @@ class MyAd extends React.Component
 		{
 			navigator.getVRDisplays().then(displays =>
 			{
-                this.vrDisplay = displays.length && displays[0]
-                this.vrDisplay.despatchPresent()
-                this.polyfilledVRDisplay = this.vrDisplay.displayName === 'Cardboard VRDisplay'
-                renderer.vr.setDevice(this.vrDisplay)
-				renderer.vr.enabled = true
-                document.getElementById('vr-icon').addEventListener('click', this.ToggleVR, false)
+                if (displays.length > 0)
+                {
+                    this.vrDisplay = displays.length && displays[0]
+                    this.vrDisplay.despatchPresent()
+                    this.polyfilledVRDisplay = this.vrDisplay.displayName === 'Cardboard VRDisplay'
+                    renderer.vr.setDevice(this.vrDisplay)
+                    renderer.vr.enabled = true
+                    document.getElementById('vr-icon').addEventListener('click', this.ToggleVR, false)
+                }
+                else
+                {
+                    this.deviceControl = new DeviceControl(this.refs.camera)
+                    document.getElementById('vr-icon').style.display = 'none'
+                }
 			})
 		}
     }
